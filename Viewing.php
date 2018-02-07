@@ -87,7 +87,7 @@ include('viewingAdd.php');
                                                     <tbody>
 
                                                         <?php
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+        $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
             $query = $conn->query("SELECT client.informant, viewing.date, viewing.preference,  viewing.chapelcode, viewing.roomtype, viewing.startdate, viewing.enddate, viewing.controlno, viewing.duration, viewing.address, viewing.dateBorrowed, viewing.datereturn, viewing.materials FROM client INNER JOIN viewing ON client.client_id = viewing.client_id") or die(mysqli_error());
             while($fetch = $query->fetch_array()){
                 $date = $fetch['date'];
@@ -288,7 +288,7 @@ include('viewingAdd.php');
                                                     <input type="number" name="duration" class="form-control"  onkeyup="compute()" placeholder="Days" id="days">
                                                 </div>
                                             </div>
-
+                                        </div>
                                             <div id="dvpreference2" style="display: none">
                                                 <div class="form-group">
                                                     <label class="col-md-4 control-label">Address</label>
@@ -323,8 +323,7 @@ include('viewingAdd.php');
                                                         </form>
                                                     </div>  
                                                 </div>
-                                            </div>                                        
-                                        </div>
+                                            </div>
                                         <div class="modal-footer">
                                             <center>
                                                 <button type="submit" class="btn btn-info" name="save_vigil"><span class="glyphicon glyphicon-check"></span> Save</button>

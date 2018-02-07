@@ -251,7 +251,7 @@ if(isset($_POST['update_hearse'])){
                                             <div class="form-group">
                                             <label class="col-sm-2 control-label">Driver Name</label>
                                             <div class="col-md-3 ">
-                                                        <select class="validate[required] select" name="DriverName" id="DriverName" data-live-search ="true" >		
+                                                        <select data-live-search ="true" class="validate[required] select" name="DriverName" id="DriverName"  >		
                                                             <option value="pick">Choose Driver</option>
                                                             <?php
                                                             $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());

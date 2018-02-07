@@ -208,13 +208,13 @@ include('casketAdd.php');
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Color:</label>
                                                         <div class="col-md-5">
-                                                            <input class="form-control" type="text" id="color" name="color" value="" />
+                                                            <input class="form-control" type="text" id="color" name="color" value="" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">QTY:</label>
                                                         <div class="col-md-5">
-                                                            <input class="form-control" type="number" min="0" name="qty" id="qty" onkeyup="compute()">
+                                                            <input class="form-control" type="number" min="0" name="qty" id="qty" onchange="compute()">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -302,38 +302,98 @@ include('casketAdd.php');
 
             switch (p) {
                 case '1':
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = "SELECT * FROM casketinventory WHERE casket_inv_id =1 ";
+                    $result_set = $conn->query($query);
+                    $row = $result_set->fetch_assoc();
+                    $sel_qty = $row['qty'];
+                    $id = $row['casket_inv_id'];
+            
+            
+                    if ($conn->query($query) === TRUE) {
+                            $add_inv = "UPDATE casketinventory SET qty=(qty - '$sel_qty') WHERE casket_inv_id= $id ";
+                            if ($conn->query($add_inv) === TRUE) {
+                                echo '<script>alert("Succesfully Added!"); window.location.href="Casket.php"</script>';
+                            }
+                        }
+                    
+                    ?>
+                    var qty1 = <?php echo $sel_qty ?>;
+                    var q1 = Number(qty1);
                     $("#img1").attr("src", "assets/images/gallery/casket-1.jpg");
                     $('#dimension').val(dimension[0]);
                     $('#type').val(type[0]);
                     $('#color').val(color[0]);
+                    $('#qty').val(q1);
                     $('#price').val(price[0]);
                     break;
                 case '2':
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = "SELECT * FROM casketinventory WHERE casket_inv_id =2 ";
+                    $result_set = $conn->query($query);
+                    $row = $result_set->fetch_assoc();
+                    $sel_qty = $row['qty'];
+                    ?>
+                    var qty2 = <?php echo $sel_qty ?>;
+                    var q2 = Number(qty2);
                     $("#img1").attr("src", "assets/images/gallery/casket-2.jpg");
-                    $('#dimension').val(dimension[1]);
+                    $('#dimension').val(dimension[1]);  
                     $('#type').val(type[0]);
                     $('#color').val(color[1]);
+                    $('#qty').val(q2);
                     $('#price').val(price[1]);
                     break;
                 case '3':
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = "SELECT * FROM casketinventory WHERE casket_inv_id =3 ";
+                    $result_set = $conn->query($query);
+                    $row = $result_set->fetch_assoc();
+                    $sel_qty = $row['qty'];
+                    ?>
+                    var qty3 = <?php echo $sel_qty ?>;
+                    var q3 = Number(qty3);
                     $("#img1").attr("src", "assets/images/gallery/casket-3.jpg");
                     $('#dimension').val(dimension[2]);
                     $('#type').val(type[0]);
                     $('#color').val(color[0]);
+                    $('#qty').val(q3);
                     $('#price').val(price[2]);
                     break;
                 case '4':
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = "SELECT * FROM casketinventory WHERE casket_inv_id =4 ";
+                    $result_set = $conn->query($query);
+                    $row = $result_set->fetch_assoc();
+                    $sel_qty = $row['qty'];
+                    ?>
+                    var qty4 = <?php echo $sel_qty ?>;
+                    var q4 = Number(qty4);
                     $("#img1").attr("src", "assets/images/gallery/casket-4.jpg");
                     $('#dimension').val(dimension[3]);
                     $('#type').val(type[1]);
                     $('#color').val(color[1]);
+                    $('#qty').val(q4);
                     $('#price').val(price[3]);
                     break;
                 case '5':
+                    <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = "SELECT * FROM casketinventory WHERE casket_inv_id =5 ";
+                    $result_set = $conn->query($query);
+                    $row = $result_set->fetch_assoc();
+                    $sel_qty = $row['qty'];
+                    ?>
+                    var qty5 = <?php echo $sel_qty ?>;
+                    var q5 = Number(qty5);
                     $("#img1").attr("src", "assets/images/gallery/casket-5.jpg");
                     $('#dimension').val(dimension[4]);
                     $('#type').val(type[1]);
                     $('#color').val(color[0]);
+                    $('#qty').val(q5);
                     $('#price').val(price[4]);
                     break;
                 default:

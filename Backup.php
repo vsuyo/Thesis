@@ -7,11 +7,41 @@ if(!$_SESSION['username'])
 }  
 ?>
 
+<?php
+
+require('import_func.php');
+
+        $dbbackup = new db_backup;
+		$dbbackup->connect("localhost","root","","alisbo");
+		$dbbackup->backup();
+		if(isset($_POST["submit"])){
+
+			//Uploading The temporary database file start here
+        		if ($_FILES['temp_file']['name']!=null && $_FILES['temp_file']['name']!="") {
+        			$src=$_FILES['temp_file']['tmp_name'];
+        			$destination='Alisbo_Backup_2018_02_06_16_38_02.'.pathinfo($_FILES['temp_file']['name'],PATHINFO_EXTENSION);
+        			if (copy($src,$destination)) {
+        				//Importing Uploaded File Start here
+							if($dbbackup->db_import($destination)){
+								echo '<script>alert("Succesfully Imported!"); window.location.href="Backup.php"</script>';
+								//Deleting Temporary Database after importing
+								if(is_file($destination)){
+									unlink($destination);
+								}
+							}
+        				//Importing Uploaded File End here
+        			}
+        		}
+			//Uploading The temporary database file end here
+		}
+
+
+?>
 
 
 
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
     <head>
         <!-- META SECTION -->
@@ -41,38 +71,88 @@ if(!$_SESSION['username'])
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Maintenance</a></li>
-                    <li class="active">Change Password</li>
+                    <li class="active"><strong><mark>Backup</mark></strong></li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
                 <!-- PAGE CONTENT WRAPPER -->
-                <div class="col-lg-6">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><span class="fa fa-key"> Backup</span></h3>
-                        </div>
-                        <center>
-                        <div class="panel-body">
-                            
-                                <form role="form" class="form-horizontal" method="post" action="exportBackup.php" enctype="multi-part/form-data">
 
-                                    <br><br>
-                                    <h1>Back Up Database</h1>
-                                    <br><br><br>
-                                        <button class="btn btn-success pull-center" name="backup" href = "Backup.php">Backup</button>
-                                            
+              
+<div class="page-content-wrap">
 
-                                    
-                                </form>
-                            
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    
+                    <form role="form" class="form-horizontal" method="post" action="exportBackup.php" enctype="multi-part/form-data">
+                        
+                        <input type="hidden" name="date" value="<?php echo $date; ?>">
+                        
+                        <button type="submit" name="submit" class="btn btn-lg btn btn-primary fa fa-cloud-download  " href = "Backup.php" data-box="#mb-signout"> Export Database</button>
+                          
+                        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+                            <div class="mb-container">
+                                <div class="mb-middle">
+                                    <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                                    <div class="mb-content">
+                                        <p>Are you sure you want to Backup?</p>
+                                        <p>Press No if you want to continue work. Press Yes to logout current user.</p>
+                                    </div>
+                                    <div class="mb-footer">
+                                        <div class="pull-right">
+                                            <a href="Backup.php" class="btn btn-success btn-lg">Yes</a>
+                                            <button class="btn btn-default btn-lg mb-control-close">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-</center>
-                    </div>
-                </div>
+                    </form>&nbsp;
+                    
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        
+                                    <input  type="file" name="temp_file">&nbsp;<br><br>
+                                    <button class="btn btn-lg btn btn-danger fa fa-cloud-upload" type="submit" name="submit" value="Import" data-box="#mb-signout"> Import</button>
+                        
+                    </form>
+                <table class="table datatable" id="backuptable">
+                    <thead>
+                        <tr>
+                            <th>Backup Date</th>
+                            <th>Filename</th>
+                        </tr>
+                    </thead>
+                   
+                        <?php
+$conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
+$query = $conn->query("SELECT * FROM `backup` ORDER BY `id` ASC") or die(mysqli_error());
+while($fetch = $query->fetch_array()){
+$id = $fetch['id'];
+$date = $fetch['date'];
+$backupName = $fetch['backupName'];
+
+    echo" 
+    
+                                                <tr>
+                                                    <p><th>$date</th><p>
+                                                    <p><th>Alisbo_Backup_$date.sql</th></p>
+                                                </tr>
+    ";
+?>
+
+                    <?php }
+$conn->close();
+?>
+                </table>
+                  </div>
             </div>
         </div>
-
-
+    </div>
+</div>
+            </div>
+        </div>
 
 
         <!-- START PRELOADS -->
@@ -89,6 +169,7 @@ if(!$_SESSION['username'])
         <!-- END PLUGINS -->
 
         <!-- THIS PAGE PLUGINS -->
+        <script type='text/javascript' src='js/plugins/noty/jquery.noty.js'></script>
         <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
         <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
@@ -101,8 +182,13 @@ if(!$_SESSION['username'])
 
         <script type="text/javascript" src="js/plugins.js"></script>
         <script type="text/javascript" src="js/actions.js"></script>
+        <script type='text/javascript' src='js/plugins/noty/themes/default.js'></script>
+
+
+        <script type='text/javascript' src='js/plugins/noty/themes/default.js'></script>
+
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS -->
     </body>
 
-    </html>
+</html>

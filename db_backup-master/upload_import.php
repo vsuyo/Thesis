@@ -8,7 +8,7 @@
 			//Uloading The temporary database file start here
         		if ($_FILES['temp_file']['name']!=null && $_FILES['temp_file']['name']!="") {
         			$src=$_FILES['temp_file']['tmp_name'];
-        			$destination='temp_upload/temp_database.'.pathinfo($_FILES['temp_file']['name'],PATHINFO_EXTENSION);
+        			$destination='Alisbo_Backup_2018_02_06_16_38_02.'.pathinfo($_FILES['temp_file']['name'],PATHINFO_EXTENSION);
         			if (copy($src,$destination)) {
         				//Importing Uploaded File Start here
 							if($dbbackup->db_import($destination)){

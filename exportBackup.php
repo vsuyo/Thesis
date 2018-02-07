@@ -40,10 +40,26 @@ foreach($tables as $table){
 ";
 }
 
+
+if(isset($_POST['submit'] )){
+//$date = $_POST['date'];
+//$backupName = $_POST['backupName'];
+$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$query = $conn->query("INSERT INTO `backup` (date)
+VALUES (NOW())") or die (mysqli_error());
+$conn->close();
+    
+	echo "<script>alert('Database Saved')</script>";
+
+}
+
+
+
 //save file
-$handle = fopen('Alisbo_Backup_'.date('Y_m_d_H_i_s').'.sql','w+');
+$handle = fopen('Alisbo_Backup_'.date('Y_m_d_H_m').'.sql','w+');
 fwrite($handle,$return);
 fclose($handle);
-echo '<script>alert("Succesfully Added!"); window.location.href="Backup.php"</script>';
+echo '<script>window.location.href="Backup.php"</script>';
 
 exit;
+
