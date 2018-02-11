@@ -14,7 +14,7 @@ if(!$_SESSION['username'])
 
     <head>
         <!-- META SECTION -->
-        <title>Alisbo Cadaver</title>
+        <title>Alisbo Client & Cadaver Report</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +46,7 @@ if(!$_SESSION['username'])
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Reports</a></li>
-                    <li class="active">Materials</li>
+                    <li class="active">Client & Cadaver</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -144,12 +144,7 @@ if(!$_SESSION['username'])
 
         <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
-        <script>
         
-        function oGender() {
-            myWindow = window.open("filter_gender.php", "", "width=1350, height=650");
-        }
-        </script>
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>

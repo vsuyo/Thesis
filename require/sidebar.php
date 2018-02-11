@@ -64,6 +64,7 @@
                 <li><a href="HearseReport.php"><span class="fa fa-truck"></span>Hearse</a></li>
                 <li><a href="MaterialsReport.php"><span class="fa fa-flask"></span>Materials</a></li>
                 <li><a href="Client&cadaverReport.php"><span class="fa fa-user"></span>No. of Client & Cadaver</a></li>  
+                <li><a href="UnidentifiedCorpseReport.php"><span class="fa fa-user"></span>Unidentified Corpes</a></li>
                 <li><a href="SummaryReport.php"><span class="fa fa-user"></span>Summary Report</a></li>
                 
                 </ul>

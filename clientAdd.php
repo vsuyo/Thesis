@@ -5,20 +5,24 @@ if(isset($_POST['save'] )){
     $informant = $_POST['informant'];
     $address = $_POST['address'];
     $contactno = $_POST['contactno'];
-    $month = date("M", strtotime("+8 HOURS")); // for reports no need to add input type field in the form
-	$year = date("Y", strtotime("+8 HOURS")); // for reports no need to add input type field in the form
-    
     
 
 
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-
-    $query = $conn -> query ("INSERT INTO `client`(`date`, `informant`, `address`, `contactno`,     `month`, `year`) VALUES ('$date', '$informant', '$address', '$contactno', '$month', '$year' )")or die (mysqli_error());
+$qry = $conn -> query("SELECT * FROM client where informant='$informant '") or die(mysqli_error());
+    
+    $f1 = $qry -> fetch_array();
+    $check = $qry -> num_rows;
+    if($check>0){
+         echo '<script>alert("Sorry, existing Insurance Name in DB"); window.location.href= "DataEntry.php"</script>';    
+        
+    }else{
+    $query = $conn -> query ("INSERT INTO `client`(`date`, `informant`, `address`, `contactno`) VALUES ('$date', '$informant', '$address', '$contactno' )")or die (mysqli_error());
 
     
-    echo '<script>alert("Succesfully Added"); window.location.href="DataEntry.php"</script>';
+    echo '<script>alert("Succesfully Added!"); window.location.href="DataEntry.php"</script>';
 
-       
+    }
     
 
     
@@ -33,7 +37,6 @@ $conn -> close();
 
 <?php
 if(isset($_POST['save_cadaver'] )){
-    $date_added = $_POST['date_added'];
     $cadaverdeceased = $_POST['cadaverdeceased'];
     $informant = $_POST['informant'];
     $insurance = $_POST['insurance'];
@@ -60,12 +63,36 @@ if(isset($_POST['save_cadaver'] )){
 
 
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$qry = $conn -> query("SELECT * FROM cadaverentry where cadaverdeceased='$cadaverdeceased '") or die(mysqli_error());
+    
+    $f1 = $qry -> fetch_array();
+    $check = $qry -> num_rows;
+    if($check>0){
+         echo '<script>alert("Sorry, existing Informant in DB"); window.location.href= "DataEntry.php"</script>';    
+        
+    }else{
+    $query = $conn -> query ("INSERT INTO `cadaverentry`(`cadaverdeceased`,`client_id`,`insurance`, `lifeplan`, `age`, `gender`, `mothersname`, `fathersname`, `birthdate`, `currentaddress`, `deathcertificate`, `deathcertno`, `dateissued`, `placeofdeath`, `dateofdeath`, `timeofdeath`, `transferfrom`, `datereceived`, `timereceived`, `month`, `year` ) VALUES ('$cadaverdeceased', '$informant', '$insurance', '$lifeplan', '$age', '$gender', '$mothersname', '$fathersname', '$birthdate', '$currentaddress', '$deathcertificate', '$deathcertno', '$dateissued', '$placeofdeath', '$dateofdeath', '$timeofdeath', '$transferfrom', '$datereceived', '$timereceived', '$month', '$year' )")or die (mysqli_error());
 
-    $query = $conn -> query ("INSERT INTO `cadaverentry`(`date_added`,`cadaverdeceased`,`client_id`,`insurance`, `lifeplan`, `age`, `gender`, `mothersname`, `fathersname`, `birthdate`, `currentaddress`, `deathcertificate`, `deathcertno`, `dateissued`, `placeofdeath`, `dateofdeath`, `timeofdeath`, `transferfrom`, `datereceived`, `timereceived`, `month`, `year` ) VALUES ('$date_added', '$cadaverdeceased', '$informant', '$insurance', '$lifeplan', '$age', '$gender', '$mothersname', '$fathersname', '$birthdate', '$currentaddress', '$deathcertificate', '$deathcertno', '$dateissued', '$placeofdeath', '$dateofdeath', '$timeofdeath', '$transferfrom', '$datereceived', '$timereceived', '$month', '$year' )")or die (mysqli_error());
-
-            echo '<script>alert("Succesfully Added"); window.location.href="Casket.php"</script>';
+            echo '<script>alert("Succesfully Added!"); window.location.href="Casket.php"</script>';
 
 }
+}
 
+
+?>
+
+<?php 
+
+if(isset($_POST['update_dataentry'] )){
+    $date = $_POST['date'];
+    $informant = $_POST['informant'];
+    $address = $_POST['address'];
+    $contactno = $_POST['contactno'];
+
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+    $query = $conn->query("UPDATE `client` SET `date`=['$date'],`client_id`=['client_id'],`informant`=['$informant'],`address`=['$address'],`contactno`=['$contactno'] WHERE   `client_id` = '$client_id'") or die(mysqli_error());
+    echo "<script>alert(' Updated Successfully!')</script>";
+    echo '<script>window.location.href="DataEntry.php"</script>';
+}
 
 ?>

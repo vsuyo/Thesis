@@ -75,6 +75,7 @@ if(!$_SESSION['username'])
                                                         <th>Casket Name</th>
                                                         <th>Qty.</th>
                                                         <th>Total</th>
+                                                        <th>Print</th>
                                                 
                                                 
                                                         
@@ -87,38 +88,31 @@ if(!$_SESSION['username'])
   
     
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$query = $conn->query("SELECT client.informant, cadaverentry.cadaverdeceased, viewing.preference, hearsetrans.hearsedate, casket.casket_inv_id, casketinventory.casketName, casket.qty, casket.total FROM client
+$query = $conn->query("SELECT client.informant, client.client_id, cadaverentry.cadaverdeceased, viewing.preference, hearsetrans.hearsedate, casket.casket_inv_id, casketinventory.casketName, casket.qty, casket.total FROM client
 INNER JOIN cadaverentry ON client.client_id = cadaverentry.client_id
 INNER JOIN viewing ON client.client_id = viewing.client_id
 INNER JOIN hearsetrans ON client.client_id = hearsetrans.client_id
 INNER JOIN casket ON client.client_id = casket.client_id
 INNER JOIN casketinventory ON casket.casket_inv_id = casketinventory.casket_inv_id
 " ) or die(mysqli_error());
-while($fetch = $query->fetch_array()){
-    $informant = $fetch['informant'];   
-    $cadaverdeceased = $fetch['cadaverdeceased'];
-    $preference = $fetch['preference']; 
-    $hearsedate = $fetch['hearsedate'];
-    $casketName = $fetch['casketName'];
-    $qty = $fetch['qty'];
-    $total = $fetch['total'];
-    
-    
+        while($fetch = $query->fetch_array()){
+        
 
-                                           echo "<tr>
-                                                <td>$informant</td>
-												<td>$cadaverdeceased</td>
-                                                <td>$preference</td>
-                                                <td>$hearsedate</td>
-                                                <td>$casketName</td>
-                                                <td>$qty</td>
-                                                <td>$total</td>
-                                                ";
-                       
-
-}
-$conn->close();
-?>
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $fetch['informant']?></td>
+                                                            <td><?php echo $fetch['cadaverdeceased']?></td>
+                                                            <td><?php echo $fetch['preference']?></td>
+                                                            <td><?php echo $fetch['hearsedate']?></td>
+                                                            <td><?php echo $fetch['casketName']?></td>
+                                                            <td><?php echo $fetch['qty']?></td>
+                                                            <td><?php echo $fetch['total']?></td>
+                                                            
+                                                            <td><a href="PrintSumTrans.php?id=<?php echo $fetch['client_id'];?>"  ><span class="btn btn-info btn-md fa fa-print" data-toggle="tooltip" data-placement="left" title="Print Details"> Print</span></a></td>
+                                                        </tr>
+                                                        <?php
+            }
+                                                        ?>
                                         </tbody>
                                     </table>                                    
                                     
@@ -139,7 +133,11 @@ $conn->close();
 
 
 
-
+<script>
+            function oGender() {
+                myWindow = window.open("PrintSumTrans.php?id=<?php echo $client_id?>", "", "width=1350, height=650");
+            }
+        </script>
     <!-- START PRELOADS -->
     <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
     <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>

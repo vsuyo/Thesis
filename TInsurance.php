@@ -38,7 +38,7 @@ include('Tinsuranceadd.php');
 <html lang="en">
     <head>        
         <!-- META SECTION -->
-        <title>Alisbo Cadaver</title>            
+        <title>Alisbo Insurance</title>            
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,7 +68,7 @@ include('Tinsuranceadd.php');
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">Data Entry</a></li>
+                    <li><a href="#">Transaction</a></li>
                     <li class="active">Insurance</li>
                 </ul>
                 <!-- END BREADCRUMB -->

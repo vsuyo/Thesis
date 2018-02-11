@@ -12,7 +12,7 @@ if(isset($_POST["export"])){
                     <p>Lacson St. cor. Burgos Avenue, Bacolod, 6100 Negros Occidental</p>
                     <p>(034) 434-0290</p>
         
-                    <center><p><h2>Chemicals Report</h2></p></center><br>
+                    <center><p><h2>Client & Cadaver Report</h2></p></center><br>
                     <tr>  
                         <th>Informant</th>
                         <th>Deceased</th>
@@ -56,7 +56,7 @@ class myPDF extends FPDF{
    function header(){
         $this->image('ALISBOLOGO.png',101);
         $this->SetFont('Arial','B',14);
-        $this->Cell(292,5,'Chemicals Report
+        $this->Cell(292,5,'Client & Cadaver  Report
         ',0,0,'C');
         $this->Ln();
         $this->SetFont('Times','',12);
@@ -82,7 +82,7 @@ class myPDF extends FPDF{
     function headerTable(){
         $this->SetFont('Times','B',13);
         $this->Cell(70);
-        $this->Cell(145,8,'Current Hearsing Details as of Year 2018',0,0,'C');
+        $this->Cell(145,8,'Current Client & Cadaver Details as of Year 2018',0,0,'C');
         $this->Ln();
         $this->Cell(15);
         $this->SetFont('Times','B',10);

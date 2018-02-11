@@ -1,3 +1,13 @@
+<?php  
+session_start();  
+$session_username = $_SESSION['username'];
+if(!$_SESSION['username'])  
+{  
+    header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
+}  
+?>
+
+
 <?php
 include ('hearseAdd.php');
 ?>
@@ -22,7 +32,7 @@ if(isset($_POST['update_hearse'])){
 
         $sql = "UPDATE hearsetrans SET client_id='$informant', hearse_id='$DriverName', car_id='$plateno', hearsedate='$hearsedate', purpose='$purpose', destinationto='$destinationto', destinationfrom='$destinationfrom' WHERE hearsetrans_id='$hearseID' ";
         if ($conn->query($sql) === TRUE) {
-            echo '<script>alert("Succesfully Added!"); window.location.href="HearseTrans.php"</script>';
+            echo '<script>window.location.href="HearseTrans.php"</script>';
         } else {
             echo "Error updating record: " . $conn->error;
         }
@@ -62,86 +72,7 @@ if(isset($_POST['update_hearse'])){
             <div class="page-content">
 
                 <!-- START X-NAVIGATION VERTICAL -->
-                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
-                    <!-- TOGGLE NAVIGATION -->
-                    <li class="xn-icon-button">
-                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
-                    </li>
-                    <!-- END TOGGLE NAVIGATION -->
-                    <!-- SEARCH -->
-                    <li class="xn-search">
-                        <form role="form">
-                            <input type="text" name="search" placeholder="Search..." />
-                        </form>
-                    </li>
-                    <!-- END SEARCH -->
-                    <!-- SIGN OUT -->
-                    <li class="xn-icon-button pull-right">
-                        <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
-                    </li>
-                    <!-- END SIGN OUT -->
-                    <!-- MESSAGES -->
-                    <li class="xn-icon-button pull-right">
-                        <a href="#"><span class="fa fa-bell"></span></a>
-                        <div class="informer informer-danger">4</div>
-                        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><span class="fa fa-bell"></span> Messages</h3>
-                                <div class="pull-right">
-                                    <span class="label label-danger">4 new</span>
-                                </div>
-                            </div>
-                            <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-online"></div>
-                                    <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe" />
-                                    <span class="contacts-title">John Doe</span>
-                                    <p>Praesent placerat tellus id augue condimentum</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-away"></div>
-                                    <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk" />
-                                    <span class="contacts-title">Dmitry Ivaniuk</span>
-                                    <p>Donec risus sapien, sagittis et magna quis</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-away"></div>
-                                    <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali" />
-                                    <span class="contacts-title">Nadia Ali</span>
-                                    <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="list-group-status status-offline"></div>
-                                    <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader" />
-                                    <span class="contacts-title">Darth Vader</span>
-                                    <p>I want my money back!</p>
-                                </a>
-                            </div>
-                            <div class="panel-footer text-center">
-                                <a href="pages-messages.html">Show all messages</a>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- END MESSAGES -->
-                    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-                        <div class="mb-container">
-                            <div class="mb-middle">
-                                <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-                                <div class="mb-content">
-                                    <p>Are you sure you want to log out?</p>
-                                    <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-                                </div>
-                                <div class="mb-footer">
-                                    <div class="pull-right">
-                                        <a href="pages-login-website-light.html" class="btn btn-success btn-lg">Yes</a>
-                                        <button class="btn btn-default btn-lg mb-control-close">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </ul>
+                <? require 'require/vertical-navigation.php' ?>
                 <!-- END X-NAVIGATION VERTICAL -->
 
                 <!-- START BREADCRUMB -->
@@ -202,9 +133,9 @@ if(isset($_POST['update_hearse'])){
                 $time = $fetch['time'];
                 $destinationfrom = $fetch['destinationfrom'];
                 $destinationto = $fetch['destinationto'];
-                
-                
-                
+
+
+
 
 
                 echo "<tr>
@@ -213,156 +144,109 @@ if(isset($_POST['update_hearse'])){
 												<td>$plateno</td>";
 
                                                     ?>
-                                                    <td>
-                                                        <div class='btn-group' role='group' aria-label='...'>
-                                                            <a href="#edit<?php echo $hearse_id;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
-                                                        </div>
-                                                    </td>
+<td>
+    <div class='btn-group' role='group' aria-label='...'>
+        <a href="#edit<?php echo $hearse_id;?>" data-toggle="modal">
+            <button type='button' class='btn btn-info btn-sm' data-toggle="tooltip" title="Edit Details" data-placement="left" ><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
+    </div>
+</td>
 
-                                                    <div id="edit<?php echo $hearse_id; ?>" class="modal fade" role="dialog">
-                                                        <form method="post" class="form-horizontal" role="form">
-                                                            <div class="modal-dialog modal-md">
-                                                                <!-- Modal content-->
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                        <h4 class="modal-title">Edit Item</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <input type="hidden" name="hearseID" value="<?php echo $hearse_id; ?>">
-                                                                        
-                                                                        <div class="form-group">
-                                            <label class="control-label col-sm-2">Informant</label>
-                                            <div class="col-md-3">
-                                                <select class="validate[required] select" name="informant" id="informant" data-live-search ="true">							
-                                                    <option value="pick">Choose Informant</option>
-                                                    <?php
-                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                    $sql = mysqli_query($conn, "SELECT * From client");
-                                                    $row = mysqli_num_rows($sql);
-                                                    while ($row = mysqli_fetch_array($sql)){
-                                                        echo "<option value=' ". $row['client_id'] ." '>" .$row['informant'] ."   </option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div><br><br>
+<div id="edit<?php echo $hearse_id; ?>" class="modal fade" role="dialog">
+    <form method="post" class="form-horizontal" role="form">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <center>
+                        <h2 class="modal-title fa fa-edit"> Edit Details</h2>
+                    </center>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="hearseID" value="<?php echo $hearse_id; ?>">
 
-                                            <div class="form-group">
-                                            <label class="col-sm-2 control-label">Driver Name</label>
-                                            <div class="col-md-3 ">
-                                                        <select data-live-search ="true" class="validate[required] select" name="DriverName" id="DriverName"  >		
-                                                            <option value="pick">Choose Driver</option>
-                                                            <?php
-                                                            $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                            $sql = mysqli_query($conn, "SELECT * From hearse");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)){
-                                                                echo "<option value=' ". $row['hearse_id'] ."'>" .$row['DriverName'] ."</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                                </div>
-                                            </div>
-                                                        <br><br>
-                                                                        
-                                            <div class="form-group">
-                                            <label class="col-sm-2 control-label">Car Plate Number</label>
-                                            <div class="col-md-3 ">
-                                                        <select class="validate[required] select" name="plateno" id="plateno">				
-                                                            <option value="pick">Choose Plate Number</option>
-                                                            <?php
-                                                            $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                            $sql = mysqli_query($conn, "SELECT * From car");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)){
-                                                                echo "<option value=' ". $row['car_id'] ."'>" .$row['plateno'] ."</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
-                                            </div>
-                                        </div>
-                                        
-                                                                        
-                                                                        
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Informant</label>
+                        <div class="col-md-6">
+                           <input type="text" class="form-control" id="informant" name="informant" value="<?php echo $informant; ?>">
+                        </div>
+                    </div><br><br>
 
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Driver Name</label>
+                        <div class="col-md-6 ">
+                           <input type="text" class="form-control" id="DriverName" name="DriverName" value="<?php echo $DriverName; ?>">
+                        </div>
+                    </div>
+                    <br><br>
 
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Car Plate Number</label>
+                        <div class="col-md-6 ">
+                            <input type="text" class="form-control" id="plateno" name="plateno" value="<?php echo $plateno; ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="date">Destination From:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="destinationfrom" name="destinationfrom" value="<?php echo $destinationfrom; ?>" placeholder="Time" required autofocus>
+                        </div>
+                    </div>
+                    <br><br>
 
-                                                                        <div class="form-group">
-                                                                            
-                                                                            
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="date">Destination To:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="destinationto" name="destinationto" value="<?php echo $destinationto; ?>" placeholder="Destination To" required autofocus>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="date">Hearse Date:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="hearsedate" name="hearsedate" value="<?php echo $hearsedate; ?>" placeholder="ate" required autofocus>
+                        </div>
+                    </div>
+                    <br><br>
 
-                                                                        </div>
-                                                                        <br><br>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="date">Purpose:</label>
+                        <div class="col-sm-6 row-sm-3">
+                            <input type="text" class="form-control" id="purpose" name="purpose" value="<?php echo $purpose; ?>" placeholder="purpose" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <br><br><br>
+                <div class="modal-footer">
+                    <center>
+                        <button type="submit" class="btn btn-info" name="update_hearse"><span class="glyphicon glyphicon-edit"></span> Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
+                </div>
+            </div>
 
-                                                                        
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-sm-2" for="date">Destination From:</label>
-                                                                            <div class="col-sm-4">
-                                                                                <input type="text" class="form-control" id="time" name="destinationfrom" value="<?php echo $time; ?>" placeholder="Time" required autofocus>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <br><br>
-                                                                        
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-sm-2" for="date">Destination To:</label>
-                                                                            <div class="col-sm-4">
-                                                                                <input type="text" class="form-control" id="destinationto" name="destinationto" value="<?php echo $destinationto; ?>" placeholder="Destination To" required autofocus>
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        
-                                                                        <br><br>
-
-
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-sm-2" for="date">Hearse Date:</label>
-                                                                            <div class="col-sm-4">
-                                                                                <input type="text" class="form-control" id="hearsedate" name="hearsedate" value="<?php echo $hearsedate; ?>" placeholder="ate" required autofocus>
-                                                                            </div>
-                                                                            </div>
-                                                                        <br><br>
-
-                                                                        <div class="form-group">
-                                                                            <label class="control-label col-sm-2" for="date">Purpose:</label>
-                                                                            <div class="col-sm-4">
-                                                                                <input type="text" class="form-control" id="purpose" name="purpose" value="<?php echo $purpose; ?>" placeholder="purpose" required autofocus>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        
-
-                                                                    </div>
-                                                                    <br><br><br>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" class="btn btn-primary" name="update_hearse"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-                                                                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </form>
-                                                    </div>
+        </div>
+    </form>
+</div>
 
 
 
-                                                    <?php
+<?php
             }
             $conn->close();
                                                     ?>
 
 
-                                                </tbody>
+    </tbody>
 
 
 
 
 
 
-                                            </table>
-
+    </table>
                                         </div>
                                     </div>
                                 </div>
@@ -395,9 +279,9 @@ if(isset($_POST['update_hearse'])){
                                 <form role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Informant</label>
-                                            <div class="col-md-9 col-xs-10">
-                                                <select class="validate[required] select" name="informant" id="informant">							
+                                            <label class="col-md-4 control-label">Informant</label>
+                                            <div class="col-md-8">
+                                                <select class="validate[required] select" name="informant" id="informant" data-live-search="true">							
                                                     <option value="pick">Choose Informant</option>
                                                     <?php
                                                     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
@@ -413,52 +297,46 @@ if(isset($_POST['update_hearse'])){
 
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Driver Name</label>
-                                            <div class="col-md-9 col-xs-10">
-                                                        <select class="validate[required] select" name="DriverName" id="DriverName">		
-                                                            <option value="pick">Choose Driver</option>
-                                                            <?php
-                                                            $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                            $sql = mysqli_query($conn, "SELECT * From hearse");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)){
-                                                                echo "<option value=' ". $row['hearse_id'] ."'>" .$row['DriverName'] ."</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
+                                            <label class="col-md-4 control-label">Driver Name</label>
+                                            <div class="col-md-8">
+                                                <select class="validate[required] select" name="DriverName" id="DriverName">		
+                                                    <option value="pick">Choose Driver</option>
+                                                    <?php
+                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                                                    $sql = mysqli_query($conn, "SELECT * From hearse");
+                                                    $row = mysqli_num_rows($sql);
+                                                    while ($row = mysqli_fetch_array($sql)){
+                                                        echo "<option value=' ". $row['hearse_id'] ."'>" .$row['DriverName'] ."</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Car Plate Number</label>
-                                            <div class="col-md-9 col-xs-10">
-                                                        <select class="validate[required] select" name="plateno" id="plateno">				
-                                                            <option value="pick">Choose Plate Number</option>
-                                                            <?php
-                                                            $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                            $sql = mysqli_query($conn, "SELECT * From car");
-                                                            $row = mysqli_num_rows($sql);
-                                                            while ($row = mysqli_fetch_array($sql)){
-                                                                echo "<option value=' ". $row['car_id'] ."'>" .$row['plateno'] ."</option>";
-                                                            }
-                                                            ?>
-                                                        </select>
+                                            <label class="col-md-4 control-label">Car Plate Number</label>
+                                            <div class="col-md-8">
+                                                <select class="validate[required] select" name="plateno" id="plateno">				
+                                                    <option value="pick">Choose Plate Number</option>
+                                                    <?php
+                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                                                    $sql = mysqli_query($conn, "SELECT * From car");
+                                                    $row = mysqli_num_rows($sql);
+                                                    while ($row = mysqli_fetch_array($sql)){
+                                                        echo "<option value=' ". $row['car_id'] ."'>" .$row['plateno'] ."</option>";
+                                                    }
+                                                    ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Purpose</label>
-                                            <div class="col-md-9 col-xs-12">
-                                                <textarea class="form-control" type = "text" id = 'input' onkeyup="myFunction(this.id)" name="purpose" rows="2"></textarea>
+                                            <label class="col-md-4 control-label">Note:</label>
+                                            <div class="col-md-6">
+                                                <textarea class="form-control" type="text" id='input' onkeyup="myFunction(this.id)" name="purpose" rows="5"></textarea>
                                             </div>
                                         </div>
-
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Optional</label>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="col-md-5 control-label">Origin (From) </label>
+                                            <label class="col-md-4 control-label">Origin (From) </label>
                                             <div class="col-md-6">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" / name="deliver" readonly value="Alisbo">
@@ -466,17 +344,17 @@ if(isset($_POST['update_hearse'])){
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-5 control-label">To </label>
-                                            <div class="col-md-2 col-xs-12">
-                                                    <select class="validate[required] select" name="to" id="place" data-style="btn-default">
-                                                        <option value="">Choose option</option>
-                                                        <option value="House">Residence</option>
-                                                        <option value="Church to Cemetery">Church to Cemetery</option>
-                                                    </select>
+                                            <label class="col-md-4 control-label">To </label>
+                                            <div class="col-md-3">
+                                                <select class="validate[required] select" name="to" id="place" data-style="btn-default">
+                                                    <option value="">Choose option</option>
+                                                    <option value="House">Residence</option>
+                                                    <option value="Church to Cemetery">Church to Cemetery</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-5 control-label">From</label>
+                                            <label class="col-md-4 control-label">From</label>
                                             <div class="col-md-3">
                                                 <div class="input-group bootstrap-timepicker">
                                                     <input type="text" name="timeoutfrom" class="form-control timepicker" />
@@ -492,38 +370,47 @@ if(isset($_POST['update_hearse'])){
                                         <br>
                                         <hr>
                                         <div class="form-group">
-                                            <label class="col-md-3 col-xs-12 control-label">Hearse Date</label>
-                                            <div class="col-md-6">
-                                                    <input type="name" name="hearsedate" class="form-control datepicker">
+                                            <label class="col-md-4 control-label">Hearse Date</label>
+                                            <div class="col-md-4">
+                                                <input type="name" name="hearsedate" class="form-control datepicker">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Time</label>
+                                            <label class="col-md-4 control-label">Time</label>
                                             <div class="col-md-6">
-                                            <div class="input-group bootstrap-timepicker">
-                                                <input type="text" name="time" class="form-control timepicker"/>                                              
-                                            </div>
+                                                <div class="input-group bootstrap-timepicker">
+                                                    <input type="text" name="time" class="form-control timepicker" />
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Destination (From) </label>
+                                            <label class="col-md-4 control-label">Destination (From) </label>
                                             <div class="col-md-6">
-                                                    <input type="text" name="destinationfrom" class="form-control" id = 'input2' onkeyup="myFunction(this.id)" />
+                                                <input type="text" name="destinationfrom" class="form-control" id='input2' onkeyup="myFunction(this.id)" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">To </label>
+                                            <label class="col-md-4 control-label">To </label>
                                             <div class="col-md-6">
-                                                    <input type="text" name="destinationto" class="form-control" id = 'input3' onkeyup="myFunction(this.id)" />
+                                                <input list="browsers" type="text" name="destinationto" class="form-control" id='input3' onkeyup="myFunction(this.id)" />
+                                                 <datalist id="browsers">
+                                                <option value="Burgos">
+                                                <option value="Acropolis">
+                                                <option value="Rolling Hills">
+                                                <option value="Handumanan Cemetery">
+                                                <option value="Roselawn">
+                                            </datalist>
                                             </div>
-                                        </div><br>
+                                        </div>
+<br>
 
 
                                         <br>
-                                        <div class="panel-footer"><center>
-                                            <button class="btn btn-info fa fa-check-square-o" name="savetrans" href="Hearse.php"> Save</button>
-                                            <button type="button" class="btn btn-danger fa fa-times" data-dismiss="modal"> Close</button></center>
+                                        <div class="panel-footer">
+                                            <center>
+                                                <button class="btn btn-info fa fa-check-square-o" name="savetrans" href="Hearse.php"> Save</button>
+                                                <button type="button" class="btn btn-danger fa fa-times" data-dismiss="modal"> Close</button></center>
                                         </div>
                                     </div>
                                 </form>
@@ -535,21 +422,20 @@ if(isset($_POST['update_hearse'])){
         </div>
 
 
-        
-        
-                                    <script>
-                                        function myFunction(textboxid) {
 
-                                            var input = document.getElementById(textboxid);
-                                            var word = input.value.split(" ");
-                                            for (var i = 0; i < word.length; i++) {
-                                                word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1).toLowerCase();
-                                            }
-                                            input.value = word.join(" ");
-                                        }
 
-                                    </script>
-                                    <!-- end -->
+        <script>
+            function myFunction(textboxid) {
+
+                var input = document.getElementById(textboxid);
+                var word = input.value.split(" ");
+                for (var i = 0; i < word.length; i++) {
+                    word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1).toLowerCase();
+                }
+                input.value = word.join(" ");
+            }
+        </script>
+        <!-- end -->
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
         <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>

@@ -1,5 +1,5 @@
 <?php
-include('Casket_add.php');
+include('casket_add.php');
 
 
 ?>
@@ -8,7 +8,7 @@ include('Casket_add.php');
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Chemicals</title>
+    <title>Alisbo Casket Inventory</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -118,8 +118,8 @@ include('Casket_add.php');
             <!-- START BREADCRUMB -->
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Monitoring</a></li>
-                <li class="active"><strong><mark>Caskets</mark></strong></li>
+                <li><a href="#">Data Entry</a></li>
+                <li class="active"><strong><mark>Casket Inventory</mark></strong></li>
             </ul>
             <!-- END BREADCRUMB -->
 
@@ -190,6 +190,7 @@ while($fetch = $query->fetch_array()){
                                                             <td>
                                                                 <div class='btn-group' role='group' aria-label='...'>
                                                                     <a href="#plus<?php echo $fetch['casket_inv_id'];?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
+                                                                    <a href="#minus<?php echo $fetch['casket_inv_id'];?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
                                                                 </div>
 
                                                             </td>
@@ -229,6 +230,48 @@ while($fetch = $query->fetch_array()){
             </div>
         </form>
     </div>
+                                                    
+
+<!--Dispense Stock-->                                                    
+ <div id="minus<?php echo $fetch['casket_inv_id'];?>" class="modal fade" role="dialog" data-backdrop="static">
+        <form method="post" class="form-horizontal" role="form">
+            <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <center><h4 class="modal-title fa fa-minus"> Dispense Stocks</h4></center>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="casket_inv_id" value="<?php echo $fetch['casket_inv_id'];?>">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="chemName1">Casket Name:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="chemName1" name="casketName" value="<?php echo $fetch['casketName']?>" placeholder="Casket Name" required readonly>
+                            </div><br><br><br>
+                            <label class="control-label col-sm-3" for="qty1">Quantity:</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" OnlyNumber="true" id="qty" name="qty"  maxlength="3" min="0" max="999"  value="<?php echo $fetch['qty']?>" placeholder="Quantity" required="" >
+                               
+                            </div><br><br><br>
+                            <label class="control-label col-sm-3" for="qty1">Receiver:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" OnlyNumber="true" id="receiver" name="receiver" value="" placeholder="Receiver" required="" >
+                               
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="modal-footer"><Center>
+                        <button type="submit" class="btn btn-info fa fa-plus" name="dispense_Stocks"> Dispense Stocks</button>
+                        <button type="button" class="btn btn-danger fa fa-times-circle" data-dismiss="modal"> Cancel</button></Center>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
 
 
 

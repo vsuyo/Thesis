@@ -389,7 +389,7 @@ else {
                                                         <td><?php echo $phpdate; ?></td>
                                                         <td><?php echo  $line->customer_id; ?></td>
                                                         <td><?php echo $line->balance; ?></td>
-                                                        <td><?php echo  $line->subtotal; ?></td>
+                                                        <td><?php echo  $line->subtotal; ?></td>    
                                                         <td> <a href="edit_stock_sales.php?id=<?php echo $row['transactionid'];?>"><span class=" glyphicon glyphicon-pencil"></a></td>
                                                         <td><a onclick="return confirmSubmit()"
                                                                            href="stock_sales_delete.php?tid=<?php echo $row['transactionid']; ?>&table=stock_sales&return=view_stock_sales.php"><span class="glyphicon glyphicon-trash"></span></a>

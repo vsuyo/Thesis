@@ -14,7 +14,7 @@ if(!$_SESSION['username'])
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Material Report</title>
+    <title>Alisbo Unidentified Corpse Report</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +46,7 @@ if(!$_SESSION['username'])
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Reports</a></li>
-                <li class="active">Materials</li>
+                <li class="active">Unidentified Corpse Report</li>
             </ul>
             <!-- END BREADCRUMB -->
 
@@ -57,45 +57,87 @@ if(!$_SESSION['username'])
                         <!-- START TABS -->
                         <div class="panel panel-default tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li><a href="#tab-first" role="tab" data-toggle="tab">Materials Report</a></li>
+                                <li><a href="#tab-first" role="tab" data-toggle="tab">Unidentified Corpse Report</a></li>
                             </ul>
                             <div class="panel-body tab-content">
                                 <div class="tab-pane active" id="tab-first">
                                    <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="btn-group pull-right">
-                                        <form method="post" action="exportmaterials.php">
+                                        <form method="post" action="exportunidentifiedcorpse.php">
                                             <input type="submit" name="export" class="btn btn-success"      value="Export To Excel" />
                                             <input type="submit" name="export2" class="btn btn-         success" value="Export To PDF" />
-                                                 </form>                   
+                                                 </form> <br> 
+                                        <form method="post" action="UnidentifiedCorpseReportChart.php">
+                                        <input type="submit" name="" class="btn btn-success"      value="Go To Chart" />
+                                            
+                                        </form>
                                                      <div class="panel-body">
-                                    <table id="customers2" class="table datatable">
-                                        <thead>
-                                            <tr>
-                                                <th>Material Name</th>
-                                                <th>Material Description</th>
-                                                <th>Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <table class="table datatable" id="corpse">
+                            <thead>
+                                    <tr>
+                                        <th>Image Preview</th>
+                                        <th>Date Added</th>
+                                        <th>Gender</th>
+                                        <th>Age Range</th>
+                                        <th>Height</th>
+                                        <th>Skin</th>
+                                        <th>Identification</th>
+                                        
+                                                            
+                                                        </tr> 
+                                                    </thead>
 <?php
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$query = $conn->query("SELECT * FROM `materialstocktrans` ORDER BY `controlNo` DESC") or die(mysqli_error());
+$query = $conn->query("SELECT * FROM `unidentifiedcorpse` ORDER BY `cid` DESC") or die(mysqli_error());
 while($fetch = $query->fetch_array()){
-    $qty1 = $fetch['qty1'];
-    $matName1 = $fetch['matName1'];
-    $matDesc1 = $fetch['matDesc1'];
+$cid = $fetch['cid'];
+$date = $fetch['date'];
+//$controlNo = $fetch['controlNo'];
+$gender = $fetch['gender'];
+$age = $fetch['age'];
+//$status = $fetch['status'];
+$height = $fetch['height'];
+$skinType = $fetch['skinType'];
+$identification = $fetch['identification'];
+//$name = $fetch['name'];
+//$image = $fetch['image'];
+//$dateF = date("m-d-Y");
+        
 
-                                           echo "<tr>
-                                                <td>$matName1</td>
-												<td>$matDesc1</td>  
-                                                <td>$qty1</td>";
-}
-$conn->close();
 ?>
-                                        </tbody>
-                                    </table>                                    
-                                    
+                        <div class="col-md-3">
+                            <!-- CONTACT ITEM -->
+                            <div class="panel panel-default" hidden="">
+                                <div class="panel-body profile" hidden="">
+                                </div>                                
+                                <div class="panel-body">                                    
+                                    <div class="contact-info">
+                                            <tr>
+                                                <td><?php echo '<img src="data:image;base64, '.$fetch['image']. '" height="50" width="100">';?>
+                                                </td>												
+                                                <td><?php echo $date;?></small></td>
+												<td><?php echo $gender;?></small></td>
+												<td><?php echo $age?></small></td>
+												<td><?php echo $height?></small></td>
+												<td><?php echo $skinType;?></small></td>
+												<td><?php echo $identification;?></small></td>
+												
+                                                		</div>
+                                </div>                                          
+                            </div>
+
+
+                            <!-- END CONTACT ITEM -->
+							</form>
+                        </div>
+						
+<?php
+} $conn->close();
+?>	
+</tbody>
+            </table>
+	
                                 </div>
                                      
                             </div>

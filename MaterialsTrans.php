@@ -35,6 +35,19 @@ if(!$_SESSION['username'])
                         $quantity = $_POST['qty1'];
                         $receiver1 = $_POST['receiver1'];
                         $matName1 = $_POST['matName1'];
+                        
+                        
+                        $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                        $query = $conn->query("select * from `materialstocktrans` where `matName1` = '$matName1'") or die (mysqli_error());
+                        $fetch = $query->fetch_array();
+                        $qty1 = $fetch['qty1'];
+                        if ($quantity > $qty1){
+                            echo "<script>alert('Need more stocks in order to dispense!')</script>";
+                             echo '<script>window.location.href="MaterialsTrans.php"</script>';
+                        }
+                        else {
+                        
+                        
                         $sql = "INSERT INTO added_quantitymat (qty1, matName1, receiver1 ,  date_time, in_out) VALUES ( '$quantity','$matName1', '$receiver1' , NOW(), 'out')";
                         
                         if ($conn->query($sql) === TRUE) {
@@ -48,6 +61,7 @@ if(!$_SESSION['username'])
                             echo "Error: " . $sql . "<br>" . $conn->error;
                         }
                     }
+                    }
     ?>
 
 <!DOCTYPE html>
@@ -55,7 +69,7 @@ if(!$_SESSION['username'])
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Cadaver</title>
+    <title>Alisbo Material Transaction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -86,8 +100,8 @@ if(!$_SESSION['username'])
             <!-- START BREADCRUMB -->
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Monitoring</a></li>
-                <li class="active">Chemicals</li>
+                <li><a href="#">Transaction</a></li>
+                <li class="active">Materials</li>
             </ul>
             <!-- END BREADCRUMB -->
 
@@ -139,7 +153,7 @@ while($fetch = $query->fetch_array()){
                                                                 <a href="#plus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
                                                             </div>
 
-                                                            <a href="#minus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
+                                                            <a href="#minus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
                                                         </td>
 
 

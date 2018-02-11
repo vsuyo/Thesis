@@ -19,7 +19,7 @@ include ('hearseAdd.php');
 
     <head>
         <!-- META SECTION -->
-        <title>Alisbo Cadaver</title>
+        <title>Alisbo Hearse Driver</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -51,7 +51,7 @@ include ('hearseAdd.php');
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Data Entry</a></li>
-                    <li class="active">Hearse</li>
+                    <li class="active">Hearse Driver</li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
@@ -64,7 +64,7 @@ include ('hearseAdd.php');
                             <!-- START TABS -->
                             <div class="panel panel-default tabs">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li><a href="#tab-third" role="tab" data-toggle="tab"><span class="fa fa-truck"> Hearse</span></a></li>
+                                    <li><a href="#tab-third" role="tab" data-toggle="tab"><span class="fa fa-truck"> Hearse Driver</span></a></li>
                                 </ul>
                                 <div class="panel-body tab-content">
                                     <div class="tab-pane active" id="tab-third">

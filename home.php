@@ -223,10 +223,10 @@ $conn->close();
                         <div class="col-lg-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Material Stock Chart</h3>
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Material Stock Alert </h3>
                                 </div>
                                 <div>
-                                    <table class="table table-bordered table-hover table-striped">
+                                    <table class="table table-bordered table-hover table-striped" id = "id2">
                                         <thead>
                                             <tr>
                                                 <th>Stock Number</th>
@@ -246,7 +246,7 @@ $conn->close();
 
                                                 <tr>
                                                     <td>
-                                                        <?php echo $list;?>
+                                                        <mark><?php echo $list;?></mark>
                                                     </td>
                                                     <td>
                                                         <?php echo $fetch['matName1'];?>
@@ -262,6 +262,9 @@ $conn->close();
                     $conn->close();
                     ?>
                                         </tbody>
+                                        <script>
+                                    document.getElementById('id2').style.color='Red';
+                                    </script>
                                     </table>
 
                                 </div>
@@ -275,10 +278,10 @@ $conn->close();
                         <div class="col-lg-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Chemical Stock Chart</h3>
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Chemical Stock Alert</h3>
                                 </div>
                                 <div>
-                                    <table class="table table-bordered table-hover table-striped">
+                                    <table class="table table-bordered table-hover table-striped" id="id1">
                                         <thead>
                                             <tr>
                                                 <th>Stock Number</th>
@@ -289,7 +292,7 @@ $conn->close();
                                         <tbody>
                                             <?php
                     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                    $query = $conn->query("SELECT chemName1, qty1 FROM chemicalstocktrans WHERE qty1 <= '10'  AND qty1 >= '1' ") or die(mysqli_error());
+                    $query = $conn->query("SELECT chemName1, qty1 FROM chemicalstocktrans WHERE qty1 <= '20'  AND qty1 >= '1' ") or die(mysqli_error());
                     $list = 1;    
                     while($fetch = $query->fetch_array()){
                     $chemName1 = $fetch['chemName1'];
@@ -298,7 +301,7 @@ $conn->close();
 
                                                 <tr>
                                                     <td>
-                                                        <?php echo $list;?>
+                                                        <mark><?php echo $list;?></mark>
                                                     </td>
                                                     <td>
                                                         <?php echo $fetch['chemName1'];?>
@@ -315,6 +318,9 @@ $conn->close();
                     ?>
                                         </tbody>
                                     </table>
+                                    <script>
+                                    document.getElementById('id1').style.color='Red';
+                                    </script>
 
 
                                 </div>

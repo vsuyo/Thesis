@@ -1,4 +1,4 @@
-<?php
+ <?php
 include('Chemicaladd.php');
 
 
@@ -118,7 +118,7 @@ include('Chemicaladd.php');
             <!-- START BREADCRUMB -->
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Monitoring</a></li>
+                <li><a href="#">Data Entry</a></li>
                 <li class="active"><strong><mark>Chemicals</mark></strong></li>
             </ul>
             <!-- END BREADCRUMB -->

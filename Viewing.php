@@ -15,9 +15,10 @@ include('viewingAdd.php');
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>        
+
+    <head>
         <!-- META SECTION -->
-        <title>Alisbo Cadaver</title>            
+        <title>Alisbo Cadaver</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,21 +26,22 @@ include('viewingAdd.php');
         <link rel="icon" href="img/A.png" type="image/x-icon" />
         <!-- END META SECTION -->
 
-        <!-- CSS INCLUDE -->        
-        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-blue.css"/>
-        <!-- EOF CSS INCLUDE -->    
+        <!-- CSS INCLUDE -->
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-blue.css" />
+        <!-- EOF CSS INCLUDE -->
 
     </head>
+
     <body>
         <!-- START PAGE CONTAINER -->
-        <div class="page-container">       
-            <?php require 'require/sidebar.php'?>        
+        <div class="page-container">
+            <?php require 'require/sidebar.php'?>
             <!-- PAGE CONTENT -->
             <div class="page-content">
 
                 <!-- START X-NAVIGATION VERTICAL -->
                 <?php require 'require/vertical-navigation.php'?>
-                <!-- END X-NAVIGATION VERTICAL -->                   
+                <!-- END X-NAVIGATION VERTICAL -->
 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
@@ -55,20 +57,20 @@ include('viewingAdd.php');
                     <div class="row">
 
                         <div class="col-md-12">
-                            <!-- START TABS -->                                
-                            <div class="panel panel-default tabs">                            
+                            <!-- START TABS -->
+                            <div class="panel panel-default tabs">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#tab-first" role="tab" data-toggle="tab"><span class="fa fa-home"> Vigil</span></a></li>
-                                </ul>                            
+                                </ul>
                                 <div class="panel-body tab-content">
                                     <div class="tab-pane active" id="tab-first">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">                                
-                                                <h3 class="panel-title"> 
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">
                                                     <div class="pull-right">
                                                         <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium"><span class="fa fa-plus"></span>Add Vigil</button>
-
-                                                    </div></h3>
+                                                    </div>
+                                                </h3>
 
                                             </div>
 
@@ -76,92 +78,44 @@ include('viewingAdd.php');
                                                 <table class="table datatable" id="chemStockList">
                                                     <thead>
                                                         <tr>
+                                                            <th>Transaction Date</th>
                                                             <th>Informant</th>
                                                             <th>Preference</th>
+                                                            <th>Chapel / Room</th>
                                                             <th>Address</th>
                                                             <th>Date Borrowed</th>
                                                             <th>Date Return</th>
                                                             <th>Materials</th>
-                                                            <th>Status</th></tr>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
 
                                                         <?php
-        $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-            $query = $conn->query("SELECT client.informant, viewing.date, viewing.preference,  viewing.chapelcode, viewing.roomtype, viewing.startdate, viewing.enddate, viewing.controlno, viewing.duration, viewing.address, viewing.dateBorrowed, viewing.datereturn, viewing.materials FROM client INNER JOIN viewing ON client.client_id = viewing.client_id") or die(mysqli_error());
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+            $query = $conn->query("select * from `client`, `viewing` where client.client_id = viewing.client_id") or die(mysqli_error());
             while($fetch = $query->fetch_array()){
-                $date = $fetch['date'];
-                $informant = $fetch['informant'];
-                $preference = $fetch['preference'];
-                $chapelcode = $fetch['chapelcode'];
-                $roomtype = $fetch['roomtype'];
-                $startdate = $fetch['startdate'];
-                $enddate = $fetch['enddate'];
-                $controlno = $fetch['controlno'];
-                $duration = $fetch['duration'];
-                $address = $fetch['address'];
-                $dateBorrowed = $fetch['dateBorrowed'];
-                $datereturn = $fetch['datereturn'];
-                $materials = $fetch['materials'];
-
-
-
-                echo "<tr>
-                                                <td>$informant</td>
-                                                <td>$preference</td>
-												<td>$address</td>
-												<td>$dateBorrowed</td>
-                                                <td>$datereturn</td>
-                                                <td>$materials</td>";
-
                                                         ?>
-                                                        <td>
-                                                            <div class='btn-group' role='group' aria-label='...'>
-                                                                <a href="#update<?php echo $controlno; ?>" data-toggle="modal"><button  data-toggle="tooltip" title="Edit Status" type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#modal_medium2" ><span class="fa fa-edit"></span></button></a>&nbsp;
-                                                            </div>
-                                                        </td>
 
-                                                        <!-- insurance update modal-->
-                                                        <div id="update<?php echo $controlno; ?>" class="modal fade" role="dialog">
-                                                            <form method="post" class="form-horizontal" role="form">
-                                                                <div class="modal-dialog modal-sm">
-                                                                    <!-- Modal content-->
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                            <center><h2 class="modal-title fa fa-edit"> Edit Status</h2></center>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="from-group">
-                                                                                <label class="col-md-2 control-label">Status</label>
-                                                                                <div class="col-md-6">
-                                                                                    <select id="" name = "status" class="validate [required] select">
-                                                                                        <option value="">Status</option>
-                                                                                        <option name = "returned" value="returned">Returned</option>
-                                                                                        <option name = "unreturn" value="unreturned">Un Returned</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div><br><br>
-                                                                        <div class="modal-footer"><center>
-                                                                            <button type="submit" class="btn btn-info" name="update_viewing"><span class="glyphicon glyphicon-edit"></span> Save</button>
-                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
-                
-
-
+                                                        <tr>
+                                                            <td><?php echo $fetch['date']?></td>
+                                                            <td><?php echo $fetch['informant']?></td>
+                                                            <td><?php echo $fetch['preference']?></td>
+                                                            <td><?php echo $fetch['chapelcode']?></td>
+                                                            <td><?php echo $fetch['address']?></td>
+                                                            <td><?php echo $fetch['dateBorrowed']?></td>
+                                                            <td><?php echo $fetch['datereturn']?></td>
+                                                            <td><?php echo $fetch['materials']?></td>
+                                                            <td><?php echo $fetch['status']?></td>
+                                                            <td> <a href="#update<?php echo $fetch['controlno']?>" data-target="#update<?php echo $fetch['controlno']?>" data-toggle="modal" class="btn btn-info btn-md"><span class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Update Status"></span></a></td>
+                                                        </tr>
                                                         <?php
             }
             $conn->close();
-                                                        ?>  
+                                                        ?>
 
-                                                    </tbody> 
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -170,11 +124,11 @@ include('viewingAdd.php');
 
                                 </div>
                             </div>
-                        </div>                                                   
-                        <!-- END TABS -->                        
-                    </div>              
+                        </div>
+                        <!-- END TABS -->
+                    </div>
 
-                </div>               
+                </div>
             </div>
         </div>
 
@@ -184,7 +138,10 @@ include('viewingAdd.php');
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <center><h2 class="fa fa-home"> Vigil</h2>                                 </center>
+                        <center>
+                            <?php $dateF = date("y-d-m");?>
+                            <h2 class="fa fa-home"> Vigil</h2>
+                        </center>
                     </div>
 
                     <div class="modal-body">
@@ -196,18 +153,18 @@ include('viewingAdd.php');
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Date</label>
                                             <div class="col-md-5">
-                                                <input type="text" name="date" class="form-control datepicker" value="Date" placeholder="Date">
+                                                <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Informant</label>
                                             <div class="col-md-6">
-                                                <select class="validate[required] select" name="informant" id="informant" data-live-search="true" >											
+                                                <select class="validate[required] select" name="informant" id="informant" data-live-search="true">											
                                                     <option value="pick">Choose Informant</option>
                                                     <?php
                                                     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                    $sql = mysqli_query($conn, "SELECT * From client");
+                                                    $sql = mysqli_query($conn, "SELECT * From client ");
                                                     $row = mysqli_num_rows($sql);
                                                     while ($row = mysqli_fetch_array($sql)){
                                                         echo "<option value=' ". $row['client_id'] ." '>" .$row['informant'] ."   </option>";
@@ -235,7 +192,7 @@ include('viewingAdd.php');
 
                                         </script>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Preference</label>    
+                                            <label class="col-md-4 control-label">Preference</label>
                                             <div class="col-md-6">
                                                 <select class="validate[required] select" id="ddlPreference" name="preference">
                                                     <option value="">Choose preference</option>
@@ -250,7 +207,7 @@ include('viewingAdd.php');
                                             <div class="from-group">
                                                 <label class="col-md-4 control-label">Room Type</label>
                                                 <div class="col-md-6">
-                                                    <select id="ddl" name = "roomtype" class="validate [required] select" onchange="pick(this,document.getElementById('init'))">
+                                                    <select id="ddl" name="roomtype" class="validate [required] select" onchange="pick(this,document.getElementById('init'))">
                                                         <option value="">Choose</option>
                                                         <option name = "roomtype" value="Aircon">Aircon</option>
                                                         <option name = "roomtype" value="Non_Aircon">Non-Aircon</option>
@@ -261,69 +218,80 @@ include('viewingAdd.php');
                                             <div class="">
                                                 <label class="col-md-4 control-label">Chapel Name</label>
                                                 <div class="col-md-8">
-                                                    <select id="init" name = "chapelcode" class="" >   
+                                                    <select id="init" name="chapelcode" class="">   
                                                         <option>Choose Chapel Name</option>
                                                     </select>
                                                 </div>
                                             </div><br><br>
 
 
-                                            <div class="form-group" >
-                                                <label class="col-md-4 control-label" for = "startdate">Start Date</label>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="startdate">Start Date</label>
                                                 <div class="col-md-5">
                                                     <input type="text" name="startdate" class="form-control datepicker" value="Date" placeholder="Date" id="datepicker1" data-date-start-date="0d">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for = "enddate">End Date</label>
+                                                <label class="col-md-4 control-label" for="enddate">End Date</label>
                                                 <div class="col-md-5">
                                                     <input type="text" name="enddate" class="form-control datepicker" value="Date" placeholder="Date" id="datepicker2">
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">No. of (Days)</label>
                                                 <div class="col-md-3">
-                                                    <input type="number" name="duration" class="form-control"  onkeyup="compute()" placeholder="Days" id="days">
+                                                    <input type="number" name="duration" class="form-control" onkeyup="compute()" placeholder="Days" id="days" readonly>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Materials</label>&nbsp;&nbsp;
+                                                <div class="input-group">
+                                                    <form name="materials[]" id="materials">
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Carpet"> Carpet&nbsp;&nbsp;&nbsp;&nbsp;
+                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Roller Stand"> Roller Stand &nbsp;
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Crucifix"> Crucifix<br><br>
+                                                        <input class="icheckbox" aria-controls=""type="checkbox" name="materials[]" value="Curtains"> Curtains&nbsp;
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Candle Stand"> Candle Stand&nbsp;                                                        
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Lights"> Lights                                                       
+                                                    </form>
+                                                </div>
+                                            </div>         
                                         </div>
-                                            <div id="dvpreference2" style="display: none">
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Address</label>
-                                                    <div class="col-md-5">
-                                                        <input type="text" name="address" class="form-control" / placeholder="Address" id = 'input' onkeyup="myFunction(this.id)">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Date borrowed</label>
-                                                    <div class="col-md-5">
-                                                        <input type="text" name="dateBorrowed" class="form-control datepicker" value="Date" placeholder="Date" id="sd">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-md-4 control-label">Date Return</label>
-                                                    <div class="col-md-5">
-                                                        <input type="text" name="datereturn" class="form-control datepicker" value="Date" placeholder="Date" id="date">
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="form-group">
-                                                    <label class="col-md-3 control-label">Materials</label>
-                                                    <div class="input-group">
-                                                        <form name = "materials[]" id = "materials" method="post">
-                                                            <input type="checkbox"  name = "materials[]" value="Carpet"><label>Carpet</label>&nbsp;
-                                                            <input type="checkbox" name = "materials[]" value="Lights"><label>Lights</label> &nbsp;
-                                                            <input type="checkbox" name = "materials[]" value="Crucifix"><label>Crucifix</label>&nbsp;
-                                                            <input type="checkbox" name = "materials[]" value="Curtains"><label>Curtains</label>&nbsp;
-                                                            <input type="checkbox" name = "materials[]" value="Candle Stand"><label>Candle Stand</label>&nbsp;
-                                                            <input type="checkbox" name = "materials[]"  value="Roller Stand"><label>Roller Stand</label>&nbsp;
-                                                        </form>
-                                                    </div>  
+                                        <div id="dvpreference2" style="display: none">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Address</label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="address" class="form-control" / placeholder="Address" id='input' onkeyup="myFunction(this.id)">
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Date borrowed</label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="dateBorrowed" class="form-control datepicker" value="Date" placeholder="Date" id="sd">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Date Return</label>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="datereturn" class="form-control datepicker" value="Date" placeholder="Date" id="date">
+                                                </div>
+                                            </div>
+                                            <hr> <div class="form-group">
+                                                <label class="col-md-4 control-label">Materials</label>&nbsp;&nbsp;
+                                                <div class="input-group">
+                                                    <form name="materials[]" id="materials">
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Carpet"> Carpet&nbsp;&nbsp;&nbsp;&nbsp;
+                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Roller Stand"> Roller Stand &nbsp;
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Crucifix"> Crucifix<br><br>
+                                                        <input class="icheckbox" aria-controls=""type="checkbox" name="materials[]" value="Curtains"> Curtains&nbsp;
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Candle Stand"> Candle Stand&nbsp;                                                        
+                                                        <input class="icheckbox" type="checkbox" name="materials[]" value="Lights"> Lights                                                       
+                                                    </form>
+                                                </div>
+                                            </div>                              
+                                        </div><br><br>                                         
                                         <div class="modal-footer">
                                             <center>
                                                 <button type="submit" class="btn btn-info" name="save_vigil"><span class="glyphicon glyphicon-check"></span> Save</button>
@@ -338,13 +306,43 @@ include('viewingAdd.php');
             </div>
         </div>
 
+        <?php 
+        $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+        $query = $conn->query("select * from `viewing`") or die(mysqli_error());
+        while($fetch = $query->fetch_array()){
+        ?>
+        <div id="update<?php echo $fetch['controlno']?>" class="modal fade" role="dialog">
+            <form method="post" class="form-horizontal" role="form" action="viewingAdd.php">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <center>
+                                <h4>Do you want to update Chapel/Room Status?</h4>
+                            </center>
+                        </div>
+                        <div class="modal-body">
+                            <center><input type="hidden" name="controlno" value="<?php echo $fetch['controlno']?>">
+                            
+                            <input type="radio" class="iradio" name="update" value="yes"> YES &nbsp;&nbsp;                       
+                            <input type="radio" class="iradio" name="update" value="no"> NO
+                            </center>
+                        </div><br>
+                        <div class="modal-footer">
+                            <center>
+                                <button type="submit" class="btn btn-info" name="update_viewing"><span class="glyphicon glyphicon-edit"></span> Save</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
+                        </div>
+                    </div>
 
-        <script>
-            function(status){
+                </div>
+            </form>
+        </div>
+        <?php
+        }
+        $conn->close();
+        ?>
 
-            }
-
-        </script>
 
         <!--uppercase-->
         <script>
@@ -366,61 +364,61 @@ include('viewingAdd.php');
 
                 $('#datepicker1').datepicker({
                     format: "dd-M-yyyy",
-                    todayHighlight:'TRUE',
+                    todayHighlight: 'TRUE',
                     autoclose: true,
 
-                }).on('changeDate', function (date) {
+                }).on('changeDate', function(date) {
                     $('#datepicker2').datepicker('setStartDate', $("#datepicker1").val());
                 });
                 $('#datepicker2').datepicker({
                     format: "dd-M-yyyy",
-                    todayHighlight:'TRUE',
+                    todayHighlight: 'TRUE',
                     autoclose: true,
 
-                }).on('changeDate', function (date) {
+                }).on('changeDate', function(date) {
                     var start = $("#datepicker1").val();
                     var startD = new Date(start);
                     var end = $("#datepicker2").val();
                     var endD = new Date(end);
-                    var diff = parseInt((endD.getTime()-startD.getTime())/(24*3600*1000));
+                    var diff = parseInt((endD.getTime() - startD.getTime()) / (24 * 3600 * 1000));
                     $("#days").val(diff);
                 });
 
             });
+
         </script>
 
 
         <script language="javascript" type="text/javascript">
-            function dropdownlist(listindex)
-            {
+            function dropdownlist(listindex) {
 
                 document.select.subcategory.options.length = 0;
-                switch (listindex)
-                {
+                switch (listindex) {
 
-                    case "Aircon" :
-                        document.select.subcategory.options[0]=new Option("Emerald");
-                        document.select.subcategory.options[1]=new Option("Garnet");
-                        document.select.subcategory.options[2]=new Option("Ruby");
+                    case "Aircon":
+                        document.select.subcategory.options[0] = new Option("Emerald");
+                        document.select.subcategory.options[1] = new Option("Garnet");
+                        document.select.subcategory.options[2] = new Option("Ruby");
 
                         break;
 
-                    case "Non-Aircon" :
-                        document.select.subcategory.options[0]=new Option("Chapel A");
-                        document.select.subcategory.options[1]=new Option("Chapel B");
-                        document.select.subcategory.options[2]=new Option("Chapel C");
-                        document.select.subcategory.options[2]=new Option("Chapel D");
+                    case "Non-Aircon":
+                        document.select.subcategory.options[0] = new Option("Chapel A");
+                        document.select.subcategory.options[1] = new Option("Chapel B");
+                        document.select.subcategory.options[2] = new Option("Chapel C");
+                        document.select.subcategory.options[2] = new Option("Chapel D");
                         break;
 
 
                 }
                 return true;
             }
+
         </script>
 
         <!--roomtype-->
         <script type="text/javascript">
-            function pick(tugnaw,init) {
+            function pick(tugnaw, init) {
                 var aircon = ['Choose Room', 'Emerald', 'Garnet', 'Ruby'];
                 var non_aircon = ['Choose Chapel', 'Chapel A', 'Chapel B', 'Chapel C', 'Chapel D'];
 
@@ -431,12 +429,12 @@ include('viewingAdd.php');
                         for (i = 0; i < aircon.length; i++) {
                             createOption(init, aircon[i], aircon[i]);
                         }
-                        if(Aircon = Emerald){
+                        if (Aircon = Emerald) {
                             document.write(6000);
                         }
                         break;
                     case 'Non_Aircon':
-                        init.options.length = 0; 
+                        init.options.length = 0;
                         for (i = 0; i < non_aircon.length; i++) {
                             createOption(init, non_aircon[i], non_aircon[i]);
                         }
@@ -456,41 +454,36 @@ include('viewingAdd.php');
                 ddl.options.add(opt);
             }
 
-            function compute() {
-                var days = $('#days').val();
-                var price = $('#price').val();
-                var cost = days*price;
-                $('#total').val(cost);
-            }
         </script>
 
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
         <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->             
+        <!-- END PRELOADS -->
 
         <!-- START SCRIPTS -->
         <!-- START PLUGINS -->
         <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>   
+        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
         <!-- END PLUGINS -->
 
         <!-- THIS PAGE PLUGINS -->
         <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
         <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
 
-        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>                
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
         <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
         <script type='text/javascript' src='js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
         <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
 
-        <script type="text/javascript" src="js/plugins.js"></script>        
-        <script type="text/javascript" src="js/actions.js"></script>        
+        <script type="text/javascript" src="js/plugins.js"></script>
+        <script type="text/javascript" src="js/actions.js"></script>
         <!-- END TEMPLATE -->
-        <!-- END SCRIPTS -->                   
+        <!-- END SCRIPTS -->
     </body>
+
 </html>

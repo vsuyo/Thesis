@@ -122,6 +122,7 @@ include('casketAdd.php');
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <center>
+                                    <?php $dateF = date("y-d-m");?>
                                     <h3>Casket Details</h3>
                                 </center>
                             </div>
@@ -136,7 +137,7 @@ include('casketAdd.php');
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Date</label>
                                                     <div class="col-md-6">
-                                                        <input type="text" class="form-control datepicker" name="date" value="Date" placeholder="Date" required="" data-date-start-date="0d" data-date-end-date="0d">
+                                                        <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -256,37 +257,6 @@ include('casketAdd.php');
         </div>
     </div>
 
-
-
-    <!-- START PRELOADS -->
-    <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
-    <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
-    <!-- END PRELOADS -->
-
-    <!-- START SCRIPTS -->
-    <!-- START PLUGINS -->
-    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!-- END PLUGINS -->
-
-    <!-- THIS PAGE PLUGINS -->
-
-    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
-    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
-
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
-    <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
-    <script type='text/javascript' src='js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
-    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
-
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="js/actions.js"></script>
-    <!-- END TEMPLATE -->
-    <!-- END SCRIPTS -->
-</body>
 <script type="text/javascript">
     $(document).ready(function(){
     $('#casketName').change(
@@ -414,5 +384,36 @@ include('casketAdd.php');
     });
 
 </script>
+
+
+    <!-- START PRELOADS -->
+    <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
+    <!-- END PRELOADS -->
+
+    <!-- START SCRIPTS -->
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- END PLUGINS -->
+
+    <!-- THIS PAGE PLUGINS -->
+
+    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+    <script type='text/javascript' src='js/plugins/maskedinput/jquery.maskedinput.min.js'></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/actions.js"></script>
+    <!-- END TEMPLATE -->
+    <!-- END SCRIPTS -->
+</body>
 
 </html>

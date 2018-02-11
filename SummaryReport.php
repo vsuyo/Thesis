@@ -14,7 +14,7 @@ if(!$_SESSION['username'])
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Cadaver</title>
+    <title>Alisbo Summary Report</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +46,7 @@ if(!$_SESSION['username'])
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Reports</a></li>
-                <li class="active">Materials</li>
+                <li class="active">Summary Report</li>
             </ul>
             <!-- END BREADCRUMB -->
 
@@ -57,7 +57,7 @@ if(!$_SESSION['username'])
                         <!-- START TABS -->
                         <div class="panel panel-default tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li><a href="#tab-first" role="tab" data-toggle="tab">Client & Cadaver Report</a></li>
+                                <li><a href="#tab-first" role="tab" data-toggle="tab">Summary    Report</a></li>
                             </ul>
                             <div class="panel-body tab-content">
                                 <div class="tab-pane active" id="tab-first">
@@ -91,7 +91,12 @@ if(!$_SESSION['username'])
 <?php
   // ,    
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$query = $conn->query("SELECT client.informant, cadaverentry.cadaverdeceased, viewing.preference, casket.casket_inv_id, casket.price, casket.qty, cadaverentry.deathcertno, hearsetrans.hearsedate FROM client INNER JOIN cadaverentry ON client.client_id = cadaverentry.client_id INNER JOIN viewing ON client.client_id = viewing.client_id INNER JOIN casket ON client.client_id = casket.client_id INNER JOIN hearsetrans ON client.client_id = hearsetrans.client_id " ) or die(mysqli_error());
+$query = $conn->query("SELECT client.informant, client.client_id,cadaverentry.deathcertno , cadaverentry.cadaverdeceased, viewing.preference, hearsetrans.hearsedate,casket.price , casket.casket_inv_id, casketinventory.casketName, casket.qty, casket.total FROM client
+INNER JOIN cadaverentry ON client.client_id = cadaverentry.client_id
+INNER JOIN viewing ON client.client_id = viewing.client_id
+INNER JOIN hearsetrans ON client.client_id = hearsetrans.client_id
+INNER JOIN casket ON client.client_id = casket.client_id
+INNER JOIN casketinventory ON casket.casket_inv_id = casketinventory.casket_inv_id" ) or die(mysqli_error());
 while($fetch = $query->fetch_array()){
     $informant = $fetch['informant'];   
     $cadaverdeceased = $fetch['cadaverdeceased'];
@@ -101,6 +106,7 @@ while($fetch = $query->fetch_array()){
     $qty = $fetch['qty'];
     $price = $fetch['price'];
     $hearsedate = $fetch['hearsedate'];
+    $casketName = $fetch['casketName'];
     
     
     
@@ -112,7 +118,7 @@ while($fetch = $query->fetch_array()){
 												<td>$cadaverdeceased</td>
                                                 <td>$deathcertno</td>
                                                 <td>$preference</td>
-                                                <td>$casket_inv_id</td>
+                                                <td>$casketName</td>
                                                 <td>$qty</td>
                                                 <td>$price</td>
                                                 <td>$hearsedate</td>";

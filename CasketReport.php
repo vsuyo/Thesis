@@ -14,7 +14,7 @@ if(!$_SESSION['username'])
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Cadaver</title>
+    <title>Alisbo Casket Reports</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -70,11 +70,9 @@ if(!$_SESSION['username'])
                                                  </form><br>
                                         
                                         <form method="post" action="casketReportChart.php">
-                                            <input type="submit" class="btn btn-success" value="Go to Pie Chart" />
+                                            <input type="submit" class="btn btn-success" value="Go to Chart" />
                                                  </form>
-                                        <form method="post" action="casketReportChart2.php">
-                                            <input type="submit" class="btn btn-success" value="Go to Spline Chart" />
-                                            </form>
+                                        
                                         
                                         
                                                      <div class="panel-body">

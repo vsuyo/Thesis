@@ -6,6 +6,7 @@ if(!$_SESSION['username'])
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
 ?>
+
 <?php
 if(ISSET($_POST['submit'])){
 
@@ -23,11 +24,11 @@ if(ISSET($_POST['submit'])){
 	$image = file_get_contents($image);
 	$image = base64_encode($image);
 	
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
+    $conn = new mysqli("localhost", "root", "", "alisbomemchap") or die (mysqli_error());
     $query = $conn -> query ("INSERT INTO unidentifiedCorpse (date, gender, age, height, skinType, identification, month, year, name, image)
 	VALUES ('$date', '$gender', '$age', '$height', '$skinType', '$identification','$month', '$year','$name', '$image' )") or die (mysqli_error());
     $conn->close();
-	echo '<script>alert ("Successfully Added!!"); window.location.href = "UnidentifiedCorpse.php"</script>';
+	echo "<script>alert ('Successfully Added!!')</script>";
     
     
 	
@@ -36,7 +37,6 @@ if(ISSET($_POST['submit'])){
 ?>
 
 <?php
-
 if(isset($_FILES['fileToUpload'])){
    // echo $_FILES['im']['tmp_name'];
 
@@ -95,15 +95,13 @@ if ($uploadOk == 0) {
 //}
     if(isset($_POST['update_corpse'])){
 	
-	//$id = $_POST['edit_controlNo'];
-       // if(!empty($id)){
-
-		$cid = $_POST['cid'];
+	$id = $_POST['CID'];
+        if(!empty($id)){
+		$CID = $_POST['CID'];
 		$uDate = $_POST['uDate'];
 		//$uControlNo = $_POST['uControlNo'];
 		$uGender = $_POST['uGender'];
 		$uAge = $_POST['uAge'];
-        $uAge = $_POST['uAge'];
 		$uHeight = $_POST['uHeight'];
 		$uSkinType = $_POST['uSkinType'];
 		$uIdentification = $_POST['uIdentification'];
@@ -114,39 +112,39 @@ if ($uploadOk == 0) {
 		//$image = $_FILES['fileToUploadAgain']['tmp_name'];
 		//$name = $_FILES['fileToUploadAgain']['name'];
 		//$image = file_get_contents($image);
-		//$image = base64_encode($image);  	
-
-		$con = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-		$sql = "UPDATE unidentifiedcorpse SET date='$uDate', gender='$uGender', age='$uAge', height='$uHeight', skinType='$uSkinType', identification='$uIdentification'  WHERE `cid`='$cid' ";
-            
-			if ($con->query($sql) === TRUE) {
-                echo '<script>alert("Succesfullty Added!");window.location.href="UnidentifiedCorpse.php"</script>';
-            } else {
-                echo "Error updating record: " . $conn->error;
-            }	
-        } 
+		//$image = base64_encode($image);
+        
+        $conn = new mysqli("localhost", "root", "", "alisbomemchap") or die (mysqli_error());
+        $query = $conn -> query ("UPDATE unidentifiedCorpse SET (date, gender, age, height, skinType, identification)
+	    VALUES ('$uDate', '$uGender', '$uAge', '$uHeight', '$uSkinType', '$uIdentification' WHERE cid='$CID')") or die (mysqli_error());
+        echo "<script>alert ('Successfully Updated!!')</script>";
+        $conn->close();
+        }
+    }
 ?>
 	
+
 <?php
-if(isset($_FILES[''])){
+//<!--
+//if(isset($_FILES[''])){
    // echo $_FILES['im']['tmp_name'];
 
-$target_dir = 'corpseimg/';
-$target_file = $target_dir . basename($_FILES["fileToUploadAgain"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+//$target_dir = 'corpseimg/';
+//$target_file = $target_dir . basename($_FILES["fileToUploadAgain"]["name"]);
+//$uploadOk = 1;
+//$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual image or fake image
-if(isset($_POST['update_corpse'])) {
-    $check = getimagesize($_FILES["fileToUploadAgain"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
+//if(isset($_POST['u'])) {
+//    $check = getimagesize($_FILES["fileToUploadAgain"]["tmp_name"]);
+//    if($check !== false) {
+//        echo "File is an image - " . $check["mime"] . ".";
+//        $uploadOk = 1;
 		
-    } else {
-		echo "<script>alert ('File is not an image.')</script>";
-        $uploadOk = 0;
-    }
-}
+//    } else {
+//		echo "<script>alert ('File is not an image.')</script>";
+//        $uploadOk = 0;
+//    }
+//}
 
 // Check if file already exists
 //if (file_exists($target_file)) {
@@ -154,29 +152,29 @@ if(isset($_POST['update_corpse'])) {
 //    $uploadOk = 0;
 //}
 // Check file size
-if ($_FILES["fileToUploadAgain"]["size"] > 500000) {
-	echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
+//if ($_FILES["fileToUploadAgain"]["size"] > 500000) {
+//	echo "Sorry, your file is too large.";
+//    $uploadOk = 0;
+//}
 // Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed. <br>"; 
-    $uploadOk = 0;
-}
+//if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+//&& $imageFileType != "gif" ) {
+//	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed. <br>"; 
+//    $uploadOk = 0;
+//}
 // Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-	echo "Sorry, your file was not uploaded.";
+//if ($uploadOk == 0) {
+//	echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUploadAgain"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUploadAgain"]["name"]). " has been uploaded.";
-    } else {
-		echo "<script>alert ('Sorry, there was an error uploading your file.')</script>";
-    }
-}
-}
-
+//} else {
+//    if (move_uploaded_file($_FILES["fileToUploadAgain"]["tmp_name"], $target_file)) {
+//        echo "The file ". basename( $_FILES["fileToUploadAgain"]["name"]). " has been uploaded.";
+//    } else {
+//		echo "<script>alert ('Sorry, there was an error uploading your file.')</script>";
+//    }
+//}
+//}
+//-->
 ?>
 
 <!DOCTYPE html>
@@ -199,18 +197,20 @@ if ($uploadOk == 0) {
     <body>
         <!-- START PAGE CONTAINER -->
         <div class="page-container">
+            
             <!-- START PAGE SIDEBAR -->
-                         
-            <?php require 'require/sidebar.php'?>
-            <!-- END PAGE SIDE BAR -->
+            <div class="page-sidebar">
+                <?php require 'require/sidebar.php'?>
+               
+            </div>
+            <!-- END PAGE SIDEBAR -->
             
             <!-- PAGE CONTENT -->
             <div class="page-content">
-                   <!-- START X-NAVIGATION -->
-           <?php require 'require/vertical-navigation.php'?>
-                <!-- END X-NAVIGATION -->
-            
-                                 
+                
+                <!-- START X-NAVIGATION VERTICAL -->
+               <?php require 'require/vertical-navigation.php'?>
+                <!-- END X-NAVIGATION VERTICAL -->                   
                 
                 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
@@ -239,17 +239,136 @@ if ($uploadOk == 0) {
 
                                 <div class="pull-left">
                                 <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium"><span class="fa fa-plus"></span>Add New</button>
-                                </div></h3>
-                                
+                                </div></h3>                           
                                 </div>
-                                
- 
+
+                        
+                                        <div><!-- unidentified modal-->
+        <div class="modal" id="modal_medium" tabindex="-1" role="dialog" aria-labelledby="mediumModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="largeModalHead">Add New</h4>
+                    </div>
+                    <div class="modal-body">
+                       <div class="tab-pane active" id="tab-second">
+                                        <div class="row">
+                                            <form action="UnidentifiedCorpse.php" id="corpse" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                  <div class="col-md-6">
+                                            <h2 class="fa fa-group"> Corpse</h2>
+                                             <div class="form-group">       						
+<?php  
+$dateF = date("y-m-d");
+?>
+                                                <label class="col-md-3 control-label">Date</label>
+                                                <div class="col-md-5">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                        <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date" required>
+                                                         
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                         <div class="form-group">
+                                                 <label class="col-md-3 control-label">Gender</label>
+                                                     <div class="col-md-2">
+                                                      <select name="gender" class="validate[required] select" id="formGender" data-style="btn-success" required>
+                                                          <option value="">Choose option</option>
+                                                          <option value="Male">Male</option>
+                                                          <option value="Female">Female</option>
+                                                      </select>                           
+                                                     </div>                        
+                                            </div>
+                                            <div class="form-group">
+                                                 <label class="col-md-3 control-label">Age</label>
+                                                     <div class="col-md-3">
+                                                      <select name="age" class="validate[required] select" id="formGender" data-style="btn-success" required>
+                                                          <option value="">Choose option</option>
+                                                          <option value="3-10 yrs. old">3-10 yrs. old</option>
+                                                          <option value="11-15 yrs.old">11-15 yrs.old</option>
+                                                          <option value="16-20 yrs.old">16-20 yrs.old</option>
+                                                          <option value="21-25 yrs.old">21-25 yrs.old</option>
+                                                          <option value="26-30 yrs.old">26-30 yrs.old</option>
+                                                          <option value="31-35 yrs.old">31-35 yrs.old</option>
+                                                          <option value="36-40 yrs.old">36-40 yrs.old</option>
+                                                          <option value="41-45 yrs.old">41-45 yrs.old</option>
+                                                          <option value="46-50 yrs.old">46-50 yrs.old</option> 
+                                                          <option value="51-55 yrs.old">51-55 yrs.old</option> 
+                                                         <option value="56-60 yrs.old">56-60 yrs.old</option>  
+                                                      </select>                           
+                                                     </div>                        
+                                            </div>                                                      
+                                           <div class="form-group">                                        
+                                                <label class="col-md-3 control-label">Height</label>
+                                                <div class="col-md-5 col-xs-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                        <input name="height" type="number"  class="form-control"/ placeholder="Height in cm" required>
+                                                    </div>            
+                                                </div>
+                                            </div>
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 control-label">Skin</label>
+                                                <div class="col-md-9 col-xs-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                        <input name="skinType" type="text" class="form-control"/ placeholder="Skin type" required>
+                                                    </div>            
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">                                        
+                                                <label class="col-md-3 control-label">Identification </label>
+                                                <div class="col-md-9 col-xs-12">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                                        <input name="identification" type="text" class="form-control"/ placeholder="Identification" required>
+                                                    </div>            
+                                                </div>		
+                                            </div>
+											<div class="col-md-5">
+                                            <div class="input-group"> 										
+											<input type="file" name="fileToUpload" id="fileToUpload"/> 
+                                           </div>            
+                                                </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <center><h6>Current Corpse Image<h6><br>
+                                           <img src="img/User.jpg" height="250" width="250"></a>        
+								            </center>
+										</div>
+                                        </form>
+                                        </div>                                   
+                                     </div>
+                                       
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												
+                        <input type="submit" form="corpse" name="submit" class="btn btn-success pull-right"></input>						
+                    </div>
+                </div>
+            </div>
+        </div>	</div>
                                         
 				        <tbody>
-    
                                 <div class="panel-body">
                         <form class="form-horizontal" >
                          <div class="row" class="wrapper">
+                             
+                             <table class="table datatable" id="corpse">
+                            <thead>
+                                    <tr>
+                                        <th>Image Preview</th>
+                                        <th>Date Added</th>
+                                        <th>Gender</th>
+                                        <th>Age Range</th>
+                                        <th>Height</th>
+                                        <th>Skin</th>
+                                        <th>Identification</th>
+                                        <th>Action</th>
+                                                            
+                                                        </tr> 
+                                                    </thead>
 <?php
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
 $query = $conn->query("SELECT * FROM `unidentifiedcorpse` ORDER BY `cid` DESC") or die(mysqli_error());
@@ -266,38 +385,29 @@ $identification = $fetch['identification'];
 //$name = $fetch['name'];
 //$image = $fetch['image'];
 //$dateF = date("m-d-Y");
+        
 
 ?>
                         <div class="col-md-3">
                             <!-- CONTACT ITEM -->
-                            <div class="panel panel-default" >
-                                <div class="panel-body profile">
-                                    <div class="profile-image">
-									<?php echo '<img src="data:image;base64, '.$fetch['image']. '" height="100" width="100">';?>								
-                                    </div>
+                            <div class="panel panel-default" hidden="">
+                                <div class="panel-body profile" hidden="">
                                 </div>                                
                                 <div class="panel-body">                                    
                                     <div class="contact-info">
                                             <tr>
-												<td><p>Date Added<small></br><?php echo $date;?></small></td>
-												<td><p>Gender<small></br><?php echo $gender;?></small></td>
-												<td><p>Age Range<small></br><?php echo $age?></small></td>
-												<td><p>Height<small></br><?php echo $height?></small></td>
-												<td><p>Skin<small></br><?php echo $skinType;?></small></td>
-												<td><p>Identification<small></br><?php echo $identification;?></small></td><br><br>
+                                                <td><?php echo '<img src="data:image;base64, '.$fetch['image']. '" height="50" width="100">';?>
+                                                </td>												
+                                                <td><?php echo $date;?></small></td>
+												<td><?php echo $gender;?></small></td>
+												<td><?php echo $age?></small></td>
+												<td><?php echo $height?></small></td>
+												<td><?php echo $skinType;?></small></td>
+												<td><?php echo $identification;?></small></td>
 												<td><a href="#update_corpse<?php echo $cid;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'>
 												<span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
 												</td>	
-                                            </tr>
-                                    </div>
-                                </div>                                          
-                            </div>
-
-
-                            <!-- END CONTACT ITEM -->
-							</form>
-                        </div>
-		<div id="update_corpse<?php echo $cid;?>" class="modal fade" role="dialog">
+                                                		<div id="update_corpse<?php echo $cid;?>" class="modal fade" role="dialog">
             <form method="post" class="form-horizontal" role="form">
                 <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -306,7 +416,7 @@ $identification = $fetch['identification'];
                         <h4 class="modal-title" id="largeModalHead">Edit Details</h4>
                     </div>
                     <div class="modal-body">
-					<input type="hidden" name="cid" value="<?php echo $cid; ?>">
+					<input type="hidden" name="CID" value="<?php echo $cid; ?>">
                        <div class="tab-pane active" id="tab-second">
                                         <div class="row">
                                             <form action="UnidentifiedCorpse.php" id="uCorpse" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
@@ -317,7 +427,7 @@ $identification = $fetch['identification'];
                                                 <div class="col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                        <input name="uDate" id="date" type="text"   class="form-control datepicker"  placeholder="Date" required value="<?php echo $date;?>">                                            
+                                                        <input name="uDate" id="date" type="text" class="form-control datepicker"  placeholder="Date" required value="<?php echo $date;?>">                                            
                                                     </div>
                                                 </div>
                                             </div>
@@ -399,12 +509,20 @@ $identification = $fetch['identification'];
             </div>
                 </form>
         </div>
+                                    </div>
+                                </div>                                          
+                            </div>
+
+
+                            <!-- END CONTACT ITEM -->
+							</form>
+                        </div>
 						
 <?php
-}
-$conn->close();
+} $conn->close();
 ?>	
 </tbody>
+            </table>
 	
                         </div>                        
                     </div>
@@ -421,109 +539,6 @@ $conn->close();
                 </div>
             </div>
 
- <!-- unidentified modal-->
-            <div class="modal" id="modal_medium" tabindex="-1" role="dialog" aria-labelledby="largeModalHead" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="largeModalHead">Add New</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="tab-pane active" id="tab-second">
-                                <div class="row">
-                                    <form action="UnidentifiedCorpse.php" id="corpse" role="form" class="form-horizontal" method="post" enctype="multipart/form-data">
-                                        <div class="col-md-6">
-<?php $dateF = date("y-d-m");?>
-                                            <h2 class="fa fa-group"> Corpse</h2>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Date</label>
-                                                <div class="col-md-5">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                        <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Gender</label>
-                                                <div class="col-md-2">
-                                                    <select name="gender" class="validate[required] select" id="formGender" data-style="btn-success">
-                                                          <option value="">Choose option</option>
-                                                          <option value="Male">Male</option>
-                                                          <option value="Female">Female</option>
-                                                      </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Age</label>
-                                                <div class="col-md-3">
-                                                    <select name="age" class="validate[required] select" id="formGender" data-style="btn-success">
-                                                          <option value="">Choose option</option>
-                                                          <option value="3-10 yrs. old">3-10 yrs. old</option>
-                                                          <option value="11-15 yrs.old">11-15 yrs.old</option>
-                                                          <option value="16-20 yrs.old">16-20 yrs.old</option>
-                                                          <option value="21-25 yrs.old">21-25 yrs.old</option>
-                                                          <option value="26-30 yrs.old">26-30 yrs.old</option>
-                                                          <option value="31-35 yrs.old">31-35 yrs.old</option>
-                                                          <option value="36-40 yrs.old<">36-40 yrs.old</option>
-                                                          <option value="41-45 yrs.old">41-45 yrs.old</option>
-                                                          <option value="46-50 yrs.old">46-50 yrs.old</option> 
-                                                          <option value="51-55 yrs.old">51-55 yrs.old</option> 
-                                                         <option value="56-60 yrs.old<">56-60 yrs.old</option>  
-                                                      </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Height</label>
-                                                <div class="col-md-5 col-xs-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                        <input name="height" type="text" class="form-control" / placeholder="Height in cm">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Skin</label>
-                                                <div class="col-md-9 col-xs-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                        <input name="skinType" type="text" class="form-control" / placeholder="Skin type">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-md-3 control-label">Identification </label>
-                                                <div class="col-md-9 col-xs-12">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                        <input name="identification" type="text" class="form-control" / placeholder="Identification">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="input-group">
-                                                    <input type="file" name="image" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button form="corpse" name="submit" class="btn btn-success pull-right">Save</button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-	
 
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>

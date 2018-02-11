@@ -14,7 +14,7 @@ if(!$_SESSION['username'])
 
 <head>
     <!-- META SECTION -->
-    <title>Alisbo Cadaver</title>
+    <title>Alisbo Chemicals Report</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -67,7 +67,7 @@ if(!$_SESSION['username'])
                                         <form method="post" action="exportchemicals.php">
                                             <input type="submit" name="export" class="btn btn-success"      value="Export To Excel" />
                                             <input type="submit" name="export2" class="btn btn-         success" value="Export To PDF" />
-                                            <input type="submit" name="chart" class="btn btn-         success" value="Export To PDF" />
+                                            
                                             
                                                  </form><br><br>
                                                      <div class="panel-body">
