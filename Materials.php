@@ -61,7 +61,7 @@ include('materialadd.php');
                         <!-- START TABS -->
                         <div class="panel panel-default tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li><a href="#tab-first" role="tab" data-toggle="tab">Vigil Materials</a></li>
+                                <li><a href="#tab-first" role="tab" data-toggle="tab" class="fa fa-flask">Vigil Materials</a></li>
                             </ul>
                             <div class="panel-body tab-content">
                                 <div class="tab-pane active" id="tab-first">
@@ -126,22 +126,22 @@ $conn->close();
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="mediumModalHead"><span class="fa fa-flask"> Vigil Materials</span></h4>
+                   <center> <h4 class="modal-title" id="mediumModalHead"><span class="fa fa-flask"> Vigil Materials</span></h4></center>
                 </div>
                 <div class="modal-body">
                     <div class="tab-pane active" id="tab-first">
                         <div class="row">
                             <form id="chem1" action="Materials.php" class="form-horizontal" method="post" enctype="multi-part/form-data">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Chemical Name</label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-4 control-label">Material Name</label>
+                                        <div class="col-md-6">
                                                 <input name="matName1" type="text" id = 'input' class="form-control" / placeholder="Name" onkeyup="myFunction(this.id)" required = ""/>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Decription</label>
-                                        <div class="col-md-9">
+                                        <label class="col-md-4 control-label">Decription</label>
+                                        <div class="col-md-6">
                                                 <input name="matDesc1" type="text" class="form-control" / placeholder="Description" id = 'input2' onkeyup="myFunction(this.id)" />
                                             <input type="hidden" name="dateCreated" value="">
 
@@ -154,11 +154,12 @@ $conn->close();
 
                         </div>
 
-                    </div><br><center>
+                    </div><br>
                     <div class="modal-footer">
+                        <center>
                         <button class="btn btn-info" name="submit1" href = "Materials.php" form="chem1">Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div></center>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button></center>
+                    </div>
                 </div>
 
             </div>

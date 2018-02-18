@@ -19,10 +19,10 @@ if(isset($_POST['add_Stocks'])){
     
     
     
-    $sql = "INSERT INTO added_quantity (qty1, chemName1, date_time, in_out) VALUES ( '$quantity','$chemName1', NOW(), 'out')";
+    $sql = "INSERT INTO added_quantity (qty1, chemName1, date_time, in_out) VALUES ( '$quantity','$chemName1', NOW(), 'in')";
 
     if ($conn->query($sql) === TRUE) {
-        $add_inv = "UPDATE chemicalstockTrans SET qty1=(qty1 + '$quantity') WHERE controlNo='$id' ";
+        $add_inv = "UPDATE chemicalstockTrans SET qty1=(qty1 + '$quantity'), date = NOW() WHERE controlNo='$id' ";
         if ($conn->query($add_inv) === TRUE) {
             echo "<script>alert('Added Successfully!')</script>";
             echo '<script>window.location.href="ChemicalsTrans.php"</script>';
@@ -57,7 +57,7 @@ if(isset($_POST['dispense_Stocks'])){
         $sql = "INSERT INTO added_quantity (qty1, chemName1, receiver ,date_time, in_out) VALUES ( '$quantity','$chemName1', '$receiver' , NOW(), 'out')";
 
         if ($conn->query($sql) === TRUE) {
-            $add_inv = "UPDATE chemicalstockTrans SET   `qty1` = `qty1` - '$quantity' WHERE `chemName1` = '$chemName1' ";
+            $add_inv = "UPDATE chemicalstockTrans SET   `qty1` = (`qty1` - '$quantity'), date = NOW() WHERE controlNo='$id' ";
             if ($conn->query($add_inv) === TRUE) {
                 echo "<script>alert('Successfully Updated!')</script>";
                 echo '<script>window.location.href="ChemicalsTrans.php"</script>';
@@ -135,6 +135,7 @@ if(isset($_POST['dispense_Stocks'])){
                                                             <th>Chemical Name</th>
                                                             <th>Chemical Desciption</th>
                                                             <th>Qty.</th>
+                                                            <th>Date</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -147,11 +148,13 @@ if(isset($_POST['dispense_Stocks'])){
                 $chemDesc1 = $fetch['chemDesc1'];
                 $qty1 = $fetch['qty1'];
                 $controlNo = $fetch['controlNo'];
+                $date = $fetch['date'];
 
                 echo "<tr>
                                                 <td>$chemName1</td>
 												<td>$chemDesc1</td>
-												<td>$qty1</td>";
+												<td>$qty1</td>
+                                                <td>$date</td>";
                                                         ?>
                                                         <td>
                                                             <div class='btn-group' role='group' aria-label='...'>
@@ -174,6 +177,7 @@ if(isset($_POST['dispense_Stocks'])){
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">
+                                                                            <input type="hidden" name="date" value="<?php echo $date; ?>">
                                                                             <div class="form-group">
                                                                                 <label class="control-label col-sm-3" for="chemName1">Chemical Name:</label>
                                                                                 <div class="col-sm-6">
@@ -204,7 +208,7 @@ if(isset($_POST['dispense_Stocks'])){
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                            <center><h4 class="modal-title fa fa-minus "> Dispense Stocks</h4></center>
+                                                                            <center><h2 class="modal-title fa fa-minus "> Dispense Stocks</h2></center>
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">

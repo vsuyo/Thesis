@@ -85,38 +85,24 @@ require('import_func.php');
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    
+                    <div class="col-md-3">
                     <form role="form" class="form-horizontal" method="post" action="exportBackup.php" enctype="multi-part/form-data">
                         
                         <input type="hidden" name="date" value="<?php echo $date; ?>">
                         
                         <button type="submit" name="submit" class="btn btn-lg btn btn-primary fa fa-cloud-download  " href = "Backup.php" data-box="#mb-signout"> Export Database</button>
                           
-                        <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-                            <div class="mb-container">
-                                <div class="mb-middle">
-                                    <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-                                    <div class="mb-content">
-                                        <p>Are you sure you want to Backup?</p>
-                                        <p>Press No if you want to continue work. Press Yes to logout current user.</p>
-                                    </div>
-                                    <div class="mb-footer">
-                                        <div class="pull-right">
-                                            <a href="Backup.php" class="btn btn-success btn-lg">Yes</a>
-                                            <button class="btn btn-default btn-lg mb-control-close">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>&nbsp;
-                    
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        
-                                    <input  type="file" name="temp_file">&nbsp;<br><br>
-                                    <button class="btn btn-lg btn btn-danger fa fa-cloud-upload" type="submit" name="submit" value="Import" data-box="#mb-signout"> Import</button>
-                        
+                       
                     </form>
+                    </div>
+                    <div class="col-md-3">
+                    <form action="" method="POST" enctype="multipart/form-data">        
+                                    <button class="btn btn-lg btn btn-danger fa fa-cloud-upload" type="submit" name="submit" value="Import" data-box="#mb-signout"> Import Database</button><br><br>
+                                    <input  type="file" name="temp_file">
+                    </form>
+                    </div>
+                    
+                    
                 <table class="table datatable" id="backuptable">
                     <thead>
                         <tr>

@@ -17,6 +17,7 @@ if(isset($_POST["export"])){
                         <th>Chemical Name</th>
                         <th>Description</th>
                         <th>Quantity</th>
+                        <th>Date</th>
                     </tr>
   ';
   while($row = mysqli_fetch_array($result)){
@@ -24,7 +25,8 @@ if(isset($_POST["export"])){
                     <tr>  
                          <td>'.$row["chemName1"].'</td> 
                          <td>'.$row["chemDesc1"].'</td> 
-                         <td>'.$row["qty1"].'</td>        
+                         <td>'.$row["qty1"].'</td>
+                         <td>'.$row["date"].'</td>
 
                     </tr>
    ';
@@ -98,6 +100,7 @@ class myPDF extends FPDF{
         $this->Cell(45,8,'Chemical Name',1,0,'C');
         $this->Cell(60,8,'Description',1,0,'C');
         $this->Cell(30,8,'Quantity',1,0,'C');
+        $this->Cell(45,8,'Date',1,0,'C');
         $this->Ln();
         
         
@@ -110,6 +113,7 @@ class myPDF extends FPDF{
             $this->Cell(45,8,$data->chemName1,1,0,'C');
             $this->Cell(60,8,$data->chemDesc1,1,0,'C');
             $this->Cell(30,8,$data->qty1,1,0,'C');
+            $this->Cell(45,8,$data->date,1,0,'C');
             $this->Ln();
             
         }

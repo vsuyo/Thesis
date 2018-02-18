@@ -57,152 +57,152 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <?php
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q1 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity ' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
-        $f1 = $q1->fetch_array();
-        $q2 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
-        $f2 = $q2->fetch_array();
-        $q3 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
-        $f3 = $q3->fetch_array();
-        $q4 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
-        $f4 = $q4->fetch_array();
-        $q5 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
-        $f5 = $q5->fetch_array();
-        $q6 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
-        $f6 = $q6->fetch_array();
-        $q7 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
-        $f7 = $q7->fetch_array();
-        $q8 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
-        $f8 = $q8->fetch_array();
-        $q9 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
-        $f9 = $q9->fetch_array();
-        $q10 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
-        $f10 = $q10->fetch_array();
-        $q11 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
-        $f11 = $q11->fetch_array();
-        $q12 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
-        $f12 = $q12->fetch_array();
+        $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+        $charity1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $fcharity1 = $charity1->fetch_array();
+        $charity2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $fcharity2 = $charity2->fetch_array();
+        $charity3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $fcharity3 = $charity3->fetch_array();
+        $charity4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $fcharity4 = $charity4->fetch_array();
+        $charity5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $fcharity5 = $charity5->fetch_array();
+        $charity6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $fcharity6 = $charity6->fetch_array();
+        $charity7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $fcharity7 = $charity7->fetch_array();
+        $charity8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $fcharity8 = $charity8->fetch_array();
+        $charity9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $fcharity9 = $charity9->fetch_array();
+        $charity10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $fcharity10 = $charity10->fetch_array();
+        $charity11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $fcharity11 = $charity11->fetch_array();
+        $charity12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $fcharity12 = $charity12->fetch_array();
 
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q11 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer ' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
-        $f11 = $q11->fetch_array();
-        $q22 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
-        $f22 = $q22->fetch_array();
-        $q33 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
-        $f33 = $q33->fetch_array();
-        $q44 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
-        $f44 = $q44->fetch_array();
-        $q55 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
-        $f55 = $q55->fetch_array();
-        $q66 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
-        $f66 = $q66->fetch_array();
-        $q77 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
-        $f77 = $q77->fetch_array();
-        $q88 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
-        $f88 = $q88->fetch_array();
-        $q99 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
-        $f99 = $q99->fetch_array();
-        $q101 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
-        $f101 = $q101->fetch_array();
-        $q111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
-        $f111 = $q111->fetch_array();
-        $q122 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
-        $f122 = $q122->fetch_array();
+        $Pioneer1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer1 = $Pioneer1->fetch_array();
+        $Pioneer2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer2 = $Pioneer2->fetch_array();
+        $Pioneer3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer3 = $Pioneer3->fetch_array();
+        $Pioneer4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer4 = $Pioneer4->fetch_array();
+        $Pioneer5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer5 = $Pioneer5->fetch_array();
+        $Pioneer6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer6 = $Pioneer6->fetch_array();
+        $Pioneer7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer7 = $Pioneer7->fetch_array();
+        $Pioneer8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer8 = $Pioneer8->fetch_array();
+        $Pioneer9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer9 = $Pioneer9->fetch_array();
+        $Pioneer10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer10 = $Pioneer10->fetch_array();
+        $Pioneer11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer11 = $Pioneer11->fetch_array();
+        $Pioneer12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $fPioneer12 = $Pioneer12->fetch_array();
         
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass ' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
-        $f111 = $q111->fetch_array();
-        $q222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
-        $f222 = $q222->fetch_array();
-        $q333 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
-        $f333 = $q333->fetch_array();
-        $q444 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
-        $f444 = $q444->fetch_array();
-        $q555 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
-        $f555 = $q555->fetch_array();
-        $q666 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
-        $f666 = $q666->fetch_array();
-        $q777 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
-        $f777 = $q777->fetch_array();
-        $q888 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
-        $f888 = $q888->fetch_array();
-        $q999 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
-        $f999 = $q999->fetch_array();
-        $q1011 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
-        $f1011 = $q1011->fetch_array();
-        $q1111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
-        $f1111 = $q1111->fetch_array();
-        $q1222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
-        $f1222 = $q1222->fetch_array();
+        $JHG1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $fJHG1 = $JHG1->fetch_array();
+        $JHG2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $fJHG2 = $JHG2->fetch_array();
+        $JHG3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $fJHG3 = $JHG3->fetch_array();
+        $JHG4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $fJHG4 = $JHG4->fetch_array();
+        $JHG5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $fJHG5 = $JHG5->fetch_array();
+        $JHG6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $fJHG6 = $JHG6->fetch_array();
+        $JHG7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $fJHG7 = $JHG7->fetch_array();
+        $JHG8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $fJHG8 = $JHG8->fetch_array();
+        $JHG9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $fJHG9 = $JHG9->fetch_array();
+        $JHG10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $fJHG10 = $JHG10->fetch_array();
+        $JHG11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $fJHG11 = $JHG11->fetch_array();
+        $JHG12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $fJHG12 = $JHG12->fetch_array();
         
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q1111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
-        $f1111 = $q1111->fetch_array();
-        $q2222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
-        $f2222 = $q2222->fetch_array();
-        $q3333 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
-        $f3333 = $q3333->fetch_array();
-        $q4444 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
-        $f4444 = $q4444->fetch_array();
-        $q5555 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
-        $f5555 = $q5555->fetch_array();
-        $q6666 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
-        $f6666 = $q6666->fetch_array();
-        $q7777 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
-        $f7777 = $q7777->fetch_array();
-        $q8888 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
-        $f8888 = $q8888->fetch_array();
-        $q9999 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb'  && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
-        $f9999 = $q9999->fetch_array();
-        $q10111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
-        $f10111 = $q10111->fetch_array();
-        $q11111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
-        $f11111 = $q11111->fetch_array();
-        $q12222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
-        $f12222 = $q12222->fetch_array();
+        $Omb1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $fOmb1 = $Omb1->fetch_array();
+        $Omb2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $fOmb2 = $Omb2->fetch_array();
+        $Omb3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $fOmb3 = $Omb3->fetch_array();
+        $Omb4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $fOmb4 = $Omb4->fetch_array();
+        $Omb5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $fOmb5 = $Omb5->fetch_array();
+        $Omb6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $fOmb6 = $Omb6->fetch_array();
+        $Omb7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $fOmb7 = $Omb7->fetch_array();
+        $Omb8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $fOmb8 = $Omb8->fetch_array();
+        $Omb9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4  && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $fOmb9 = $Omb9->fetch_array();
+        $Omb10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4 && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $fOmb10 = $Omb10->fetch_array();
+        $Omb11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4 && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $fOmb11 = $Omb11->fetch_array();
+        $Omb12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4 && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $fOmb12 = $Omb12->fetch_array();
         
         $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q1111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
-        $f11111 = $q11111->fetch_array();
-        $q22222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
-        $f22222 = $q22222->fetch_array();
-        $q33333 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
-        $f33333 = $q33333->fetch_array();
-        $q44444 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
-        $f44444 = $q44444->fetch_array();
-        $q55555 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
-        $f55555 = $q55555->fetch_array();
-        $q66666 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
-        $f66666 = $q66666->fetch_array();
-        $q77777 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
-        $f77777 = $q77777->fetch_array();
-        $q88888 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
-        $f88888 = $q88888->fetch_array();
-        $q99999 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass'  && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
-        $f99999 = $q99999->fetch_array();
-        $q101111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
-        $f101111 = $q101111->fetch_array();
-        $q111111 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
-        $f111111 = $q111111->fetch_array();
-        $q122222 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
-        $f122222 = $q122222->fetch_array();
+        $SHG1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $fSHG1 = $SHG1->fetch_array();
+        $SHG12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $fSHG2 = $SHG12->fetch_array();
+        $SHG3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $fSHG3 = $SHG3->fetch_array();
+        $SHG4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $fSHG4 = $SHG4->fetch_array();
+        $SHG5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $fSHG5 = $SHG5->fetch_array();
+        $SHG6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $fSHG6 = $SHG6->fetch_array();
+        $SHG7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $fSHG7 = $SHG7->fetch_array();
+        $SHG8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $fSHG8 = $SHG8->fetch_array();
+        $SHG9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5  && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $fSHG9 = $SHG9->fetch_array();
+        $SHG10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5 && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $fSHG10 = $SHG10->fetch_array();
+        $SHG11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5 && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $fSHG11 = $SHG11->fetch_array();
+        $SHG12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5 && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $fSHG12 = $SHG12->fetch_array();
 
-        $query1 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `year` = '$year'") or die(mysqli_error());
+        $query1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 1 && `year` = '$year'") or die(mysqli_error());
         $fetch1 = $query1->fetch_array();
 
-        $query2 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `year` = '$year'") or die(mysqli_error());
+        $query2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 2 && `year` = '$year'") or die(mysqli_error());
         $fetch2 = $query2->fetch_array();
 
-        $query3 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `year` = '$year'") or die(mysqli_error());
+        $query3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 3 && `year` = '$year'") or die(mysqli_error());
         $fetch3 = $query3->fetch_array();
         
-        $query4 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb' && `year` = '$year'") or die(mysqli_error());
+        $query4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 4 && `year` = '$year'") or die(mysqli_error());
         $fetch4 = $query4->fetch_array();
         
-        $query5 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass' && `year` = '$year'") or die(mysqli_error());
+        $query5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `casket_inv_id` = 5 && `year` = '$year'") or die(mysqli_error());
         $fetch5 = $query5->fetch_array();
-        
-        $query6 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `year` = '$year'") or die(mysqli_error());
+     
+        $query6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `year` = '$year'") or die(mysqli_error());
         $fetch6 = $query6->fetch_array();
         
         $percentcharity = ($fetch1['total']/$fetch6['total']) * 100;
@@ -235,82 +235,82 @@
                             <tbody>
                                 <tr>
                                     <th><center>Charity</center></th>
-                                    <td><center><?php echo $f1['total']?></center></td>
-                                    <td><center><?php echo $f2['total']?></center></td>
-                                    <td><center><?php echo $f3['total']?></center></td>
-                                    <td><center><?php echo $f4['total']?></center></td>
-                                    <td><center><?php echo $f5['total']?></center></td>
-                                    <td><center><?php echo $f6['total']?></center></td>
-                                    <td><center><?php echo $f7['total']?></center></td>
-                                    <td><center><?php echo $f8['total']?></center></td>
-                                    <td><center><?php echo $f9['total']?></center></td>
-                                    <td><center><?php echo $f10['total']?></center></td>
-                                    <td><center><?php echo $f11['total']?></center></td>
-                                    <td><center><?php echo $f12['total']?></center></td>
+                                    <td><center><?php echo $fcharity1['total']?></center></td>
+                                    <td><center><?php echo $fcharity2['total']?></center></td>
+                                    <td><center><?php echo $fcharity3['total']?></center></td>
+                                    <td><center><?php echo $fcharity4['total']?></center></td>
+                                    <td><center><?php echo $fcharity5['total']?></center></td>
+                                    <td><center><?php echo $fcharity6['total']?></center></td>
+                                    <td><center><?php echo $fcharity7['total']?></center></td>
+                                    <td><center><?php echo $fcharity8['total']?></center></td>
+                                    <td><center><?php echo $fcharity9['total']?></center></td>
+                                    <td><center><?php echo $fcharity10['total']?></center></td>
+                                    <td><center><?php echo $fcharity11['total']?></center></td>
+                                    <td><center><?php echo $fcharity12['total']?></center></td>
                                     <td><center><?php echo number_format($percentcharity)?>%</center></td>
                                 </tr>
                                 <tr>
                                     <th><center>Pioneer</center></th>
-                                    <td><center><?php echo $f11['total']?></center></td>
-                                    <td><center><?php echo $f22['total']?></center></td>
-                                    <td><center><?php echo $f33['total']?></center></td>
-                                    <td><center><?php echo $f44['total']?></center></td>
-                                    <td><center><?php echo $f55['total']?></center></td>
-                                    <td><center><?php echo $f66['total']?></center></td>
-                                    <td><center><?php echo $f77['total']?></center></td>
-                                    <td><center><?php echo $f88['total']?></center></td>
-                                    <td><center><?php echo $f99['total']?></center></td>
-                                    <td><center><?php echo $f101['total']?></center></td>
-                                    <td><center><?php echo $f111['total']?></center></td>
-                                    <td><center><?php echo $f122['total']?></center></td>
+                                    <td><center><?php echo $fPioneer1['total']?></center></td>
+                                    <td><center><?php echo $fPioneer2['total']?></center></td>
+                                    <td><center><?php echo $fPioneer3['total']?></center></td>
+                                    <td><center><?php echo $fPioneer4['total']?></center></td>
+                                    <td><center><?php echo $fPioneer5['total']?></center></td>
+                                    <td><center><?php echo $fPioneer6['total']?></center></td>
+                                    <td><center><?php echo $fPioneer7['total']?></center></td>
+                                    <td><center><?php echo $fPioneer8['total']?></center></td>
+                                    <td><center><?php echo $fPioneer9['total']?></center></td>
+                                    <td><center><?php echo $fPioneer10['total']?></center></td>
+                                    <td><center><?php echo $fPioneer11['total']?></center></td>
+                                    <td><center><?php echo $fPioneer12['total']?></center></td>
                                     <td><center><?php echo number_format($percentpioneer)?>%</center></td>
                                 </tr>
                                     <tr>
                                     <th><center>Junior Half Glass</center></th>
-                                    <td><center><?php echo $f111['total']?></center></td>
-                                    <td><center><?php echo $f222['total']?></center></td>
-                                    <td><center><?php echo $f333['total']?></center></td>
-                                    <td><center><?php echo $f444['total']?></center></td>
-                                    <td><center><?php echo $f555['total']?></center></td>
-                                    <td><center><?php echo $f666['total']?></center></td>
-                                    <td><center><?php echo $f777['total']?></center></td>
-                                    <td><center><?php echo $f888['total']?></center></td>
-                                    <td><center><?php echo $f999['total']?></center></td>
-                                    <td><center><?php echo $f1011['total']?></center></td>
-                                    <td><center><?php echo $f1111['total']?></center></td>
-                                    <td><center><?php echo $f1222['total']?></center></td>
+                                    <td><center><?php echo $fJHG1['total']?></center></td>
+                                    <td><center><?php echo $fJHG2['total']?></center></td>
+                                    <td><center><?php echo $fJHG3['total']?></center></td>
+                                    <td><center><?php echo $fJHG4['total']?></center></td>
+                                    <td><center><?php echo $fJHG5['total']?></center></td>
+                                    <td><center><?php echo $fJHG6['total']?></center></td>
+                                    <td><center><?php echo $fJHG7['total']?></center></td>
+                                    <td><center><?php echo $fJHG8['total']?></center></td>
+                                    <td><center><?php echo $fJHG9['total']?></center></td>
+                                    <td><center><?php echo $fJHG10['total']?></center></td>
+                                    <td><center><?php echo $fJHG11['total']?></center></td>
+                                    <td><center><?php echo $fJHG12['total']?></center></td>
                                     <td><center><?php echo number_format($percentjuniorhalfglass)?>%</center></td>
                                 </tr>
                                     <tr>
                                     <th><center>Omb</center></th>
-                                    <td><center><?php echo $f1111['total']?></center></td>
-                                    <td><center><?php echo $f2222['total']?></center></td>
-                                    <td><center><?php echo $f3333['total']?></center></td>
-                                    <td><center><?php echo $f4444['total']?></center></td>
-                                    <td><center><?php echo $f5555['total']?></center></td>
-                                    <td><center><?php echo $f6666['total']?></center></td>
-                                    <td><center><?php echo $f7777['total']?></center></td>
-                                    <td><center><?php echo $f8888['total']?></center></td>
-                                    <td><center><?php echo $f9999['total']?></center></td>
-                                    <td><center><?php echo $f10111['total']?></center></td>
-                                    <td><center><?php echo $f11111['total']?></center></td>
-                                    <td><center><?php echo $f12222['total']?></center></td>
+                                    <td><center><?php echo $fOmb1['total']?></center></td>
+                                    <td><center><?php echo $fOmb2['total']?></center></td>
+                                    <td><center><?php echo $fOmb3['total']?></center></td>
+                                    <td><center><?php echo $fOmb4['total']?></center></td>
+                                    <td><center><?php echo $fOmb5['total']?></center></td>
+                                    <td><center><?php echo $fOmb6['total']?></center></td>
+                                    <td><center><?php echo $fOmb7['total']?></center></td>
+                                    <td><center><?php echo $fOmb8['total']?></center></td>
+                                    <td><center><?php echo $fOmb9['total']?></center></td>
+                                    <td><center><?php echo $fOmb10['total']?></center></td>
+                                    <td><center><?php echo $fOmb11['total']?></center></td>
+                                    <td><center><?php echo $fOmb12['total']?></center></td>
                                     <td><center><?php echo number_format($percentomb)?>%</center></td>
                                 </tr>
                                     <tr>
                                     <th><center>Senior Half Glass</center></th>
-                                    <td><center><?php echo $f11111['total']?></center></td>
-                                    <td><center><?php echo $f22222['total']?></center></td>
-                                    <td><center><?php echo $f33333['total']?></center></td>
-                                    <td><center><?php echo $f44444['total']?></center></td>
-                                    <td><center><?php echo $f55555['total']?></center></td>
-                                    <td><center><?php echo $f66666['total']?></center></td>
-                                    <td><center><?php echo $f77777['total']?></center></td>
-                                    <td><center><?php echo $f88888['total']?></center></td>
-                                    <td><center><?php echo $f99999['total']?></center></td>
-                                    <td><center><?php echo $f101111['total']?></center></td>
-                                    <td><center><?php echo $f111111['total']?></center></td>
-                                    <td><center><?php echo $f122222['total']?></center></td>
+                                    <td><center><?php echo $fSHG1['total']?></center></td>
+                                    <td><center><?php echo $fSHG2['total']?></center></td>
+                                    <td><center><?php echo $fSHG3['total']?></center></td>
+                                    <td><center><?php echo $fSHG4['total']?></center></td>
+                                    <td><center><?php echo $fSHG5['total']?></center></td>
+                                    <td><center><?php echo $fSHG6['total']?></center></td>
+                                    <td><center><?php echo $fSHG7['total']?></center></td>
+                                    <td><center><?php echo $fSHG8['total']?></center></td>
+                                    <td><center><?php echo $fSHG9['total']?></center></td>
+                                    <td><center><?php echo $fSHG10['total']?></center></td>
+                                    <td><center><?php echo $fSHG11['total']?></center></td>
+                                    <td><center><?php echo $fSHG12['total']?></center></td>
                                     <td><center><?php echo number_format($percentseniorhalfglass)?>%</center></td>
                                 </tr>
                             </tbody>

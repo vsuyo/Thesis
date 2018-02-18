@@ -7,19 +7,19 @@ if(isset($_GET['year']))
 }
 
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$q1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `year` = '$year'") or die(mysqli_error());
+$q1 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `year` = '$year'") or die(mysqli_error());
 $f1 = $q1->fetch_array();
-$q2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `year` = '$year'") or die(mysqli_error());
+$q2 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `year` = '$year'") or die(mysqli_error());
 $f2 = $q2->fetch_array();
 
 ?>
 <script type="text/javascript"> 
     window.onload = function() { 
-        $("#casket_ctype").CanvasJSChart({
+        $("#corpse_Gender").CanvasJSChart({
             theme: "light2",
             animationEnabled: true,
             animationDuration: 1000,
-            exportFileName: "Casket Types", 
+            exportFileName: "Unidentified Corpse Gender", 
             exportEnabled: true,
             title: { 
                 text: "Alisbo Memorial Chapels",
@@ -27,7 +27,7 @@ $f2 = $q2->fetch_array();
             }, 
             subtitles:[
                 {
-                    text: "Casket Summary by Type - Year <?php echo $year?>"
+                    text: "Unidentified Corpse Summary by Gender - Year <?php echo $year?>"
                 }
             ],
             legend :{ 
@@ -41,23 +41,23 @@ $f2 = $q2->fetch_array();
                     toolTipContent: "{label} <br/> {y}", 
                     indexLabel: "{y}", 
                     dataPoints: [ 
-                        { label: "Wood Caskets",  y: 
+                        { label: "Male Corpse",  y: 
                          <?php
     if($f1 == ""){
         echo 0;
     }else{
         echo $f1['total'];
     }	
-                         ?>, legendText: "Wood Caskets"},
+                         ?>, legendText: "Male Corpse"},
 
-                        { label: "Metal Caskets",  y: 
+                        { label: "Female Corpse",  y: 
                          <?php 
                          if($f2 == ""){
                              echo 0;
                          }else{
                              echo $f2['total'];
                          }	
-                         ?>, legendText: "Metal Caskets"}
+                         ?>, legendText: "Female Corpse"}
                     ] 
                 } 
             ] 

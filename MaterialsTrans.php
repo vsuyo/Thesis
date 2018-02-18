@@ -150,7 +150,7 @@ while($fetch = $query->fetch_array()){
 ?>
                                                         <td>
                                                             <div class='btn-group' role='group' aria-label='...'>
-                                                                <a href="#plus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
+                                                                <a href="#plus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
                                                             </div>
 
                                                             <a href="#minus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
@@ -165,7 +165,7 @@ while($fetch = $query->fetch_array()){
                     <div class="modal-content">
                     <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Stocks</h4>
+                        <center><h2 class="modal-title fa fa-plus">Add Stocks</h2></center>
                     </div>
                     <div class="modal-body">
                     <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">
@@ -181,12 +181,9 @@ while($fetch = $query->fetch_array()){
                             </div>
                             <br><br>
                             </div>
-                        
-                        
-                            <br><br><br>
-                            <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" name="add_Stocks"><span class="glyphicon glyphicon-edit"></span> Add Stocks</button>
-                                                <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
+                            <div class="modal-footer"><center>
+                    <button type="submit" class="btn btn-info" name="add_Stocks"><span class="glyphicon glyphicon-edit"></span> Add Stocks</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
                                             </div>
                                         </div>
 
@@ -202,7 +199,7 @@ while($fetch = $query->fetch_array()){
                     <div class="modal-content">
                     <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Dispense Stocks</h4>
+                    <center><h2 class="modal-title fa fa-minus"> Dispense Stocks</h2></center>
                     </div>
                     <div class="modal-body">
                     <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">
@@ -224,12 +221,11 @@ while($fetch = $query->fetch_array()){
                     </div>
                             </div>
                     </div><br><br>
-                        <br><br>
+                        <br>
                 </div>
-                    <br><br><br>
                 <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" name="dispense_Stocks"><span class="glyphicon glyphicon-edit"></span> Dispense Stock</button>
-            <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
+            <button type="submit" class="btn btn-info" name="dispense_Stocks"><span class="glyphicon glyphicon-edit"></span> Dispense Stock</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
                                                     </div>
                                                 </div>
 

@@ -1,3 +1,14 @@
+<?php  
+session_start();  
+$session_username = $_SESSION['username'];
+if(!$_SESSION['username'])  
+{  
+    header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
+}  
+?>
+
+
+
 <?php
 include('casket_add.php');
 
@@ -33,87 +44,8 @@ include('casket_add.php');
         <div class="page-content">
 
             <!-- START X-NAVIGATION VERTICAL -->
-            <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
-                <!-- TOGGLE NAVIGATION -->
-                <li class="xn-icon-button">
-                    <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
-                </li>
-                <!-- END TOGGLE NAVIGATION -->
-                <!-- SEARCH -->
-                <li class="xn-search">
-                    <form role="form">
-                        <input type="text" name="search" placeholder="Search..." />
-                    </form>
-                </li>
-                <!-- END SEARCH -->
-                <!-- SIGN OUT -->
-                <li class="xn-icon-button pull-right">
-                    <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
-                </li>
-                <!-- END SIGN OUT -->
-                <!-- MESSAGES -->
-                <li class="xn-icon-button pull-right">
-                    <a href="#"><span class="fa fa-bell"></span></a>
-                    <div class="informer informer-danger">4</div>
-                    <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><span class="fa fa-bell"></span> Messages</h3>
-                            <div class="pull-right">
-                                <span class="label label-danger">4 new</span>
-                            </div>
-                        </div>
-                        <div class="panel-body list-group list-group-contacts scroll" style="height: 200px;">
-                            <a href="#" class="list-group-item">
-                                <div class="list-group-status status-online"></div>
-                                <img src="assets/images/users/user2.jpg" class="pull-left" alt="John Doe" />
-                                <span class="contacts-title">John Doe</span>
-                                <p>Praesent placerat tellus id augue condimentum</p>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <div class="list-group-status status-away"></div>
-                                <img src="assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk" />
-                                <span class="contacts-title">Dmitry Ivaniuk</span>
-                                <p>Donec risus sapien, sagittis et magna quis</p>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <div class="list-group-status status-away"></div>
-                                <img src="assets/images/users/user3.jpg" class="pull-left" alt="Nadia Ali" />
-                                <span class="contacts-title">Nadia Ali</span>
-                                <p>Mauris vel eros ut nunc rhoncus cursus sed</p>
-                            </a>
-                            <a href="#" class="list-group-item">
-                                <div class="list-group-status status-offline"></div>
-                                <img src="assets/images/users/user6.jpg" class="pull-left" alt="Darth Vader" />
-                                <span class="contacts-title">Darth Vader</span>
-                                <p>I want my money back!</p>
-                            </a>
-                        </div>
-                        <div class="panel-footer text-center">
-                            <a href="pages-messages.html">Show all messages</a>
-                        </div>
-                    </div>
-                </li>
-                <!-- END MESSAGES -->
-                <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-                    <div class="mb-container">
-                        <div class="mb-middle">
-                            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-                            <div class="mb-content">
-                                <p>Are you sure you want to log out?</p>
-                                <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-                            </div>
-                            <div class="mb-footer">
-                                <div class="pull-right">
-                                    <a href="pages-login-website-light.html" class="btn btn-success btn-lg">Yes</a>
-                                    <button class="btn btn-default btn-lg mb-control-close">No</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </ul>
-            <!-- END X-NAVIGATION VERTICAL -->
+                <?php require 'require/vertical-navigation.php'?>
+             <!-- END X-NAVIGATION VERTICAL -->
 
             <!-- START BREADCRUMB -->
             <ul class="breadcrumb">
@@ -130,7 +62,7 @@ include('casket_add.php');
                         <!-- START TABS -->
                         <div class="panel panel-default tabs">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li><a href="#tab-first" role="tab" data-toggle="tab"><span class="fa fa-flask">Casket Stock List</span></a></li>
+                                <li><a href="#tab-first" role="tab" data-toggle="tab"><span class="fa fa-archive">Casket Stock List</span></a></li>
                             </ul>
                             <div class="panel-body tab-content">
                                 <div class="tab-pane active" id="tab-first">
@@ -189,8 +121,8 @@ while($fetch = $query->fetch_array()){
                                                             </td>
                                                             <td>
                                                                 <div class='btn-group' role='group' aria-label='...'>
-                                                                    <a href="#plus<?php echo $fetch['casket_inv_id'];?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
-                                                                    <a href="#minus<?php echo $fetch['casket_inv_id'];?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
+                                                                    <a href="#plus<?php echo $fetch['casket_inv_id'];?>" data-toggle="modal"><button type='button' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
+                                                                    
                                                                 </div>
 
                                                             </td>
@@ -232,46 +164,6 @@ while($fetch = $query->fetch_array()){
     </div>
                                                     
 
-<!--Dispense Stock-->                                                    
- <div id="minus<?php echo $fetch['casket_inv_id'];?>" class="modal fade" role="dialog" data-backdrop="static">
-        <form method="post" class="form-horizontal" role="form">
-            <div class="modal-dialog modal-sm">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <center><h4 class="modal-title fa fa-minus"> Dispense Stocks</h4></center>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="casket_inv_id" value="<?php echo $fetch['casket_inv_id'];?>">
-                        <div class="form-group">
-                            <label class="control-label col-sm-3" for="chemName1">Casket Name:</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="chemName1" name="casketName" value="<?php echo $fetch['casketName']?>" placeholder="Casket Name" required readonly>
-                            </div><br><br><br>
-                            <label class="control-label col-sm-3" for="qty1">Quantity:</label>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control" OnlyNumber="true" id="qty" name="qty"  maxlength="3" min="0" max="999"  value="<?php echo $fetch['qty']?>" placeholder="Quantity" required="" >
-                               
-                            </div><br><br><br>
-                            <label class="control-label col-sm-3" for="qty1">Receiver:</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" OnlyNumber="true" id="receiver" name="receiver" value="" placeholder="Receiver" required="" >
-                               
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="modal-footer"><Center>
-                        <button type="submit" class="btn btn-info fa fa-plus" name="dispense_Stocks"> Dispense Stocks</button>
-                        <button type="button" class="btn btn-danger fa fa-times-circle" data-dismiss="modal"> Cancel</button></Center>
-                    </div>
-                </div>
-
-            </div>
-        </form>
-    </div>
-
 
 
 
@@ -301,7 +193,7 @@ $conn->close();
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <center>
-                        <h4 class="modal-title" id="mediumModalHead"><span class="fa fa-flask">Add Casket</span></h4>
+                        <h4 class="modal-title" id="mediumModalHead"><span class="fa fa-archive"> Add Casket</span></h4>
                     </center>
                 </div>
                 <div class="modal-body">

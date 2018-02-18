@@ -77,21 +77,25 @@ if(!$_SESSION['username'])
                                                 <th>Chemical Name</th>
                                                 <th>Description</th>
                                                 <th>Quantity</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 <?php
-$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
 $query = $conn->query("SELECT * FROM `chemicalstocktrans` ORDER BY `controlNo` DESC") or die(mysqli_error());
 while($fetch = $query->fetch_array()){
     $qty1 = $fetch['qty1'];
     $chemName1 = $fetch['chemName1'];
     $chemDesc1 = $fetch['chemDesc1'];
+    $date = $fetch['date'];
+    
 
                                            echo "<tr>
                                                 <td>$chemName1</td>
 												<td>$chemDesc1</td>  
-                                                <td>$qty1</td>";
+                                                <td>$qty1</td>
+                                                <td>$date</td>";
 }
 $conn->close();
 ?>

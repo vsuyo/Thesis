@@ -108,7 +108,7 @@ INNER JOIN casketinventory ON casket.casket_inv_id = casketinventory.casket_inv_
                                                             <td><?php echo $fetch['qty']?></td>
                                                             <td><?php echo $fetch['total']?></td>
                                                             
-                                                            <td><a href="PrintSumTrans.php?id=<?php echo $fetch['client_id'];?>"  ><span class="btn btn-info btn-md fa fa-print" data-toggle="tooltip" data-placement="left" title="Print Details"> Print</span></a></td>
+                                                            <td><a href="printIndividualTrans.php?id=<?php echo $fetch['client_id'];?>"  ><span class="btn btn-info btn-md fa fa-print" data-toggle="tooltip" data-placement="left" title="Print Details"> Print</span></a></td>
                                                         </tr>
                                                         <?php
             }

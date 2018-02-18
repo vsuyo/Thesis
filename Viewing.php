@@ -6,11 +6,6 @@ if(!$_SESSION['username'])
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
 ?>
-<?php
-
-include('viewingAdd.php');
-
-?>
 
 
 <!DOCTYPE html>
@@ -61,6 +56,7 @@ include('viewingAdd.php');
                             <div class="panel panel-default tabs">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#tab-first" role="tab" data-toggle="tab"><span class="fa fa-home"> Vigil</span></a></li>
+                                    <li class=""><a href="#tab-second" role="tab" data-toggle="tab"><span class="fa fa-cogs"> History Logs</span></a></li>
                                 </ul>
                                 <div class="panel-body tab-content">
                                     <div class="tab-pane active" id="tab-first">
@@ -81,10 +77,11 @@ include('viewingAdd.php');
                                                             <th>Transaction Date</th>
                                                             <th>Informant</th>
                                                             <th>Preference</th>
-                                                            <th>Chapel / Room</th>
-                                                            <th>Address</th>
-                                                            <th>Date Borrowed</th>
-                                                            <th>Date Return</th>
+                                                            <th>Room Type</th>
+                                                            <th>Chapel Name</th>
+                                                            <th>Start Ddate</th>
+                                                            <th>End Date</th>
+                                                            <th>No. of Days</th>
                                                             <th>Materials</th>
                                                             <th>Status</th>
                                                             <th>Action</th>
@@ -94,7 +91,7 @@ include('viewingAdd.php');
 
                                                         <?php
     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-            $query = $conn->query("select * from `client`, `viewing` where client.client_id = viewing.client_id") or die(mysqli_error());
+            $query = $conn->query("select * from `client`, `viewing` where client.client_id = viewing.client_id && `status` = 'Currently Used'") or die(mysqli_error());
             while($fetch = $query->fetch_array()){
                                                         ?>
 
@@ -102,12 +99,13 @@ include('viewingAdd.php');
                                                             <td><?php echo $fetch['date']?></td>
                                                             <td><?php echo $fetch['informant']?></td>
                                                             <td><?php echo $fetch['preference']?></td>
+                                                            <td><?php echo $fetch['roomtype']; ?></td>
                                                             <td><?php echo $fetch['chapelcode']?></td>
-                                                            <td><?php echo $fetch['address']?></td>
-                                                            <td><?php echo $fetch['dateBorrowed']?></td>
-                                                            <td><?php echo $fetch['datereturn']?></td>
+                                                            <td><?php echo $fetch['startdate']?></td>
+                                                            <td><?php echo $fetch['enddate']?></td>
+                                                            <td><?php echo $fetch['duration']?></td>
                                                             <td><?php echo $fetch['materials']?></td>
-                                                            <td><?php echo $fetch['status']?></td>
+                                                            <td style="color:red"><?php echo $fetch['status']?></td>
                                                             <td> <a href="#update<?php echo $fetch['controlno']?>" data-target="#update<?php echo $fetch['controlno']?>" data-toggle="modal" class="btn btn-info btn-md"><span class="fa fa-edit" data-toggle="tooltip" data-placement="left" title="Update Status"></span></a></td>
                                                         </tr>
                                                         <?php
@@ -120,7 +118,61 @@ include('viewingAdd.php');
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane" id="tab-second">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                </h3>
 
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <table class="table datatable" id="chemStockList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Transaction Date</th>
+                                                            <th>Informant</th>
+                                                            <th>Preference</th>
+                                                            <th>Room Type</th>
+                                                            <th>Chapel Name</th>
+                                                            <th>Start Ddate</th>
+                                                            <th>End Date</th>
+                                                            <th>No. of Days</th>
+                                                            <th>Materials</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+            $query = $conn->query("select * from `client`, `viewing` where client.client_id = viewing.client_id && `status` = 'Available'") or die(mysqli_error());
+            while($fetch = $query->fetch_array()){
+                                                        ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fetch['date']?></td>
+                                                            <td><?php echo $fetch['informant']?></td>
+                                                            <td><?php echo $fetch['preference']?></td>
+                                                            <td><?php $fetch['roomtype'];?></td>
+                                                            <td><?php echo $fetch['chapelcode']?></td>
+                                                            <td><?php echo $fetch['startdate']?></td>
+                                                            <td><?php echo $fetch['enddate']?></td>
+                                                            <td><?php echo $fetch['duration']?></td>
+                                                            <td><?php echo $fetch['materials']?></td>
+                                                            <td><strong style="color:Green"><?php echo $fetch['status']?></strong></td>
+                                                           
+                                                        </tr>
+                                                        <?php
+            }
+            $conn->close();
+                                                        ?>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -147,13 +199,13 @@ include('viewingAdd.php');
                     <div class="modal-body">
                         <div class="tab-pane active" id="tab-fourth">
                             <div class="row">
-                                <form role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
+                                <form action="viewingAdd.php" role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
                                     <div class="col-md-12">
 
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Date</label>
                                             <div class="col-md-5">
-                                                <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
+                                                <input type="text" name="date" class="form-control datepicker" value="<?php echo $dateF; ?>" placeholder="Date">
                                             </div>
                                         </div>
 
@@ -208,7 +260,7 @@ include('viewingAdd.php');
                                                 <label class="col-md-4 control-label">Room Type</label>
                                                 <div class="col-md-6">
                                                     <select id="ddl" name="roomtype" class="validate [required] select" onchange="pick(this,document.getElementById('init'))">
-                                                        <option value="">Choose</option>
+                                                        <option>Choose</option>
                                                         <option name = "roomtype" value="Aircon">Aircon</option>
                                                         <option name = "roomtype" value="Non_Aircon">Non-Aircon</option>
                                                     </select>
@@ -219,6 +271,7 @@ include('viewingAdd.php');
                                                 <label class="col-md-4 control-label">Chapel Name</label>
                                                 <div class="col-md-8">
                                                     <select id="init" name="chapelcode" class="">   
+                                                        <option></option>
                                                         <option>Choose Chapel Name</option>
                                                     </select>
                                                 </div>
@@ -241,13 +294,13 @@ include('viewingAdd.php');
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">No. of (Days)</label>
                                                 <div class="col-md-3">
-                                                    <input type="number" name="duration" class="form-control" onkeyup="compute()" placeholder="Days" id="days" readonly>
+                                                    <input type="number" name="duration" class="form-control" onkeyup="compute()" placeholder="Days" id="days">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Materials</label>&nbsp;&nbsp;
                                                 <div class="input-group">
-                                                    <form name="materials[]" id="materials">
+                                                    <form name="materials1" id="materials">
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Carpet"> Carpet&nbsp;&nbsp;&nbsp;&nbsp;
                                                          <input class="icheckbox" type="checkbox" name="materials[]" value="Roller Stand"> Roller Stand &nbsp;
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Crucifix"> Crucifix<br><br>
@@ -281,14 +334,14 @@ include('viewingAdd.php');
                                             <hr> <div class="form-group">
                                                 <label class="col-md-4 control-label">Materials</label>&nbsp;&nbsp;
                                                 <div class="input-group">
-                                                    <form name="materials[]" id="materials">
+                                                    
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Carpet"> Carpet&nbsp;&nbsp;&nbsp;&nbsp;
                                                          <input class="icheckbox" type="checkbox" name="materials[]" value="Roller Stand"> Roller Stand &nbsp;
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Crucifix"> Crucifix<br><br>
                                                         <input class="icheckbox" aria-controls=""type="checkbox" name="materials[]" value="Curtains"> Curtains&nbsp;
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Candle Stand"> Candle Stand&nbsp;                                                        
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Lights"> Lights                                                       
-                                                    </form>
+                                                 
                                                 </div>
                                             </div>                              
                                         </div><br><br>                                         
@@ -313,21 +366,21 @@ include('viewingAdd.php');
         ?>
         <div id="update<?php echo $fetch['controlno']?>" class="modal fade" role="dialog">
             <form method="post" class="form-horizontal" role="form" action="viewingAdd.php">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <center>
-                                <h4>Do you want to update Chapel/Room Status?</h4>
+                                <h4>Do you want to update status??</h4>
                             </center>
                         </div>
                         <div class="modal-body">
                             <center><input type="hidden" name="controlno" value="<?php echo $fetch['controlno']?>">
                             
-                            <input type="radio" class="iradio" name="update" value="yes"> YES &nbsp;&nbsp;                       
-                            <input type="radio" class="iradio" name="update" value="no"> NO
+                            <input type="radio" class="iradio" name="update" value="yes" required> YES &nbsp;&nbsp;                       
+                            <input type="radio" class="iradio" name="update" value="no" required> NO
                             </center>
-                        </div><br>
+                        </div><br>  
                         <div class="modal-footer">
                             <center>
                                 <button type="submit" class="btn btn-info" name="update_viewing"><span class="glyphicon glyphicon-edit"></span> Save</button>
@@ -388,7 +441,7 @@ include('viewingAdd.php');
 
         </script>
 
-
+        <!--For Aircon/Non-Aircon-->
         <script language="javascript" type="text/javascript">
             function dropdownlist(listindex) {
 
@@ -406,7 +459,8 @@ include('viewingAdd.php');
                         document.select.subcategory.options[0] = new Option("Chapel A");
                         document.select.subcategory.options[1] = new Option("Chapel B");
                         document.select.subcategory.options[2] = new Option("Chapel C");
-                        document.select.subcategory.options[2] = new Option("Chapel D");
+                        document.select.subcategory.options[3] = new Option("Chapel D");
+                        document.select.subcategory.options[4] = new Option("Chapel E");
                         break;
 
 
@@ -420,7 +474,7 @@ include('viewingAdd.php');
         <script type="text/javascript">
             function pick(tugnaw, init) {
                 var aircon = ['Choose Room', 'Emerald', 'Garnet', 'Ruby'];
-                var non_aircon = ['Choose Chapel', 'Chapel A', 'Chapel B', 'Chapel C', 'Chapel D'];
+                var non_aircon = ['Choose Chapel', 'Chapel A', 'Chapel B', 'Chapel C', 'Chapel D', 'Chapel E'];
 
 
                 switch (tugnaw.value) {

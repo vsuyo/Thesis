@@ -105,6 +105,8 @@ include('casketAdd.php');
 }
 
 ?>
+                                                
+                                                
 
                                             </tbody>
                                         </table>
@@ -135,6 +137,8 @@ include('casketAdd.php');
 
 
                                                 <div class="form-group">
+                                                    <input type="hidden" name="casket_inv_id" value="<?php echo $casket_inv_id; ?>">
+                                                                            <div class="form-group">
                                                     <label class="col-md-3 control-label">Date</label>
                                                     <div class="col-md-6">
                                                         <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
@@ -197,13 +201,13 @@ include('casketAdd.php');
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Dimension:</label>
                                                         <div class="col-md-6">
-                                                            <input class="form-control" type="text" id="dimension" name="dimension" value="" />
+                                                            <input class="form-control" type="text" id="dimension" name="dimension" value="" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Type:</label>
                                                         <div class="col-md-6">
-                                                            <input class="form-control" type="text" id="type" name="type" value="" />
+                                                            <input class="form-control" type="text" id="type" name="type" value="" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -221,7 +225,7 @@ include('casketAdd.php');
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Price:</label>
                                                         <div class="col-md-5">
-                                                            <input class="form-control" name="price" id="price" value="">
+                                                            <input class="form-control" name="price" id="price" value="" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -240,8 +244,8 @@ include('casketAdd.php');
                                                     </center>
                                                 </div>
                                             </div>
+                                            </div>
                                         </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -252,8 +256,9 @@ include('casketAdd.php');
                 <!-- END CONTENT FRAME BODY -->
 
             </div>
-
-            <?php require 'require/footer.php' ?>
+                
+       
+                   <?php require 'require/footer.php' ?>
         </div>
     </div>
 
@@ -374,7 +379,13 @@ include('casketAdd.php');
                     break;
             }
         });
-
+        $(document).ready(function() {
+        //this calculates values automatically 
+        compute();
+        $("#qty, #price",).on("keydown keyup", function() {
+        compute();
+        });
+        });
     function compute() {
         var qty = $('#qty').val();
         var price = $('#price').val();

@@ -13,21 +13,21 @@ include('Tinsuranceadd.php');
     if(isset($_POST['update_tinsurance'])){
 			
 	$id = $_POST['id'];
-    echo $id;
-
         if(!empty($id)){
-	
-		
-		
+		$id = $_POST['id'];
+		$uinformant = $_POST['uinformant'];
+		$uinsuranceName = $_POST['uinsuranceName'];
 		$upercentage = $_POST['upercentage'];
 		$uamount = $_POST['uamount'];
 		$udate = $_POST['udate'];
 		
 		$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-		mysqli_query($conn, "UPDATE tinsurance SET percentage = '$upercentage', amount = '$uamount',  date ='$udate' WHERE `tinsurance_id`='$id' ") or die(mysqli_error());
-          
-                echo '<script>alert("Succesfully Updated!"); window.location.href="TInsurance.php"</script>';
-          
+		$sql = "UPDATE tinsurance SET informant= '$uinformant', insuranceName='$uinsuranceName', percentage = '$upercentage', amount = '$uamount', WHERE `tinsurance_id`='$id' ";
+            if ($conn->query($sql) === TRUE) {
+                echo '<script>alert("Succesfully Added!"); window.location.href="TInsurance.php"</script>';
+            } else {
+                echo "Error updating record: " . $conn->error;
+            }
 		}
        
         }
@@ -110,8 +110,7 @@ include('Tinsuranceadd.php');
 <tbody>
 <?php
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$query = $conn->query("SELECT client.informant, tinsurance.tinsurance_id, insurance.insuranceName, tinsurance.percentage, tinsurance.amount, tinsurance.date FROM client  INNER JOIN tinsurance ON client.client_id = tinsurance.client_id 
-INNER JOIN insurance ON insurance.insurance_id = tinsurance.insurance_id") or die(mysqli_error());
+$query = $conn->query("SELECT client.informant, tinsurance.tinsurance_id, insurance.insuranceName, tinsurance.percentage, tinsurance.amount, tinsurance.date FROM client  INNER JOIN tinsurance ON client.client_id = tinsurance.client_id INNER JOIN insurance ON insurance.insurance_id = tinsurance.insurance_id") or die(mysqli_error());
 while($fetch = $query->fetch_array()){
 	$informant = $fetch['informant'];  
     $insuranceName = $fetch['insuranceName'];
@@ -128,9 +127,14 @@ while($fetch = $query->fetch_array()){
 												<td>$date</td>";												
     ?>
                     <td>
-                            <a href="#update-<?php echo $tinsurance_id; ?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
-                            <!-- update insurance modal-->
-        <div id="update-<?php echo $tinsurance_id; ?>" class="modal fade" role="dialog">
+                            <a href="#update<?php echo $tinsurance_id; ?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
+
+                    </td>
+    
+    
+					
+        <!-- update insurance modal-->
+        <div id="update<?php echo $tinsurance_id; ?>" class="modal fade" role="dialog">
             <div class="modal-dialog modal-def">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -142,13 +146,15 @@ while($fetch = $query->fetch_array()){
                             <div class="row">
                                 <form action = "TInsurance.php" id="tInsure" role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
                                     <center><div class="col-md-12">
-                                      <input type="hidden" name="id" value="<?php echo $tinsurance_id; ?>">
+									  <input type="hidden" name="id" value="<?php echo $tinsurance_id; ?>">
                                         <div class="form-group">                                        
                                             <label class="col-md-3 control-label">Informant</label>
                                             <div class="col-md-5">
                                                 <div class="input-group">
-                                                       <input type="text" class="form-control"/ placeholder="Insurance" name="name" value="<?php echo $fetch['informant'];  ?>">
-                                                </div>   
+                                                      <select name="uinformant" class="validate[required] select" id="informant" required>
+														  <option value="Sample">Choose Informant</option>
+														  <?php echo"<option value='" . $informant."'>". $informant."</option>";?>  
+                                                      </select>  
                                                 </div>            
                                             </div>
                                         </div>
@@ -157,9 +163,7 @@ while($fetch = $query->fetch_array()){
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                    <input type="hidden" name="uinsuranceName" value="<?php echo $fetch['insurance_id'] ?>">
-
-                                                    <input type="text" class="form-control"/ placeholder="Insurance" name="uinsuranceName1" value="<?php echo $insuranceName;?>" disable>
+                                                    <input type="text" class="form-control"/ placeholder="Insurance" name="uinsuranceName" value="<?php echo $insuranceName;?>">
                                                 </div>            
                                             </div>
                                         </div>                                        
@@ -168,7 +172,7 @@ while($fetch = $query->fetch_array()){
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                    <input type="text" class=" form-control" name="upercentage" value= "<?php printf( $fetch['percentage'],"%") ?>" required>
+                                                    <input type="text" class="mask_percent form-control"  placeholder="Percentage" name="upercentage" value="<?php echo $percentage;?>">
                                                 </div>            
                                             </div>
                                         </div>
@@ -178,7 +182,7 @@ while($fetch = $query->fetch_array()){
                                             <div class="col-md-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-ruble"></span></span>
-                                                    <input type="number" class="form-control"  placeholder="Amount" name="uamount" value="<?php echo $amount;?>" required>
+                                                    <input type="number" class="form-control"  placeholder="Amount" name="uamount" value="<?php echo $amount;?>">
                                                 </div>            
                                             </div>
                                         </div>                                        
@@ -187,30 +191,24 @@ while($fetch = $query->fetch_array()){
                                         <div class="col-md-4">
                                             <div class="input-group">
                                               <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                              <input name="udate" type="text" class="form-control datepicker" placeholder="Date" value="<?php echo $date;?>" required>
+                                              <input name="udate" type="text" class="form-control datepicker" placeholder="Date" value="<?php echo $date;?>">
                                             </div>
                                         </div>
                                     </div>
-                                            <br>
+											<br>
                                     </div></center>
                                 </form>
                             </div>                                   
                         </div>
                     </div>
-                    <div class="modal-footer">
+					<div class="modal-footer">
                     <center>
                         <button type="submit" class="btn btn-info" name="update_tinsurance" form="tInsure"><span class="glyphicon glyphicon-check"></span>Save</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
                     </div>
                 </div>
             </div>
-        </div>  
-
-                    </td>
-    
-    
-					
-        				
+        </div>					
 <?php
 }
 $conn->close();
@@ -237,7 +235,7 @@ $conn->close();
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                     <center>
-                                        <h2 class="fa fa-user"> Cadaver</h2>
+                                        <h2 class="fa fa-book"> Cadaver Insurance</h2>
                                     </center>
                 </div>
                 <div class="modal-body">
@@ -245,9 +243,15 @@ $conn->close();
                         <div class="row">
                             <form role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
                                 <div class="col-md-12">
+                                     <div class="form-group">
+                                        <label class="col-md-4 control-label">Date</label>
+                                        <div class="col-md-5">
+                                              <input name="date" type="text" class="form-control datepicker" value="Date" placeholder="Date" required>
+                                        </div>
+                                    </div>
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label">Informant</label>
-                                            <div class="col-md-9 col-xs-10">
+                                            <label class="col-md-4 control-label">Informant</label>
+                                            <div class="col-md-7">
                                                 <select class="validate[required] select" name="informant" id="informant" data-live-search ="true">							
                                                     <option value="pick">Choose Informant</option>
                                                     <?php
@@ -263,8 +267,8 @@ $conn->close();
                                         </div>
                                     
                                     <div class="form-group">
-                                            <label class="col-md-3 control-label">Insurance</label>
-                                            <div class="col-md-9 col-xs-10">
+                                            <label class="col-md-4 control-label">Insurance</label>
+                                            <div class="col-md-7">
                                                 <select class="validate[required] select" name="insuranceName" id="informant" data-live-search ="true">							
                                                     <option value="pick">Choose Insurance</option>
                                                     <?php
@@ -278,38 +282,23 @@ $conn->close();
                                                 </select>
                                             </div>
                                         </div>
-                                    </div> &nbsp;
                                 
                                         
                                     
                                         <div class="form-group">                                        
-                                            <label class="col-md-3 control-label">Percent covered</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            <label class="col-md-4 control-label">Percent covered</label>
+                                            <div class="col-md-5">
                                                     <input type="text" class="mask_percent form-control"  placeholder="Percentage" name="percentage">
-                                                </div>            
                                             </div>
                                         </div>
                                                                                 
                                         <div class="form-group">                                        
-                                            <label class="col-md-3 control-label">Amount</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-ruble"></span></span>
+                                            <label class="col-md-4 control-label">Amount</label>
+                                            <div class="col-md-5">
                                                     <input type="number" class="form-control"  placeholder="Amount" name="amount">
-                                                </div>            
                                             </div>
                                         </div>                                        
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Date</label>
-                                        <div class="col-md-4">
-                                            <div class="input-group">
-                                              <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                              <input name="date" type="text" class="form-control datepicker" value="Date" placeholder="Date" required>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
 									<br>
 
                                     <div class="panel-footer"><center>

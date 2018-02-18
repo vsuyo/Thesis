@@ -122,7 +122,7 @@ require('car_add.php');
                         <!-- END TABS -->
                     </div>
                 </div>
-                <?php require 'require/footer.php' ?>
+                
             </div>
         </div>
 
@@ -158,7 +158,7 @@ require('car_add.php');
 </script>
                                         <div class="form-group">
                                         <label class="col-md-3 control-label">Unit </label>
-                                        <div class="col-md-5">
+                                        <div class="col-md-6">
                                             <input type="text" class="form-control" / name="unit" placeholder="Unit" required="" id='input' onkeyup="myFunction(this.id)">
                                         </div>
                                     </div>

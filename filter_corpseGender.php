@@ -1,4 +1,4 @@
-
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script src="js/jquery.min.js"></script>
         <script src = "js/jquery.canvasjs.min.js"></script>
-        <?php require 'js/charteasy/casket_ctype.php'?>
+        <?php require 'js/charteasy/corpse_gender.php'?>
         <!-- META SECTION -->   
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -49,7 +49,7 @@
         <div class="panel-body">
                         
             <div class="col-md-6">
-                <div id="casket_ctype" style="width: 100%; height: 400px"></div>
+                <div id="corpse_Gender" style="width: 100%; height: 400px"></div>
                 
             </div>
             
@@ -58,74 +58,74 @@
                     <div class="panel-body">
                         <?php
     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-        $q1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood ' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $q1 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
         $f1 = $q1->fetch_array();
-        $q2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $q2 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
         $f2 = $q2->fetch_array();
-        $q3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $q3 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
         $f3 = $q3->fetch_array();
-        $q4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $q4 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
         $f4 = $q4->fetch_array();
-        $q5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $q5 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
         $f5 = $q5->fetch_array();
-        $q6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $q6 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
         $f6 = $q6->fetch_array();
-        $q7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $q7 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
         $f7 = $q7->fetch_array();
-        $q8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $q8 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
         $f8 = $q8->fetch_array();
-        $q9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $q9 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
         $f9 = $q9->fetch_array();
-        $q10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $q10 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
         $f10 = $q10->fetch_array();
-        $q11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $q11 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
         $f11 = $q11->fetch_array();
-        $q12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $q12 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
         $f12 = $q12->fetch_array();
 
-        $c1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+        $c1 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
         $c1 = $c1->fetch_array();
-        $c2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
+        $c2 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
         $c2 = $c2->fetch_array();
-        $c3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
+        $c3 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Mar' && `year` = '$year'") or die(mysqli_error());
         $c3 = $c3->fetch_array();
-        $c4 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
+        $c4 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Apr' && `year` = '$year'") or die(mysqli_error());
         $c4 = $c4->fetch_array();
-        $c5 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
+        $c5 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'May' && `year` = '$year'") or die(mysqli_error());
         $c5 = $c5->fetch_array();
-        $c6 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
+        $c6 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Jun' && `year` = '$year'") or die(mysqli_error());
         $c6 = $c6->fetch_array();
-        $c7 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
+        $c7 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Jul' && `year` = '$year'") or die(mysqli_error());
         $c7 = $c7->fetch_array();
-        $c8 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
+        $c8 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Aug' && `year` = '$year'") or die(mysqli_error());
         $c8 = $c8->fetch_array();
-        $c9 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
+        $c9 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Sep' && `year` = '$year'") or die(mysqli_error());
         $c9 = $c9->fetch_array();
-        $c10 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
+        $c10 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Oct' && `year` = '$year'") or die(mysqli_error());
         $c10 = $c10->fetch_array();
-        $c11 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
+        $c11 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Nov' && `year` = '$year'") or die(mysqli_error());
         $c11 = $c11->fetch_array();
-        $c12 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
+        $c12 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `month` = 'Dec' && `year` = '$year'") or die(mysqli_error());
         $c12 = $c12->fetch_array();
 
-        $query1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `year` = '$year'") or die(mysqli_error());
+        $query1 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Male' && `year` = '$year'") or die(mysqli_error());
         $fetch1 = $query1->fetch_array();
 
-        $query2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `year` = '$year'") or die(mysqli_error());
+        $query2 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `gender` = 'Female' && `year` = '$year'") or die(mysqli_error());
         $fetch2 = $query2->fetch_array();
 
-        $query3 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `year` = '$year'") or die(mysqli_error());
+        $query3 = $conn->query("SELECT COUNT(*) as total FROM `unidentifiedcorpse` WHERE `year` = '$year'") or die(mysqli_error());
         $fetch3 = $query3->fetch_array();
         
-        $percentwood = ($fetch1['total']/$fetch3['total']) * 100;
-        $percentmetal = ($fetch2['total']/$fetch3['total']) * 100;
+        $percentmale = ($fetch1['total']/$fetch3['total']) * 100;
+        $percentfemale = ($fetch2['total']/$fetch3['total']) * 100;
                         ?>
                         
-                        <h4><mark>Casket Summary - Wood and Metal Types - Year <?php echo $_GET['year']?></mark></h4> <hr>
+                        <h4><mark>Unidentified Corpse Summary - Male and Female - Year <?php echo $_GET['year']?></mark></h4> <hr>
                         <table class="table table-condensed">
                             <thead>
                                 <tr>
-                                    <th><center>Caskets</center></th>
+                                    <th><center>Unidentified Corpse</center></th>
                                     <th><center>Jan</center></th>
                                     <th><center>Feb</center></th>
                                     <th><center>Mar</center></th>
@@ -143,7 +143,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th><center>Wood</center></th>
+                                    <th><center>Male</center></th>
                                     <td><center><?php echo $f1['total']?></center></td>
                                     <td><center><?php echo $f2['total']?></center></td>
                                     <td><center><?php echo $f3['total']?></center></td>
@@ -156,10 +156,10 @@
                                     <td><center><?php echo $f10['total']?></center></td>
                                     <td><center><?php echo $f11['total']?></center></td>
                                     <td><center><?php echo $f12['total']?></center></td>
-                                    <td><center><?php echo number_format($percentwood)?>%</center></td>
+                                    <td><center><?php echo number_format($percentmale)?>%</center></td>
                                 </tr>
                                 <tr>
-                                    <th><center>Metal</center></th>
+                                    <th><center>Female</center></th>
                                     <td><center><?php echo $c1['total']?></center></td>
                                     <td><center><?php echo $c2['total']?></center></td>
                                     <td><center><?php echo $c3['total']?></center></td>
@@ -172,7 +172,7 @@
                                     <td><center><?php echo $c10['total']?></center></td>
                                     <td><center><?php echo $c11['total']?></center></td>
                                     <td><center><?php echo $c12['total']?></center></td>
-                                    <td><center><?php echo number_format($percentmetal)?>%</center></td>
+                                    <td><center><?php echo number_format($percentfemale)?>%</center></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -185,7 +185,7 @@
             $(document).ready(function(){
                 $("#pyear").on('change', function(){
                     var year=$(this).val();
-                    window.location = 'clientReportChart.php?year='+year;
+                    window.location = 'unidentifiedCorpseReportChart.php?year='+year;
                 });
             });
         </script>

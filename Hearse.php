@@ -128,7 +128,7 @@ $conn->close();
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <center><h2 class="fa fa-truck"> Hearse Data Entry</h2></center>
+                        <center><h2 class="fa fa-truck"> Hearse Driver</h2></center>
                     </div>
                     <div class="modal-body">
                         <div class="tab-pane active" id="tab-third">
@@ -137,29 +137,20 @@ $conn->close();
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Drivers Name</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                                            <div class="col-md-6">
                                                     <input type="text" id="input" onkeyup="myFunction(this.id)" class="form-control" / name="DriverName" placeholder="Name" required="">
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Address</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-truck"></span></span>
+                                            <div class="col-md-6">
                                                     <input type="text" id="input2" onkeyup="myFunction(this.id)" class="form-control" / name="address" placeholder="Address" required="">
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Driver's License</label>
-                                            <div class="col-md-4">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-truck"></span></span>
+                                            <div class="col-md-6">
                                                     <input type="text" class="form-control" / name="driverlicense" placeholder="Driver's License" required="">
-                                                </div>
                                             </div>
                                         </div>
 

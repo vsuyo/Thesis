@@ -75,6 +75,7 @@ if(!$_SESSION['username'])
                                                 <th>Material Name</th>
                                                 <th>Material Description</th>
                                                 <th>Quantity</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -85,11 +86,13 @@ while($fetch = $query->fetch_array()){
     $qty1 = $fetch['qty1'];
     $matName1 = $fetch['matName1'];
     $matDesc1 = $fetch['matDesc1'];
+    $date = $fetch['date'];
 
                                            echo "<tr>
                                                 <td>$matName1</td>
 												<td>$matDesc1</td>  
-                                                <td>$qty1</td>";
+                                                <td>$qty1</td>
+                                                <td>$date</td>";
 }
 $conn->close();
 ?>

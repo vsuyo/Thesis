@@ -19,24 +19,22 @@ $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
 
 if(isset($_POST['update_hearse'])){
 
-    $id = $_POST['hearseID'];
-    if(!empty($id)){
-        $hearseID = $_POST['hearseID'];
+        $hearseID = $_POST['hearsetrans_id'];
         $informant = $_POST['informant'];
         $DriverName = $_POST['DriverName'];
-        $plateno = $_POST['plateno'];
+        $plateno = $_POST['plate'];
         $hearsedate = $_POST['hearsedate'];
         $purpose = $_POST['purpose'];
         $destinationto = $_POST['destinationto'];
         $destinationfrom = $_POST['destinationfrom'];
 
-        $sql = "UPDATE hearsetrans SET client_id='$informant', hearse_id='$DriverName', car_id='$plateno', hearsedate='$hearsedate', purpose='$purpose', destinationto='$destinationto', destinationfrom='$destinationfrom' WHERE hearsetrans_id='$hearseID' ";
+        $sql = "UPDATE hearsetrans SET client_id='$informant', hearse_id='$DriverName', car_id='$plateno', hearsedate='$hearsedate', purpose='$purpose', destinationto='$destinationto', destinationfrom='$destinationfrom' WHERE hearsetrans_id='$hearseID'";
         if ($conn->query($sql) === TRUE) {
-            echo '<script>window.location.href="HearseTrans.php"</script>';
+         echo '<script>alert("Updated Successfully"); window.location.href="HearseTrans.php"</script>';
         } else {
-            echo "Error updating record: " . $conn->error;
+      echo "Error updating record: " . $conn->error;
         }
-    }
+    
 
 }
 
@@ -118,9 +116,12 @@ if(isset($_POST['update_hearse'])){
                                                 </thead>
                                                 <tbody>
                                                     <?php
-    $query = $conn->query("SELECT client.informant, hearse.DriverName, car.plateno, hearsetrans.purpose, hearsetrans.deliver, hearsetrans.to, hearsetrans.timeoutfrom, hearsetrans.timeoutto, hearsetrans.hearsedate, hearsetrans.time, hearsetrans.destinationfrom, hearsetrans.destinationto, hearsetrans.hearse_id  FROM hearsetrans INNER JOIN client ON client.client_id = hearsetrans.client_id INNER JOIN  hearse ON hearse.hearse_id = hearsetrans.hearse_id INNER JOIN car ON car.car_id = hearsetrans.car_id  ") or die(mysqli_error());
+    $query = $conn->query("SELECT * FROM hearsetrans 
+    INNER JOIN client ON hearsetrans.client_id = client.client_id 
+    INNER JOIN  hearse ON hearsetrans.hearse_id = hearse.hearse_id 
+    INNER JOIN car ON hearsetrans.car_id = car.car_id WHERE client.client_id = hearsetrans.client_id") or die(mysqli_error());
             while($fetch = $query->fetch_array()){  
-                $informant = $fetch['informant'];
+               // $informant = $fetch['informant'];
                 $DriverName = $fetch['DriverName'];
                 $plateno = $fetch['plateno'];
                 $hearse_id = $fetch['hearse_id'];
@@ -133,25 +134,26 @@ if(isset($_POST['update_hearse'])){
                 $time = $fetch['time'];
                 $destinationfrom = $fetch['destinationfrom'];
                 $destinationto = $fetch['destinationto'];
+                $hearsetrans_id = $fetch['hearsetrans_id'];
+                    
+?>
 
 
+               <tr>
+                                                <td><?php echo $fetch['informant'] ?></td>
+                 
+                                                <td><?php echo $fetch['DriverName'] ?></td>
+												<td><?php echo $fetch['plateno'] ?></td>
 
-
-
-                echo "<tr>
-                                                <td>$informant</td>
-                                                <td>$DriverName</td>
-												<td>$plateno</td>";
-
-                                                    ?>
+                                                  
 <td>
     <div class='btn-group' role='group' aria-label='...'>
-        <a href="#edit<?php echo $hearse_id;?>" data-toggle="modal">
+        <a href="#edit-<?php echo $fetch['hearsetrans_id']?>" data-toggle="modal">
             <button type='button' class='btn btn-info btn-sm' data-toggle="tooltip" title="Edit Details" data-placement="left" ><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
     </div>
 </td>
 
-<div id="edit<?php echo $hearse_id; ?>" class="modal fade" role="dialog">
+<div id="edit-<?php echo  $fetch['hearsetrans_id'] ?>" class="modal fade" role="dialog">
     <form method="post" class="form-horizontal" role="form">
         <div class="modal-dialog modal-md">
             <!-- Modal content-->
@@ -163,19 +165,36 @@ if(isset($_POST['update_hearse'])){
                     </center>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="hearseID" value="<?php echo $hearse_id; ?>">
-
+                    <input type="hidden" name="hearsetrans_id" value="<?php echo $hearsetrans_id; ?>">
+ 
                     <div class="form-group">
                         <label class="col-md-4 control-label">Informant</label>
                         <div class="col-md-6">
-                           <input type="text" class="form-control" id="informant" name="informant" value="<?php echo $informant; ?>">
+                            <select class="validate[required] select" id="informant" name="informant" data-live-search="true">							
+                                
+                                <option value="<?php echo $fetch['client_id'] ?>"><?php echo $fetch['informant']; ?></option>
+                               
+                            </select>
+                           
                         </div>
                     </div><br><br>
 
                     <div class="form-group">
                         <label class="col-md-4 control-label">Driver Name</label>
                         <div class="col-md-6 ">
-                           <input type="text" class="form-control" id="DriverName" name="DriverName" value="<?php echo $DriverName; ?>">
+                            <select class="validate[required] select" id="DriverName" name="DriverName" data-live-search="true">							
+                                <option value="pick">Choose Driver</option>
+                                <?php
+                                $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                                $sql = mysqli_query($conn, "SELECT * FROM hearse");
+                                $row = mysqli_num_rows($sql);
+                                while ($row = mysqli_fetch_array($sql)){
+                                    echo "<option value=' ". $row['hearse_id'] ." '>" .$row['DriverName'] ."   </option>";
+                                }
+                                ?>
+                               
+                            </select>
+                          
                         </div>
                     </div>
                     <br><br>
@@ -183,7 +202,17 @@ if(isset($_POST['update_hearse'])){
                     <div class="form-group">
                         <label class="col-md-4 control-label">Car Plate Number</label>
                         <div class="col-md-6 ">
-                            <input type="text" class="form-control" id="plateno" name="plateno" value="<?php echo $plateno; ?>">
+                            <select class="validate[required] select" id="plate" name="plate" data-live-search="true">							
+                                <option value="pick">Choose Plate Number</option>
+                                <?php
+                                $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                                $sql = mysqli_query($conn, "SELECT * FROM car");
+                                $row = mysqli_num_rows($sql);
+                                while ($row = mysqli_fetch_array($sql)){
+                                    echo "<option value=' ". $row['car_id'] ." '>" .$row['plateno'] ."   </option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -370,7 +399,7 @@ if(isset($_POST['update_hearse'])){
                                         <br>
                                         <hr>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Hearse Date</label>
+                                            <label class="col-md-4 control-label">Internment Date</label>
                                             <div class="col-md-4">
                                                 <input type="name" name="hearsedate" class="form-control datepicker">
                                             </div>
