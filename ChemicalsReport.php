@@ -82,7 +82,7 @@ if(!$_SESSION['username'])
                                         </thead>
                                         <tbody>
 <?php
-$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
 $query = $conn->query("SELECT * FROM `chemicalstocktrans` ORDER BY `controlNo` DESC") or die(mysqli_error());
 while($fetch = $query->fetch_array()){
     $qty1 = $fetch['qty1'];

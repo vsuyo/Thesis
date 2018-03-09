@@ -84,7 +84,7 @@ if(!$_SESSION['username'])
                                                             <th>Casket Chosen</th>
                                                             <th>Dimension</th>
                                                             <th>Total</th>
-                                                            <th>Date Added</th>
+                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -110,7 +110,7 @@ if(!$_SESSION['username'])
                                                 <td>$casketName</td>
                                                 <td>$dimension</td>
 												<td>$total</td>
-                                                <td>$date</td>";
+                                                ";
 }
 $conn->close();
 ?>

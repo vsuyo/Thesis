@@ -507,7 +507,7 @@ $dateF = date("y-m-d");
                                                         </tr> 
                                                     </thead>
 <?php
-$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$conn = new mysqli("localhost", "root", "", "alisbomemchap") or die(mysqli_error());
 $query = $conn->query("SELECT * FROM `unidentifiedcorpse` ORDER BY `cid` DESC") or die(mysqli_error());
 while($fetch = $query->fetch_array()){
 $cid = $fetch['cid'];
