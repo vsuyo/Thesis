@@ -37,6 +37,9 @@ $conn->close();
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="js/jquery.min.js"></script>
+        <script src = "js/jquery.canvasjs.min.js"></script>
+        <?php require 'js/charteasy/clientChart.php'?>
 
     <link rel="icon" href="img/A.png" type="image/x-icon" />
     <!-- END META SECTION -->
@@ -167,57 +170,70 @@ $conn->close();
 
 
                     </div>
-<div class = "col-lg-9 ">
-             <div class= "col-lg-9">
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                </ol>
+                    
+                    <div class = "col-md-12"> 
+        </div>
+        
+                        
+                        
+                    </div>
+                    
+                    <div class="col-md-12">
 
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src= "assets/images/gallery/casket-1.jpg" alt="Charity">
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="assets/images/gallery/casket-2.jpg" alt="Pioneer">
-                                    </div>
-
-                                    <div class="item">
-                                        <img src= "assets/images/gallery/casket-3.jpg" alt="Junior Half Glass">
-                                    </div>
-                                    
-                                    <div class="item">
-                                        <img src="assets/images/gallery/casket-4.jpg" alt="OMB">
-                                    </div>
-                                    
-                                    <div class="item">
-                                        <img src="assets/images/gallery/casket-5.jpg" alt="Senior Half Glass">
-                                    </div>
+                        <div class="col-lg-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Casket Stock Alert </h3>
                                 </div>
+                                <div>
+                                    <table class="table table-bordered table-hover table-striped" id = "id3">
+                                        <thead>
+                                            <tr>
+                                                <th>Stock Number</th>
+                                                <th>Casket Name</th>
+                                                <th>Available Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                    $query = $conn->query("SELECT casketname, qty FROM casketinventory WHERE qty <= '20' AND qty >= '1'") or die(mysqli_error());
+                    $list = 1;    
+                    while($fetch = $query->fetch_array()){
+                    $chemName1 = $fetch['casketname'];
+                    $qty1 = $fetch['qty'];
+                        ?>
 
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                                <span class="sr-only">Previous</span>
-                              </a>
-                                                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                <span class="sr-only">Next</span>
-                              </a>
+                                                <tr>
+                                                    <td>
+                                                        <mark><?php echo $list;?></mark>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $fetch['casketname'];?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $fetch['qty'];?>
+                                                    </td>
+                                                </tr>
+
+                                                <?php
+                    $list++;
+                    }
+                    $conn->close();
+                    ?>
+                                        </tbody>
+                                        <script>
+                                    document.getElementById('id3').style.color='Red';
+                                    </script>
+                                    </table>
+
+                                </div>
                             </div>
-
-
                         </div>
-           
-</div>
 
+
+                    </div>
+                    
                     <div class="col-md-12">
 
                         <div class="col-lg-12">
@@ -237,7 +253,7 @@ $conn->close();
                                         <tbody>
                                             <?php
                     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                    $query = $conn->query("SELECT matName1, qty1 FROM materialstocktrans WHERE qty1 <= '20' ") or die(mysqli_error());
+                    $query = $conn->query("SELECT matName1, qty1 FROM materialstocktrans WHERE qty1 <= '20'  AND qty1 >= '1' ") or die(mysqli_error());
                     $list = 1;    
                     while($fetch = $query->fetch_array()){
                     $chemName1 = $fetch['matName1'];
@@ -344,7 +360,7 @@ $conn->close();
                     <div class="mb-title"><span class="glyphicon glyphicon-off"></span> Log <strong>Out</strong> ?</div>
                     <div class="mb-content">
                         <p>Are you sure you want to log out?</p>
-                        <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                        <p>Press No if you want to continue work. Press Yes to logout current user.</p>
                     </div>
                     <div class="mb-footer">
                         <div class="pull-right">

@@ -14,7 +14,7 @@ if(isset($_POST['submit'])){
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
+    $date = $_POST['date'];
     $query = $conn -> query ("SELECT * FROM  `user` WHERE BINARY `username` = '$username' && BINARY `password` =  '$password' ") or die (mysqli_error());
     $fetch = $query -> fetch_array();
     $valid = $query -> num_rows;
@@ -29,7 +29,18 @@ if(isset($_POST['submit'])){
 
         echo "<script>alert ('Invalid')</script>";
     }
+    
+    
+    
 $conn->close(); 
+    
+}
+
+if(isset($_POST['submit'])){
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
+    
+    $query = $conn->query("INSERT INTO `user_log` VALUES (NOW() , userName )") or die (mysqli_error());
+    
     
 }
 
@@ -42,7 +53,7 @@ $conn->close();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
+        <script src='http://code.jquery.com/jquery-1.7.1.min.js'></script>
         <link rel="icon" href="assets/images/users/A.png" type="image/x-icon" />
         <!-- END META SECTION -->
         
@@ -61,17 +72,18 @@ $conn->close();
                     <form action="loading.php" class="form-horizontal" method="post">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" name = "username" placeholder="Username" />
+                            <input type="text" class="form-control" id ="username" name = "username" placeholder="Username" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
-                            <input type="password" class="form-control" name = "password" placeholder="Password"/>
+                            <input type="password" class="form-control" id = "password" name = "password" placeholder="Password"/>
+                            <input type="hidden" class="form-control" id = "password" name = "date" placeholder="Password"/>
                         </div>
                     </div>
                     <div class="form-group">
                        <div class="col-md-6">
-                            <button class="btn btn-info btn-block fa fa-lock" name = "submit"> Login</button>
+                            <button class="btn btn-info btn-block fa fa-lock" id = "sendButton" name = "submit"> Login</button>
                         </div>
                     </div>
                     </form>
@@ -84,6 +96,66 @@ $conn->close();
             </div>
             
         </div>
+        
+        
+        <script>
+    $(document).ready(function(){  
+
+      var checkField;
+
+      //checking the length of the value of message and assigning to a variable(checkField) on load
+      checkField = $("input#username").val().length;
+        
+      var enableDisableButton = function(){         
+        if(checkField > 0){
+          $('#sendButton').removeAttr("disabled");
+        } 
+        else {
+          $('#sendButton').attr("disabled","disabled");
+        }
+      }        
+     
+      //calling enableDisableButton() function on load
+      enableDisableButton();
+      
+      $('input#username').keyup(function(){ 
+        //checking the length of the value of message and assigning to the variable(checkField) on keyup
+        checkField = $("input#username").val().length;
+        //calling enableDisableButton() function on keyup
+        enableDisableButton();
+      });
+    });
+    </script>
+        
+        
+        <script>
+         $(document).ready(function(){  
+
+      var checkField2;
+
+      //checking the length of the value of message and assigning to a variable(checkField) on load
+      checkField2 = $("input#password").val().length;
+        
+      var enableDisableButton2 = function(){         
+        if(checkField2 > 0){
+          $('#sendButton').removeAttr("disabled");
+        } 
+        else {
+          $('#sendButton').attr("disabled","disabled");
+        }
+      }        
+     
+      //calling enableDisableButton() function on load
+      enableDisableButton2();
+      
+      $('input#password').keyup(function(){ 
+        //checking the length of the value of message and assigning to the variable(checkField) on keyup
+        checkField2 = $("input#password").val().length;
+        //calling enableDisableButton() function on keyup
+        enableDisableButton2();
+      });
+    });
+        </script>
         
     </body>
 </html>

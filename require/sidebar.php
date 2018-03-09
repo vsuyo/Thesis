@@ -22,6 +22,7 @@
         <li class="xn-title">Navigation</li>
         <li class="active">
             <a href="home.php"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+            <a href="example/calendar.php"><span class="fa fa-desktop"></span> <span class="xn-text">Calendar</span></a>
         </li>
 
         <li class="xn-title">Components</li>
@@ -29,13 +30,9 @@
             <a href="#"><span class="fa fa-pencil"></span> <span class="xn-text">Data Entry</span></a>
             <ul>
                 
-                <li><a href="Casket_inventory.php"><span class="fa fa-archive"></span>Casket Inventory</a></li>
-                <li><a href="DataEntry.php"><span class="fa fa-user"></span>Client & Cadaver</a></li> 
-                <li><a href="Chemicals.php"><span class="fa fa-archive"></span>Chemicals</a></li>
-                <li><a href="Hearse.php"><span class="fa fa-truck"></span>Hearse Driver</a></li>
-                <li><a href="Car.php"><span class="fa fa-car"></span>Hearse Car</a></li>                  
-                <li><a href="Insurance.php"><span class="fa fa-file-text-o"></span>Insurance</a></li>
-                <li><a href="Materials.php"><span class="fa fa-book"></span>Vigil Materials</a></li>                
+                <li><a href="Casket_inventory.php"><span class="fa fa-archive"></span>Entry For Inventories</a></li>
+                <li><a href="DataEntry.php"><span class="fa fa-user"></span>Client & Deceased</a></li> 
+                <li><a href="Hearse.php"><span class="fa fa-truck"></span>Hearse Driver & Car</a></li>              
                 <li><a href="UnidentifiedCorpse.php"><span class="fa fa-user"></span>Unidentified Corpse</a></li>
             </ul>
         </li>
@@ -46,6 +43,7 @@
                 <li><a href="Viewing.php"><span class="fa fa-bookmark"></span>Viewing</a></li>
                 <li><a href="HearseTrans.php"><span class="fa fa-truck"></span>Hearse</a></li>
                 <li><a href="TInsurance.php"><span class="fa fa-file-text-o"></span>Insurance</a></li>
+                <li><a href="Extendservice.php"><span class="fa fa-file-text-o"></span>Extended Service</a></li>
                 <li><a href="ChemicalsTrans.php"><span class="fa fa-flask"></span>Chemicals</a></li>
                 <li><a href="MaterialsTrans.php"><span class="fa fa-wrench"></span>Vigil Materials</a></li>
                 <li><a href="Delivery.php"><span class="fa fa-wrench"></span>Delivery of Casket</a></li>
@@ -59,6 +57,8 @@
             <a href="tables.html"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Reports</span></a>
             <ul>
                 
+                
+                <li><a href="casket_InventoryReportChart.php"><span class="fa fa-user"></span>Casket Inventory Report</a></li>
                 <li><a href="CasketReport.php"><span class="fa fa-user"></span>Casket Report</a></li>  
                 <li><a href="ChemicalsReport.php"><span class="fa fa-flask"></span>Chemicals</a></li>
                 <li><a href="HearseReport.php"><span class="fa fa-truck"></span>Hearse</a></li>

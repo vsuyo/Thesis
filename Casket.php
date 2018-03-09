@@ -105,6 +105,8 @@ include('casketAdd.php');
 }
 
 ?>
+                                                
+                                                
 
                                             </tbody>
                                         </table>
@@ -135,6 +137,8 @@ include('casketAdd.php');
 
 
                                                 <div class="form-group">
+                                                    <input type="hidden" name="casket_inv_id" value="<?php echo $casket_inv_id; ?>">
+                                                                            <div class="form-group">
                                                     <label class="col-md-3 control-label">Date</label>
                                                     <div class="col-md-6">
                                                         <input name="date" type="text" class="form-control datepicker" value="<?php echo $dateF ?>" placeholder="Date">
@@ -173,6 +177,31 @@ include('casketAdd.php');
                                                 </select>
                                                     </div>
                                                 </div>
+                                                    
+                                                    <div class="form-group">
+                                                    <label class="col-md-3 control-label">Chemical</label>
+                                                    <div class="col-md-9 col-xs-10">
+                                                        <select class="validate[required] select" name="chemName1" id="informant" data-live-search ="true">							
+                                                    <option value="pick">Choose Chemical</option>
+                                                    <?php
+                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+                                                    $sql = mysqli_query($conn, "SELECT * From chemicalstocktrans");
+                                                    $row = mysqli_num_rows($sql);
+                                                    while ($row = mysqli_fetch_array($sql)){
+                                                        echo "<option value=' ". $row['controlNo'] ." '>" .$row['chemName1'] ."   </option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <div class="form-group">
+                                                        <label class="col-md-3 control-label">QTY (Chemical):</label>
+                                                        <div class="col-md-5">
+                                                            <input class="form-control" type="number" min="0" name="qty2" id="" onchange="compute()">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Casket</label>
                                                     <div class="col-md-9 col-xs-10">
@@ -195,15 +224,27 @@ include('casketAdd.php');
 
                                                     <center><img id="img1" alt="image" width="250" height="150" align="middle" /></center><br><br>
                                                     <div class="form-group">
+                                                        <label class="col-md-3 control-label"><mark>Services Includes</mark>:</label>
+                                                        <div class="col-md-6">
+                                                            <textarea rows="4" cols="6" class="form-control" type="text" id="details" name="details" value="" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Cutomized <mark style="color:red">(Optional)</mark>:</label>
+                                                        <div class="col-md-6">
+                                                            <textarea class="form-control" type="text" name="customized" value="" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <label class="col-md-3 control-label">Dimension:</label>
                                                         <div class="col-md-6">
-                                                            <input class="form-control" type="text" id="dimension" name="dimension" value="" />
+                                                            <input class="form-control" type="text" id="dimension" name="dimension" value="" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Type:</label>
                                                         <div class="col-md-6">
-                                                            <input class="form-control" type="text" id="type" name="type" value="" />
+                                                            <input class="form-control" type="text" id="type" name="type" value="" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -221,13 +262,21 @@ include('casketAdd.php');
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Price:</label>
                                                         <div class="col-md-5">
-                                                            <input class="form-control" name="price" id="price" value="">
+                                                            <input class="form-control" name="price" id="price" value="" required>
+                                                        </div>
+                                                    </div>
+                                                    <input id="discount" value="20" hidden>
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Discount: <mark style="color:red">(For senior citizen)</mark></label>
+                                                        <div class="col-md-5">
+                                                            <input type="radio" name="discount"value="Yes" onclick="getPrice()"> Yes
+                                                            <input type="radio" name="discount" value="No" id="price" onchange="price"> No
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="col-md-3 control-label">Total:</label>
                                                         <div class="col-md-5">
-                                                            <input class="form-control" name="total" id="total" value="" readonly>
+                                                            <input class="form-control" name="total" id="total" value="" style="color:black" readonly>
                                                         </div>
                                                     </div>
                                                 </div><br><br>
@@ -240,8 +289,8 @@ include('casketAdd.php');
                                                     </center>
                                                 </div>
                                             </div>
+                                            </div>
                                         </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -252,11 +301,19 @@ include('casketAdd.php');
                 <!-- END CONTENT FRAME BODY -->
 
             </div>
-
-            <?php require 'require/footer.php' ?>
+            </div>  
+       
+                   <?php require 'require/footer.php' ?>
         </div>
     </div>
-
+<script>
+getPrice = function() {
+var numVal1 = Number(document.getElementById("price").value);
+var numVal2 = Number(document.getElementById("discount").value) / 100;
+var totalValue = numVal1 - (numVal1 * numVal2)
+document.getElementById("total").value = totalValue.toFixed(2);
+}
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
     $('#casketName').change(
@@ -268,7 +325,8 @@ include('casketAdd.php');
             var color = ["White", "Silver"];
             var price = [25000, 30000, 40000, 50000, 70000];
             var qty = $('#qty').val();
-
+            var discount = 0.20;
+            var details = ["5 Days free Viewing (Chapel Rooms), 7 Days free Embalming, Hearse (Free Transportation with in Bacolod City)"];
 
             switch (p) {
                 case '1':
@@ -292,6 +350,7 @@ include('casketAdd.php');
                     var qty1 = <?php echo $sel_qty ?>;
                     var q1 = Number(qty1);
                     $("#img1").attr("src", "assets/images/gallery/casket-1.jpg");
+                    $('#details').val(details[0]);
                     $('#dimension').val(dimension[0]);
                     $('#type').val(type[0]);
                     $('#color').val(color[0]);
@@ -309,6 +368,7 @@ include('casketAdd.php');
                     var qty2 = <?php echo $sel_qty ?>;
                     var q2 = Number(qty2);
                     $("#img1").attr("src", "assets/images/gallery/casket-2.jpg");
+                    $('#details').val(details[0]);
                     $('#dimension').val(dimension[1]);  
                     $('#type').val(type[0]);
                     $('#color').val(color[1]);
@@ -326,6 +386,7 @@ include('casketAdd.php');
                     var qty3 = <?php echo $sel_qty ?>;
                     var q3 = Number(qty3);
                     $("#img1").attr("src", "assets/images/gallery/casket-3.jpg");
+                    $('#details').val(details[0]);
                     $('#dimension').val(dimension[2]);
                     $('#type').val(type[0]);
                     $('#color').val(color[0]);
@@ -343,6 +404,7 @@ include('casketAdd.php');
                     var qty4 = <?php echo $sel_qty ?>;
                     var q4 = Number(qty4);
                     $("#img1").attr("src", "assets/images/gallery/casket-4.jpg");
+                    $('#details').val(details[0]);
                     $('#dimension').val(dimension[3]);
                     $('#type').val(type[1]);
                     $('#color').val(color[1]);
@@ -360,6 +422,7 @@ include('casketAdd.php');
                     var qty5 = <?php echo $sel_qty ?>;
                     var q5 = Number(qty5);
                     $("#img1").attr("src", "assets/images/gallery/casket-5.jpg");
+                    $('#details').val(details[0]);
                     $('#dimension').val(dimension[4]);
                     $('#type').val(type[1]);
                     $('#color').val(color[0]);
@@ -367,14 +430,23 @@ include('casketAdd.php');
                     $('#price').val(price[4]);
                     break;
                 default:
-                    $('#dimension').val("what the Heck!");
+                    $("#img").attr("");
+                    $('#details').val("");
+                    $('#dimension').val("");
                     $('#type').val("");
+                    $('#qty').val("");
                     $('#color').val("");
                     $('#price').val(0);
                     break;
             }
         });
-
+        $(document).ready(function() {
+        //this calculates values automatically 
+        compute();
+        $("#qty, #price",).on("keydown keyup", function() {
+        compute();
+        });
+        });
     function compute() {
         var qty = $('#qty').val();
         var price = $('#price').val();
@@ -384,7 +456,6 @@ include('casketAdd.php');
     });
 
 </script>
-
 
     <!-- START PRELOADS -->
     <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>

@@ -2,28 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
+    <head>
         <div><center><img src="img/ALISBOLOGO3.png"/></center></div>
-		<title>Unidentified Corpse Report</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<script src="js/jquery.min.js"></script>
-		<script src = "js/jquery.canvasjs.min.js"></script>
-		<?php require 'js/charteasy/UnidentifiedCorpseChart.php'?>
-        
+        <title>Unidentified Corpse Report</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script src="js/jquery.min.js"></script>
+        <script src = "js/jquery.canvasjs.min.js"></script>
+        <?php require 'js/charteasy/UnidentifiedCorpseChart.php'?>
         <!-- META SECTION -->   
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="icon" href="img/A.png" type="image/x-icon" />
-    <!-- END META SECTION -->
+        <link rel="icon" href="img/A.png" type="image/x-icon" />
+        <!-- END META SECTION -->
 
-    <!-- CSS INCLUDE -->
-    <link rel="stylesheet" type="text/css" id="theme" href="css/theme-blue.css" />
-    <!-- EOF CSS INCLUDE -->
+        <!-- CSS INCLUDE -->
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-blue.css" />
+        <!-- EOF CSS INCLUDE -->
+    </head>
+    <body>
+        <div class="btn-group pull-left">
+            <div class="btn-group">
+                <a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle">Filter by<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" onclick="oAgeRange()">Age Range</a></li>
+                    <li><a href="#" onclick="oGender()">Gender</a></li>
+                </ul>
+            </div>
+        </div>
 
-	</head>
-	<body>
-         
         <div class="btn-group pull-center">
             <div class="pull-center">
                 <select id="pyear" class="validate[required] select" data-style="btn-primary" data-live-search="true">
@@ -55,31 +62,35 @@
                 </select>
             </div>
         </div>
-		<div class="panel-body">
-			<div id="UnidentifiedCorpseChart" style="width: 100%; height: 400px"></div>
-		</div>
-        
+        <div class="panel-body">
+            <div id="UnidentifiedCorpseChart" style="width: 100%; height: 400px"></div>
+        </div>
         <form method="post" action="UnidentifiedCorpseReport.php">
-        <input type="submit" class="btn btn-success" value="Back to Report Table" />
+            <input type="submit" class="btn btn-success" value="Back to Report Table" />
 
         </form>
-        
-		
-		<script>
-			$(document).ready(function(){
-				$("#pyear").on('change', function(){
-					var year=$(this).val();
-					window.location = 'UnidentifiedCorpseReportChart.php?year='+year;
-				});
-			});
-		</script>
-         <script>
-            function oCorpseGender() {
-                myWindow = window.open("filter_ucgender.php?year=<?php echo $year?>", "", "width=1350, height=650");
-            }
-            
+        <script>
+            $(document).ready(function(){
+                $("#pyear").on('change', function(){
+                    var year=$(this).val();
+                    window.location = 'UnidentifiedCorpseReportChart.php?year='+year;
+                });
+            });
         </script>
-        
+        <script>
+            function oAgeRange() {
+                myWindow = window.open("filter_ageRange.php?year=<?php echo $year?>", "", "width=1350, height=650");
+            }
+            function oGender() {
+                myWindow = window.open("filter_corpseGender.php?year=<?php echo $year?>", "", "width=1350, height=650");
+            }
 
-	</body>
+        </script>
+        <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+        <script type="text/javascript" src="js/plugins.js"></script>
+
+    </body>
 </html>

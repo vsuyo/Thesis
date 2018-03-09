@@ -86,52 +86,43 @@ $confirm_password = $_POST['confirm_password'];
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Maintenance</a></li>
-                    <li class="active">Change Password</li>
+                    <li class="active"><strong><mark>Change Password</mark></strong></li>
                 </ul>
                 <!-- END BREADCRUMB -->
 
                 <!-- PAGE CONTENT WRAPPER -->
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><span class="fa fa-key"> Change Password</span></h3>
+                           <h3 class="panel-title"><span class="fa fa-lock"> <strong>Change Password</strong></span></h3>
                         </div>
                         <div class="panel-body">
                             <center>
                                 <form role="form" class="form-horizontal" method="post" action="Changepass.php" enctype="multi-part/form-data">
 
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Current Password</label>
+                                        <label class="col-md-4 control-label">Current Password</label>
                                         <div class="col-md-4">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-key"></span></span>
                                                 <input type="password" class="form-control" / name="current_password" placeholder="Password" required="">
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">New Password</label>
+                                        <label class="col-md-4 control-label">New Password</label>
                                         <div class="col-md-4">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-key"></span></span>
-                                                <input type="password" class="form-control" / name="new_password" placeholder="New Password" required="">
-                                            </div>
+                                                <input type="password" class="form-control" / name="new_password" placeholder="New Password" required="" max="15">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label">Confirm Password</label>
+                                        <label class="col-md-4 control-label">Confirm Password</label>
                                         <div class="col-md-4">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span class="fa fa-key"></span></span>
-                                                <input type="password" class="form-control" / name="confirm_password" placeholder="Confirm Password" required="">
-                                            </div>
+                                                <input type="password" class="form-control" / name="confirm_password" placeholder="Confirm Password" required="" max="15">
                                         </div>
                                     </div>
                                     <br><br>
                                     <div class="panel-footer">
-                                        <button class="btn btn-success pull-center" name="save" href="Changepass.php">Save</button>
-                                        <button class="btn btn-warning pull-center" name="clear">Clear Form</button>
-
+                                        <button class="btn btn-info fa fa-check-square-o" name="save" href="Changepass.php"> Save</button>
+                                        <button class="btn btn-danger fa fa-times-circle-o" name="clear"> Cancel</button>
+                                        
 
                                     </div>
                                 </form>

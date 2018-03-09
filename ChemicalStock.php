@@ -1,3 +1,12 @@
+<?php  
+session_start();  
+$session_username = $_SESSION['username'];
+if(!$_SESSION['username'])  
+{  
+    header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
+}  
+?>
+
 <?php
 if(ISSET($_POST['submit1'])){
     $chemName1 = $_POST['chemName1'];
@@ -69,7 +78,7 @@ if(ISSET($_POST['submit3'])){
                     <div class="page-content">
 
                         <!-- START X-NAVIGATION VERTICAL -->
-                        <?php require 'require/vertical navigation.php'?>
+                        <?php require 'require/vertical-navigation.php'?>
                         <!-- END X-NAVIGATION VERTICAL -->
 
                         <!-- START BREADCRUMB -->

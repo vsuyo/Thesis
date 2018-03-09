@@ -12,7 +12,7 @@ if(isset($_POST['save_vigil'] )){
     $address = $_POST['address'];
     $dateBorrowed = $_POST['dateBorrowed'];
     $datereturn = $_POST['datereturn'];
-    $materials = $_POST['materials'];
+    $material = $_POST['materials'];
     $new = "";
 
     foreach ($materials as $value){
@@ -32,8 +32,14 @@ if(isset($_POST['save_vigil'] )){
         $conn->query ("INSERT INTO `viewing` VALUES ('$informant', '$date', '', '$preference', '$chapelcode', '$startdate', '$enddate', '$roomtype', '$duration', '$address', '$dateBorrowed', '$datereturn', '$new', 'Currently Used' )")or die (mysqli_error());
         echo "<script>alert('Added Successfully!')</script>";
         echo '<script>window.location.href="HearseTrans.php"</script>';
+        
+        
+       
+        
+        
     }
 }
+
 
 
 if(isset($_POST['update_viewing'] )){

@@ -113,6 +113,7 @@ if(!$_SESSION['username'])
                         <div class="panel panel-default tabs">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li><a href="#tab-first" role="tab" data-toggle="tab">Material Stock</a></li>
+                                <li class=""><a href="#tab-second" role="tab" data-toggle="tab"><span class="fa fa-cogs"> History Logs</span></a></li>  
                             </ul>
                             <div class="panel-body tab-content">
                                 <div class="tab-pane active" id="tab-first">
@@ -150,7 +151,7 @@ while($fetch = $query->fetch_array()){
 ?>
                                                         <td>
                                                             <div class='btn-group' role='group' aria-label='...'>
-                                                                <a href="#plus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
+                                                                <a href="#plus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></a>
                                                             </div>
 
                                                             <a href="#minus<?php echo $controlNo;?>" data-toggle="modal"><button type='button' class='btn btn-warning btn-sm'><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button></a>
@@ -165,7 +166,7 @@ while($fetch = $query->fetch_array()){
                     <div class="modal-content">
                     <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add Stocks</h4>
+                        <center><h2 class="modal-title fa fa-plus">Add Stocks</h2></center>
                     </div>
                     <div class="modal-body">
                     <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">
@@ -181,12 +182,9 @@ while($fetch = $query->fetch_array()){
                             </div>
                             <br><br>
                             </div>
-                        
-                        
-                            <br><br><br>
-                            <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" name="add_Stocks"><span class="glyphicon glyphicon-edit"></span> Add Stocks</button>
-                                                <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
+                            <div class="modal-footer"><center>
+                    <button type="submit" class="btn btn-info" name="add_Stocks"><span class="glyphicon glyphicon-edit"></span> Add Stocks</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button></center>
                                             </div>
                                         </div>
 
@@ -202,7 +200,7 @@ while($fetch = $query->fetch_array()){
                     <div class="modal-content">
                     <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Dispense Stocks</h4>
+                    <center><h2 class="modal-title fa fa-minus"> Dispense Stocks</h2></center>
                     </div>
                     <div class="modal-body">
                     <input type="hidden" name="controlNo" value="<?php echo $controlNo; ?>">
@@ -224,12 +222,11 @@ while($fetch = $query->fetch_array()){
                     </div>
                             </div>
                     </div><br><br>
-                        <br><br>
+                        <br>
                 </div>
-                    <br><br><br>
                 <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" name="dispense_Stocks"><span class="glyphicon glyphicon-edit"></span> Dispense Stock</button>
-            <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
+            <button type="submit" class="btn btn-info" name="dispense_Stocks"><span class="glyphicon glyphicon-edit"></span> Dispense Stock</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
                                                     </div>
                                                 </div>
 
@@ -252,6 +249,55 @@ $conn->close();
                                         </div>
                                     </div>
                                 </div>
+                                 <!--tab second-->
+                                          <div class="tab-pane" id="tab-second">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                </h3>
+
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <table class="table datatable" id="chemStockList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Quantity</th>
+                                                            <th>Material Name</th>
+                                                            <th>Data & Time</th>
+                                                            <th>Receiver </th>
+                                                            <th>In/Out </th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+            $query = $conn->query("select * from `added_quantitymat` ORDER BY controlNo ASC") or die(mysqli_error());
+            while($fetch = $query->fetch_array()){
+                                                        ?>
+
+                                                        <tr>
+                                                            <td><?php echo $fetch['qty1']?></td>
+                                                            <td><?php echo $fetch['matName1']?></td>
+                                                            <td><?php echo $fetch['date_time']?></td>
+                                                            <td><?php echo $fetch['receiver1'];?></td>
+                                                            <td><?php echo $fetch['in_out'];?></td>
+                                                         
+                                                           
+                                                        </tr>
+                                                        <?php
+            }
+            $conn->close();
+                                                        ?>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
                             </div>
                         </div>
                     </div>

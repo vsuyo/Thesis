@@ -57,8 +57,8 @@
                 <div class="panel panel-info">
                     <div class="panel-body">
                         <?php
-    $conn = new mysqli("localhost", "root", "", "test") or die(mysqli_error());
-        $q1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `color` = 'White ' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
+    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+        $q1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `color` = 'White' && `month` = 'Jan' && `year` = '$year'") or die(mysqli_error());
         $f1 = $q1->fetch_array();
         $q2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `color` = 'White' && `month` = 'Feb' && `year` = '$year'") or die(mysqli_error());
         $f2 = $q2->fetch_array();

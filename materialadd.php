@@ -1,7 +1,7 @@
 <?php
 
 
-if(isset($_POST['submit1'] )){
+if(isset($_POST['submit4'] )){
     $matName1 = $_POST['matName1'];
     $matDesc1 = $_POST['matDesc1'];
     $qty1 = $_POST['qty1'];
@@ -19,7 +19,7 @@ if(isset($_POST['submit1'] )){
 
 
         if ($conn->query($add_viewing_query) === TRUE) {
-        echo '<script>alert("Succesfully Added!"); window.location.href="MaterialsTrans.php"</script>';
+        echo '<script>alert("Succesfully Added!"); window.location.href="Casket_inventory.php"</script>';
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 }   

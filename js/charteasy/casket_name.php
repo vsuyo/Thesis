@@ -6,17 +6,20 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
+
 $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-$q1 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Charity' && `year` = '$year'") or die(mysqli_error());
+$q1 = $conn->query("SELECT COUNT(*) as total FROM casket WHERE casket_inv_id = 1 && year = '$year'") or die(mysqli_error());
 $f1 = $q1->fetch_array();
-$q2 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Pioneer' && `year` = '$year'") or die(mysqli_error());
+$q2 = $conn->query("SELECT COUNT(*) as total FROM casket WHERE casket_inv_id = 2 && year = '$year'") or die(mysqli_error());
 $f2 = $q2->fetch_array();
-$q3 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Junior Half Glass' && `year` = '$year'") or die(mysqli_error());
+$q3 = $conn->query("SELECT COUNT(*) as total FROM casket WHERE casket_inv_id = 3 && year = '$year'") or die(mysqli_error());
 $f3 = $q3->fetch_array();
-$q4 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Omb' && `year` = '$year'") or die(mysqli_error());
+$q4 = $conn->query("SELECT COUNT(*) as total FROM casket WHERE casket_inv_id = 4 && year = '$year'") or die(mysqli_error());
 $f4 = $q4->fetch_array();
-$q5 = $conn->query("SELECT COUNT(*) as total FROM `added_casket` WHERE `casketName` = 'Senior Half Glass' && `year` = '$year'") or die(mysqli_error());
+$q5 = $conn->query("SELECT COUNT(*) as total FROM casket WHERE casket_inv_id = 5 && year = '$year'") or die(mysqli_error());
 $f5 = $q5->fetch_array();
+
+
 
 ?>
 <script type="text/javascript"> 
@@ -66,26 +69,26 @@ $f5 = $q5->fetch_array();
                          ?>, legendText: "Pioneer"},
                          { label: "Junior Half Glass",  y: 
                          <?php 
-                         if($f2 == ""){
+                         if($f3 == ""){
                              echo 0;
                          }else{
-                             echo $f2['total'];
+                             echo $f3['total'];
                          }	
                          ?>, legendText: "Junior Half Glass"},
                          { label: "Omb",  y: 
                          <?php 
-                         if($f2 == ""){
+                         if($f4 == ""){
                              echo 0;
                          }else{
-                             echo $f2['total'];
+                             echo $f4['total'];
                          }	
                          ?>, legendText: "Omb"},
                          { label: "Senior Half Glass",  y: 
                          <?php 
-                         if($f2 == ""){
+                         if($f5 == ""){
                              echo 0;
                          }else{
-                             echo $f2['total'];
+                             echo $f5['total'];
                          }	
                          ?>, legendText: "Senior Half Glass"}
                     ] 

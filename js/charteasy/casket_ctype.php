@@ -6,7 +6,7 @@ if(isset($_GET['year']))
     $year=$_GET['year'];
 }
 
-$conn = new mysqli("localhost", "root", "", "test") or die(mysqli_error());
+$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
 $q1 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Wood' && `year` = '$year'") or die(mysqli_error());
 $f1 = $q1->fetch_array();
 $q2 = $conn->query("SELECT COUNT(*) as total FROM `casket` WHERE `type` = 'Metal' && `year` = '$year'") or die(mysqli_error());

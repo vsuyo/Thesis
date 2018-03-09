@@ -90,10 +90,13 @@ if(!$_SESSION['username'])
                                                     <tbody>
                                                     <?php
     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-    $query = $conn->query("SELECT cadaverentry.cadaverdeceased, client.informant, casket.casket_inv_id, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id INNER JOIN client ON client.client_id = casket.client_id ") or die(mysqli_error());
+    $query = $conn->query("SELECT cadaverentry.cadaverdeceased, client.informant, casket.casket_inv_id, casketinventory.casketName, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket 
+    INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id
+    INNER JOIN casketinventory ON casketinventory.casket_inv_id = casket.casket_inv_id
+    INNER JOIN client ON client.client_id = casket.client_id ") or die(mysqli_error());
             while($fetch = $query->fetch_array()){
                 $cadaverdeceased = $fetch['cadaverdeceased'];
-                $casket_inv_id = $fetch['casket_inv_id'];
+                $casketName = $fetch['casketName'];
                 $informant = $fetch['informant'];
                 $dimension = $fetch['dimension'];
                 $total = $fetch['total']; 
@@ -104,7 +107,7 @@ if(!$_SESSION['username'])
                 echo "<tr>
                                                 <td>$informant</td>
                                                 <td>$cadaverdeceased</td>   
-                                                <td>$casket_inv_id</td>
+                                                <td>$casketName</td>
                                                 <td>$dimension</td>
 												<td>$total</td>
                                                 <td>$date</td>";

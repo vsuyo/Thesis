@@ -7,7 +7,7 @@ if(isset($_POST['add_insurance'])){
     $query = $conn -> query ("INSERT INTO insurance (insuranceName, description)
 	VALUES ('$insuranceName','$description' )") or die (mysqli_error());
     $conn->close();
-	echo '<script>alert("Succesfully Added!"); window.location.href="Insurance.php"</script>';
+	echo '<script>alert("Succesfully Added!"); window.location.href="DateEntry.php"</script>';
 }
 
 ?>

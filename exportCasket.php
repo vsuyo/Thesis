@@ -3,7 +3,10 @@
 $conn = mysqli_connect("localhost", "root", "", "alisbo");
 $output = '';
 if(isset($_POST["export"])){
- $query = "SELECT cadaverentry.cadaverdeceased, client.informant, casket.choosecasket, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id INNER JOIN client ON client.client_id = casket.client_id";
+ $query = "SELECT cadaverentry.cadaverdeceased, client.informant, casket.casket_inv_id, casketinventory.casketName, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket 
+    INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id
+    INNER JOIN casketinventory ON casketinventory.casket_inv_id = casket.casket_inv_id
+    INNER JOIN client ON client.client_id = casket.client_id ";
  $result = mysqli_query($conn, $query);
  if(mysqli_num_rows($result) > 0){
   $output .= '
@@ -28,7 +31,7 @@ if(isset($_POST["export"])){
                          <td>'.$row["informant"].'</td>  
                          <td>'.$row["cadaverdeceased"].'</td>  
                          <td>'.$row["dimension"].'</td>
-                         <td>'.$row["choosecasket"].'</td>
+                         <td>'.$row["casketName"].'</td>
                          <td>'.$row["qty"].'</td>
                          <td>'.$row["total"].'</td>
                          <td>'.$row["date"].'</td> 
@@ -99,13 +102,16 @@ class myPDF extends FPDF{
     }
     function viewTable($db){
         $this->SetFont('Times','',12);
-        $stmt = $db->query('SELECT cadaverentry.cadaverdeceased, client.informant, casket.choosecasket, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id INNER JOIN client ON client.client_id = casket.client_id');
+        $stmt = $db->query('SELECT cadaverentry.cadaverdeceased, client.informant, casket.casket_inv_id, casketinventory.casketName, casket.dimension, casket.type, casket.color, casket.qty, casket.price, casket.date, casket.total FROM casket 
+    INNER JOIN cadaverentry ON cadaverentry.cadaverentry_id = casket.cadaverentry_id
+    INNER JOIN casketinventory ON casketinventory.casket_inv_id = casket.casket_inv_id
+    INNER JOIN client ON client.client_id = casket.client_id ');
         while($data = $stmt->fetch(PDO::FETCH_OBJ)){
             $this->Cell(0.1);
             $this->Cell(45,8,$data->informant,1,0,'C');
             $this->Cell(75,8,$data->cadaverdeceased,1,0,'C');
             $this->Cell(30,8,$data->dimension,1,0,'C');
-            $this->Cell(30,8,$data->choosecasket,1,0,'C');
+            $this->Cell(30,8,$data->casketName,1,0,'C');
             $this->Cell(30,8,$data->qty,1,0,'C');
             $this->Cell(30,8,$data->total,1,0,'C');
             $this->Cell(30,8,$data->date,1,0,'C');

@@ -64,7 +64,7 @@ if(!$_SESSION['username'])
                                    <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="btn-group pull-right">
-                                        <form method="post" action="exportclientcadaver.php">
+                                        <form method="post" action="exportSummaryReport.php">
                                             <input type="submit" name="export" class="btn btn-success"      value="Export To Excel" />
                                             <input type="submit" name="export2" class="btn btn-         success" value="Export To PDF" />
                                                  </form>                   
@@ -79,6 +79,7 @@ if(!$_SESSION['username'])
                                                         <th>Casket</th>
                                                         <th>Qty.</th>
                                                         <th>Price</th>
+                                                        <th>Total</th>
                                                         <th>Hearse Date</th>
                                                 
                                                 
@@ -105,6 +106,7 @@ while($fetch = $query->fetch_array()){
     $casket_inv_id = $fetch['casket_inv_id'];
     $qty = $fetch['qty'];
     $price = $fetch['price'];
+    $total = $fetch['total'];
     $hearsedate = $fetch['hearsedate'];
     $casketName = $fetch['casketName'];
     
@@ -121,6 +123,7 @@ while($fetch = $query->fetch_array()){
                                                 <td>$casketName</td>
                                                 <td>$qty</td>
                                                 <td>$price</td>
+                                                <td>$total</td>
                                                 <td>$hearsedate</td>";
                        
 
