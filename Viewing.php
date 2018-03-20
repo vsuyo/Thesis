@@ -1,7 +1,7 @@
 <?php  
 session_start();  
-$session_username = $_SESSION['username'];
-if(!$_SESSION['username'])  
+$session_username = $_SESSION['user_id'];
+if(!$_SESSION['user_id'])  
 {  
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
@@ -300,7 +300,7 @@ if(!$_SESSION['username'])
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Materials</label>&nbsp;&nbsp;
                                                 <div class="input-group">
-                                                    <form name="materials1" id="materials">
+                                                    <form name="materials" id="materials">
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Carpet"> Carpet&nbsp;&nbsp;&nbsp;&nbsp;
                                                          <input class="icheckbox" type="checkbox" name="materials[]" value="Roller Stand"> Roller Stand &nbsp;
                                                         <input class="icheckbox" type="checkbox" name="materials[]" value="Crucifix"> Crucifix<br><br>

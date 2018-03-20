@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 <html>
     <head>
         <link rel="icon" type="image/png" sizes="96x96" href="assets/images/project_logo.png">
@@ -139,32 +137,37 @@ session_start();
 </html>
   
 <?php
-$conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
-if(isset($_SESSION['username'])) {
-     header("Location: home.php"); // redirects them to homepage
-     exit; // for good measure
-}
+session_start();
 
+$conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
+
+  
 if(isset($_POST['submit'])){
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
-    $query = $conn -> query ("SELECT * FROM  `user` WHERE BINARY `username` = '$username' && BINARY `password` =  '$password' ") or die (mysqli_error());
-    $fetch = $query -> fetch_array();
-    $valid = $query -> num_rows;
+    $date = $_POST['date'];
+    $query = $conn -> query ("SELECT * FROM  `user` WHERE `username` = '$username' && `password` = '$password'") or die (mysqli_error());
+    $fetch = $query->fetch_array();
+	$valid = $query->num_rows;
+	$position = $fetch['position'];
 
-    if($valid >0 ){
-        echo '<meta http-equiv = "refresh" content= "2;url=home.php">';
-			$_SESSION['username']=$username;
+    if($valid > 0){
+		if ($position == 'admin') {
+			$_SESSION['user_id'] = $fetch['user_id'];
+			echo '<meta http-equiv="refresh" content="1;url=home.php">';
+		}
+		if ($position == 'secretary') {
+			$_SESSION['user_id'] = $fetch['user_id'];
+			echo '<meta http-equiv="refresh" content="1;thesis-secretary/home-secretary.php">';
+		}
+	}
+	else{
+		echo "<script>alert('Invalid account. Please check your username and password.')</script>";
+		echo "<script>window.location = 'login2.php'</script>";
+	}
 
-    }
-
-    else {
-
-        echo "<script>alert ('Invalid')</script>";
-    }
-$conn->close(); 
+	$conn->close();
     
 }
 

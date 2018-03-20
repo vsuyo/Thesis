@@ -1,7 +1,7 @@
-<?php  
+<?php 
 session_start();  
-$session_username = $_SESSION['username'];
-if(!$_SESSION['username'])  
+$session_username = $_SESSION['user_id'];
+if(!$_SESSION['user_id'])  
 {  
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  

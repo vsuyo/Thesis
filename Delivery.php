@@ -1,7 +1,7 @@
     <?php  
 session_start();  
-$session_username = $_SESSION['username'];
-if(!$_SESSION['username'])  
+$session_username = $_SESSION['user_id'];
+if(!$_SESSION['user_id'])  
 {  
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
@@ -88,9 +88,27 @@ if(!$_SESSION['username'])
                                         <div class="form-group">                                        
                                             <label class="col-md-4 control-label">Supplier Name</label>
                                             <div class="col-md-5">
-                                                    <input type="text" class="form-control"/ placeholder="Supplier Name" name="suppliername" id ='input' onkeyup="myFunction(this.id)" required = ""/>
+                                                    
+                                        <select id="choices" name="suppliername" class="validate [required] select">
+                                            <option value="">Choose Supplier</option>
+                                            <option value="Supplier1">SUPPLIER 1</option>
+                                            <option value="Supplier2">SUPPLIER 2</option>
+                                            <option value="Supplier3">SUPPLIER 3</option>
+                                        </select>
                                             </div>
                                         </div> 
+                                         <div class="form-group">                                        
+                                            <label class="col-md-4 control-label">Address</label>
+                                            <div class="col-md-5 ">
+                                                    <input type="text" class="form-control"/ placeholder="Address"  name="address" id ="add" required = ""/>
+                                            </div>
+                                        </div>
+                                         <div class="form-group">                                        
+                                            <label class="col-md-4 control-label">Contact No.</label>
+                                            <div class="col-md-5 ">
+                                                    <input type="number" class="form-control"/ placeholder="Contact No."  name="contactno" id ="contact" required = ""/>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Casket Name</label>
                                             <div class="col-md-5">
@@ -233,7 +251,6 @@ if(!$_SESSION['username'])
                                     <!-- end -->
 
 
-
         <!-- START PRELOADS -->
         <audio id="audio-alert" src="audio/alert.mp3" preload="auto"></audio>
         <audio id="audio-fail" src="audio/fail.mp3" preload="auto"></audio>
@@ -263,6 +280,50 @@ if(!$_SESSION['username'])
         <!-- END TEMPLATE -->
         <!-- END SCRIPTS -->                   
     </body>
+    
+<script type="text/javascript">
+    $(document).ready(function(){
+    $('#choices').change(
+			function(){
+				var pick = $('#choices').val();
+                var add = ["15th St. Lacson Bacolod City", "Brgy.Tangub Bacolod City", "Brgy.35 Bacolod City"];
+                var contact = ["09105123412", "09221234123", "09099912341"];
+                //var qty = $('#qty').val();
+				
+				switch(pick){
+					case 'Supplier1':
+						
+							$('#add').val(add[0]);
+							$('#contact').val(contact[0]);
+                            break;
+                    case 'Supplier2':
+							
+							$('#add').val(add[1]);
+							$('#contact').val(contact[1]);
+							break;
+                    case 'Supplier3':
+		
+							$('#add').val(add[2]);
+							$('#contact').val(contact[2]);
+							break;
+                   
+                    default:
+                            $('#dimension').val("");
+							$('#type').val("");
+							$('#color').val("");
+                            $('#price').val(0);
+                            break;
+					}
+			});
+    /*
+            function compute() {
+                    var qty = $('#qty').val();
+                    var price = $('#price').val();
+                    var cost = qty*price;
+                    $('#total').val(cost);
+            }*/
+                });
+</script>
 </html>
 
 

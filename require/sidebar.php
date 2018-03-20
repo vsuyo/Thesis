@@ -22,7 +22,7 @@
         <li class="xn-title">Navigation</li>
         <li class="active">
             <a href="home.php"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
-            <a href="example/calendar.php"><span class="fa fa-desktop"></span> <span class="xn-text">Calendar</span></a>
+            <a href="example/calendar.php"><span class="fa fa-calendar"></span> <span class="xn-text">Calendar</span></a>
         </li>
 
         <li class="xn-title">Components</li>
@@ -36,6 +36,7 @@
                 <li><a href="UnidentifiedCorpse.php"><span class="fa fa-user"></span>Unidentified Corpse</a></li>
             </ul>
         </li>
+        
         <li class="xn-openable">
             <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text">Transactions</span></a>
             <ul>

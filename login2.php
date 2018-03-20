@@ -1,51 +1,6 @@
-<?php  
-session_start();//session starts here  
-  
-?>  
-  
-<?php
-
-if(isset($_SESSION['username'])) {
-     header("Location: home.php"); // redirects them to homepage
-     exit; // for good measure
-}
-
-if(isset($_POST['submit'])){
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $date = $_POST['date'];
-    $query = $conn -> query ("SELECT * FROM  `user` WHERE BINARY `username` = '$username' && BINARY `password` =  '$password' ") or die (mysqli_error());
-    $fetch = $query -> fetch_array();
-    $valid = $query -> num_rows;
-
-    if($valid >0 ){
-        echo '<meta http-equiv = "refresh" content= "1;url=home.php">';
-			$_SESSION['username']=$username;
-
-    }
-
-    else {
-
-        echo "<script>alert ('Invalid')</script>";
-    }
-    
-    
-    
-$conn->close(); 
-    
-}
-
-if(isset($_POST['submit'])){
-    $conn = new mysqli("localhost", "root", "", "alisbo") or die (mysqli_error());
-    
-    $query = $conn->query("INSERT INTO `user_log` VALUES (NOW() , userName )") or die (mysqli_error());
-    
-    
-}
 
 
-?>
+
 <html lang="en" class="body-full-height">
     <head>        
         <!-- META SECTION -->

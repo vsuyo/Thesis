@@ -147,7 +147,7 @@ include('casketAdd.php');
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Informant</label>
                                                     <div class="col-md-9 col-xs-10">
-                                                        <select class="validate[required] select" name="informant" id="informant" data-live-search ="true">							
+                                                        <select class="validate[required] select" name="chemName1" id="informant" data-live-search ="true">							
                                                     <option value="pick">Choose Informant</option>
                                                     <?php
                                                     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
@@ -160,23 +160,17 @@ include('casketAdd.php');
                                                 </select>
                                                     </div>
                                                 </div>
-
+                                                    
+                                                    
+                                                    
                                                 <div class="form-group">
-                                                    <label class="col-md-3 control-label">Cadaver</label>
-                                                    <div class="col-md-9 col-xs-10">
-                                                        <select class="validate[required] select" name="cadaverdeceased" id="cadaverdeceased" data-live-search ="true">							
-                                                    <option value="pick">Choose Cadaver</option>
-                                                    <?php
-                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                    $sql = mysqli_query($conn, "SELECT * From cadaverentry");
-                                                    $row = mysqli_num_rows($sql);
-                                                    while ($row = mysqli_fetch_array($sql)){
-                                                        echo "<option value=' ". $row['cadaverentry_id'] ." '>" .$row['cadaverdeceased'] ."   </option>";
-                                                    }
-                                                    ?>
-                                                </select>
+                                                        <label class="col-md-3 control-label">Deceased: </label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="cadaver" name="cadaver" value="" required />
+                                                        </div>
                                                     </div>
-                                                </div>
+
+                                                
                                                     
                                                     <div class="form-group">
                                                     <label class="col-md-3 control-label">Chemical</label>

@@ -12,7 +12,7 @@ if(isset($_POST['save_vigil'] )){
     $address = $_POST['address'];
     $dateBorrowed = $_POST['dateBorrowed'];
     $datereturn = $_POST['datereturn'];
-    $material = $_POST['materials'];
+    $materials = $_POST['materials'];
     $new = "";
 
     foreach ($materials as $value){

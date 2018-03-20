@@ -1,7 +1,7 @@
-<?php  
+<?php 
 session_start();  
-$session_username = $_SESSION['username'];
-if(!$_SESSION['username'])  
+$session_username = $_SESSION['user_id'];
+if(!$_SESSION['user_id'])  
 {  
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
@@ -10,8 +10,11 @@ if(!$_SESSION['username'])
 
 
 <?php
-require('clientadd.php');
+require('client&cadaver_add.php');
+require('insurance_entry.php');
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +64,7 @@ require('clientadd.php');
                             <div class="panel panel-default tabs">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="active"><a href="#tab-first" role="tab" data-toggle="tab"><span class="fa fa-users"> Client & Deceased</span></a></li>
+                                    <li class=""><a href="#tab-second" role="tab" data-toggle="tab"><span class="fa fa-cogs"> Insurance</span></a></li>
                                 </ul>
                                 <div class="panel-body tab-content">
                                     <div class="tab-pane active" id="tab-first">
@@ -68,8 +72,8 @@ require('clientadd.php');
                                             <div class="panel-heading">
                                                 <h3 class="panel-title">
                                                     <div class="pull-right">
-                                                        <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium"><span class="fa fa-plus"></span>Add Client</button>
-                                                        <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium2"><span class="fa fa-plus"></span>Add Deceased</button>
+                                                        
+                                                        <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium2"><span class="fa fa-plus"></span>Add Client & Deceased</button>
                                                     </div>
                                                 </h3>
 
@@ -80,7 +84,7 @@ require('clientadd.php');
                                                     <thead>
                                                         <tr>                                                            
                                                             <th>Informant</th>
-                                                            <th>Date Added(Client)</th>
+                                                            
                                                             <th>Deceased</th>                                                            
                                                             <th>Date Added(Deceased)</th>
                                                             <th>Deceased Age</th>
@@ -94,12 +98,12 @@ require('clientadd.php');
 
                                                         <?php
     $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-            $query = $conn->query("select * from `client`, `cadaverentry` where client.client_id = cadaverentry.client_id" ) or die(mysqli_error());
+            $query = $conn->query("select * from `client_cadaver` ORDER BY 'client_cadaver_id' ASC") or die(mysqli_error());
             while($fetch = $query->fetch_array()){
                                                         ?>
                                                         <tr>
                                                             <td><?php echo $fetch['informant']?></td>
-                                                            <td><?php echo $fetch['date']?></td>
+                                                            
                                                             <td><?php echo $fetch['cadaverdeceased']?></td>
                                                             <td><?php echo $fetch['dateadded']?></td>
                                                             <td><?php echo $fetch['age']?></td>
@@ -117,6 +121,144 @@ require('clientadd.php');
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    
+
+                                    <!--tab second-->
+                                 <div class="tab-pane" id="tab-second">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">                                
+                                                <h3 class="panel-title"> 
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-success" data-toggle="modal" data-target="#modal_medium3"><span class="fa fa-plus"></span> Add Insurance</button>
+                                                    </div></h3>
+
+                                            </div>
+ <!-- insurance modal-->
+        <div class="modal" id="modal_medium3" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true">
+            <div class="modal-dialog modal-def">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><center>
+                        <h2 class="modal-title" id="largeModalHead"><span class="fa fa-file-text"> Insurance</span></h2></center>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tab-pane active" id="tab-first">
+                            <div class="row">
+                                <form action="DataEntry.php" role="form" class="form-horizontal" method="post" enctype="multi-part/form-data" id="uinsure">
+                                    <center><div class="col-md-12">
+                                        <div class="form-group">                                        
+                                            <label class="col-md-3 control-label">Insurance</label>
+                                            <div class="col-md-6">
+                                                    <input type="text" class="form-control"/ placeholder="Insurance" name="insuranceName" id ='input' required = ""/>
+                                            </div>
+                                        </div>                                                      
+                                        <div class="form-group">                                        
+                                            <label class="col-md-3 control-label">Description</label>
+                                            <div class="col-md-6 ">
+                                                    <input type="text" class="form-control"/ placeholder="Description" onkeyup="myFunction(this.id)" name="description" id ='input2 ' required = ""/>
+                                            </div>
+                                        </div><br>
+
+                                    </div></center>
+                                </form>
+                            </div>                                   
+                        </div>
+                    </div><div class="modal-footer">
+                    <center>
+                        <button type="submit" value="Save" class="btn btn-info fa fa-check-square-o " name="add_insurance" form="uinsure"> Save</button>
+                        <button type="button" class="btn btn-danger fa fa-times-circle-o" data-dismiss="modal"> Close</button></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+                                            <div class="panel-body">
+                                                <table class="table datatable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Insurance Name</th>
+                                                            <th>Description</th>
+															<th>Action</th>
+                                                        </tr>
+                                                    </thead>
+<tbody>
+<?php
+$conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
+$query = $conn->query("SELECT * FROM `insurance` ORDER BY `insurance_id` DESC") or die(mysqli_error());
+while($fetch = $query->fetch_array()){
+	$insurance_id = $fetch['insurance_id'];
+    $insuranceName = $fetch['insuranceName'];
+    $description = $fetch['description'];
+
+                                           echo "<tr>
+                                                <td>$insuranceName</td>
+												<td>$description</td>";												
+    ?>
+                    <td>
+                        <div class='btn-group' role='group' aria-label='...'>
+                            <a href="#update<?php echo $insurance_id;?>" data-toggle="modal"><button type='button' class='btn btn-success btn-sm'><span class='glyphicon glyphicon-edit' aria-hidden='true'></span></button></a>
+                        </div>
+                    </td>
+					
+                            <!-- insurance update modal-->
+                           <div id="update<?php echo $insurance_id; ?>" class="modal fade" role="dialog">
+                            <form method="post" class="form-horizontal" role="form">
+                            <div class="modal-dialog modal-lg">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit Item</h4>
+                                </div>
+                                    <div class="modal-body">
+                                    <input type="hidden" name="controlNo" value="<?php echo $insurance_id; ?>">
+
+                                    <div class="form-group">
+
+                                     <label class="control-label col-sm-2" for="date">Insurance Name:</label>
+                                    <div class="col-sm-4">
+                                <input type="text" class="form-control" id="date" name="insuranceName" value="<?php echo $insuranceName; ?>"  required autofocus>
+                            </div>
+
+                            <label class="control-label col-sm-2" for="date">Description:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="description" name="description" value="<?php echo $description; ?>"  required autofocus>
+                            </div>
+
+                        </div>
+                        
+                        <br><br>
+                    </div>
+                                
+                    <br><br><br>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="update_insurance"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancel</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    
+
+    
+    
+    			
+<?php
+}
+$conn->close();
+?>
+</tbody>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+
+                                </div>
+                               
 
 
                                 </div>
@@ -129,63 +271,7 @@ require('clientadd.php');
             </div>
         </div>
 
-        <!-- client modal-->
-        <div class="modal fade" id="modal_medium" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-def">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <center>
-                            <?php $dateF = date("y-d-m");?>
-                            <h2 class="fa fa-user"> Client</h2>
-                        </center>
-                    </div>
-                    <div class="modal-body">
-                        <div class="tab-pane active" id="tab-first">
-                            <div class="row">
-                                <form role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            
-                                            <label class="col-md-4 control-label">Date</label>
-                                            <div class="col-md-5">
-                                                <input type="text" class="form-control datepicker" name="date" value="<?php echo $dateF; ?>" placeholder="Date" required="" data-date-start-date="0d" data-date-end-date="0d">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">Informant </label>
-                                            <div class="col-md-5">
-                                                <input type="text" class="form-control" / name="informant" placeholder="Name" required="" id='input' onkeyup="myFunction(this.id)">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">Address</label>
-                                            <div class="col-md-5">
-                                                <input type="text" class="form-control" / name="address" placeholder="Address" required="" id='input2' onkeyup="myFunction(this.id)">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">Contact No:</label>
-                                            <div class="col-md-5">
-                                                <input type="text" class=" form-control" name="contactno" value="" placeholder="Contact no." required="" maxlength="11" />
-                                            </div>
-                                        </div>
-                                        <input type="hidden" class=" form-control" name="month" value="" required="" maxlength="11" />
-                                        <input type="hidden" class=" form-control" name="year" value="" required="" maxlength="11" />
-                                        <div class="modal-footer">
-                                            <center>
-                                                <button class="btn btn-info fa fa-check-square-o" name="save" href="DataEntry.php"> Save</button> <button type="button" class="btn btn-danger fa fa-times-circle-o" data-dismiss="modal"> Close</button>
-                                            </center>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
 
         <!-- cadaver modal-->
         <div class="modal fade" id="modal_medium2" tabindex="-1" role="dialog" aria-labelledby="defModalHead" aria-hidden="true" data-backdrop="static">
@@ -195,7 +281,7 @@ require('clientadd.php');
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <center>
                             <?php $dateF = date("y-d-m");?>
-                            <h2 class="fa fa-user"> Deceased</h2>
+                            <h2 class="fa fa-user"> Client & Deceased</h2>
                         </center>
                     </div>
                     <div class="modal-body">
@@ -203,6 +289,8 @@ require('clientadd.php');
                             <div class="row">
                                 <form role="form" class="form-horizontal" method="post" enctype="multi-part/form-data">
                                     <div class="col-md-12">
+                                         <center><h4 class="fa fa-user"> Informant</h4></center>
+                                        
                                         <div class="form-group">
                                             
                                             <label class="col-md-4 control-label">Date</label>
@@ -211,21 +299,26 @@ require('clientadd.php');
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Informant</label>
-                                            <div class="col-md-8">
-                                                <select class="validate[required] select" name="informant" id="informant" data-live-search="true">							
-                                                    <option value="pick">Choose Informant</option>
-                                                    <?php
-                                                    $conn = new mysqli("localhost", "root", "", "alisbo") or die(mysqli_error());
-                                                    $sql = mysqli_query($conn, "SELECT * From client");
-                                                    $row = mysqli_num_rows($sql);
-                                                    while ($row = mysqli_fetch_array($sql)){
-                                                        echo "<option value=' ". $row['client_id'] ." '>" .$row['informant'] ."   </option>";
-                                                    }
-                                                    ?>
-                                                </select>
+                                            <label class="col-md-4 control-label">Informant </label>
+                                            <div class="col-md-5">
+                                                <input type="text" class="form-control" / name="informant" placeholder="Name" required="" id='input' onkeyup="myFunction(this.id)">
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Address (Client)</label>
+                                            <div class="col-md-5">
+                                                <input type="text" class="form-control" / name="address_client" placeholder="Address" required="" id='input2' onkeyup="myFunction(this.id)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Contact No:</label>
+                                            <div class="col-md-5">
+                                                <input type="text" class=" form-control" name="contactno" value="" placeholder="Contact no." required="" maxlength="11" />
+                                            </div>
+                                        </div>
+                                        
+                                        <center><h4 class="fa fa-user"> Deceased</h4></center>
+                                        
 
                                         <div class="form-group">
                                             <label class="col-md-4 control-label">Deceased </label>
@@ -375,7 +468,7 @@ require('clientadd.php');
                                         </div>
                                         <div class="panel-footer">
                                             <center>
-                                                <button class="btn btn-info fa fa-check-square-o" name="save_cadaver" href="DataEntry.php"> Save</button> <button type="button" class="btn btn-danger fa fa-times-circle-o" data-dismiss="modal"> Close</button>
+                                                <button class="btn btn-info fa fa-check-square-o" name="save_client&cadaver" href="DataEntryFinal.php"> Save</button> <button type="button" class="btn btn-danger fa fa-times-circle-o" data-dismiss="modal"> Close</button>
                                             </center>
 
                                         </div>

@@ -1,8 +1,8 @@
 <?php  
 //session_start();  
-$session_username = $_SESSION['username'];
+$session_username = $_SESSION['user_id'];
 
-if(!$_SESSION['username'])  
+if(!$_SESSION['user_id'])  
 {  
     header("Location: login2.php");//redirect to login page to secure the welcome page without login access.  
 }  
@@ -27,7 +27,7 @@ if(!$_SESSION['username'])
                 <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
                 <div class="mb-content">
                     <p>Are you sure you want to log out?</p>
-                    <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+                    <p>Press No if you want to continue work. Press Yes to logout current user.</p>
                 </div>
                 <div class="mb-footer">
                     <div class="pull-right">
